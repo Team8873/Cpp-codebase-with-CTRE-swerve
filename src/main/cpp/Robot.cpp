@@ -4,7 +4,6 @@
 
 #include "Robot.h"
 #include "LimelightHelpers.h"
-
 #include <frc2/command/CommandScheduler.h>
 
 Robot::Robot() {}
@@ -58,7 +57,9 @@ void Robot::TeleopInit() {
     }
 }
 
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
+
+}
 
 void Robot::TeleopExit() {}
 

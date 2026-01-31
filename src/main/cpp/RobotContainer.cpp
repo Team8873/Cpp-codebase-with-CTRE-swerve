@@ -3,11 +3,11 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "RobotContainer.h"
-
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/Commands.h>
 #include <frc2/command/button/RobotModeTriggers.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
+
 
 RobotContainer::RobotContainer()
 {
@@ -51,6 +51,17 @@ void RobotContainer::ConfigureBindings()
     joystick.POVDown().WhileTrue(
         drivetrain.ApplyRequest([this]() -> auto&& {
             return forwardStraight.WithVelocityX(-0.5_mps).WithVelocityY(0_mps);
+        })
+    );
+    
+    joystick.POVRight().WhileTrue(
+        drivetrain.ApplyRequest([this]() -> auto&& {
+            return forwardStraight.WithVelocityX(0_mps).WithVelocityY(0.5_mps);
+        })
+    );
+    joystick.POVLeft().WhileTrue(
+        drivetrain.ApplyRequest([this]() -> auto&& {
+            return forwardStraight.WithVelocityX(0_mps).WithVelocityY(-0.5_mps);
         })
     );
 
