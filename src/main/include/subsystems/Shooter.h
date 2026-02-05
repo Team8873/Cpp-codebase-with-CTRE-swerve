@@ -25,4 +25,3 @@ class Shooter : public frc2::SubsystemBase
         rev::spark::SparkMax m_ShooterDriver{ConstantsCanIds::ShooterDriverID, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkMax m_ShooterRotate{ConstantsCanIds::ShooterRotateID, rev::spark::SparkLowLevel::MotorType::kBrushless};
 };
-//wow
