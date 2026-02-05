@@ -19,7 +19,8 @@ namespace ConstantsCanIds
 }
 
 #pragma endregion
- typedef int CANid_t;
+ 
+typedef int CANid_t;
  
  #pragma region ConstantsCanIds
  namespace ConstantsCanIds
