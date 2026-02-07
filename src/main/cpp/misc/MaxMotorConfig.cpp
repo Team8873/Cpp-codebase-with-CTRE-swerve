@@ -9,14 +9,22 @@ void MaxMotorConfig(rev::spark::SparkMax *motor,
                     double D,
                     double S,
                     double V,
-                    double A)
+                    double A,
+                    bool onboard)
 {
     rev::spark::SparkMaxConfig sparkMaxConfig{};
 
     sparkMaxConfig.SetIdleMode(breakMode ? rev::spark::SparkBaseConfig::IdleMode::kBrake : rev::spark::SparkBaseConfig::IdleMode::kCoast);
     sparkMaxConfig.SmartCurrentLimit(currentLimit.value());
 
-    sparkMaxConfig.closedLoop.SetFeedbackSensor(rev::spark::FeedbackSensor::kPrimaryEncoder);
+    if(onboard) {
+        sparkMaxConfig.closedLoop.SetFeedbackSensor(rev::spark::FeedbackSensor::kPrimaryEncoder);
+    }
+    else {
+        sparkMaxConfig.closedLoop.SetFeedbackSensor(rev::spark::FeedbackSensor::kDetachedAbsoluteEncoder, 14);  // ♦♦♦CHANGE THIS LATER♦♦♦ This sets the off-board encoder's ID 
+        sparkMaxConfig.absoluteEncoder.PositionConversionFactor(360.0);
+        sparkMaxConfig.absoluteEncoder.VelocityConversionFactor(360.0 / 60.0);
+    }                                                                                                         
     sparkMaxConfig.closedLoop.Pid(P, I, D);
     //sparkMaxConfig.closedLoop.PositionWrappingEnabled(continuousWrap);
     auto status = motor->Configure(

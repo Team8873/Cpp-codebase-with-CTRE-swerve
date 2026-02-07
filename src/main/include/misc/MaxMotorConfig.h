@@ -24,4 +24,5 @@ void MaxMotorConfig(rev::spark::SparkMax *motor,
                     double D,
                     double S,
                     double V,
-                    double A);
+                    double A,
+                    bool onboard);
