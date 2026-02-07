@@ -27,8 +27,8 @@ enum IntakeStates
 namespace IntakeConstant
 {
     // FIX ME PLEASE
-    constexpr auto IntakeStowedAngle = 0;
-    constexpr auto IntakeDeployedAngle = 0;
+    constexpr auto IntakeStowedAngle = 0.0_tr;
+    constexpr auto IntakeDeployedAngle = 0.25_tr;
 
     constexpr auto IntakeSpeed = 0;
 
