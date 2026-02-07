@@ -4,9 +4,21 @@
 #include <units/time.h>
 #include <units/velocity.h>
 
+#include <rev/SparkLowLevel.h>
+
 #include "networktables/NetworkTable.h"
 #include "networktables/NetworkTableInstance.h"
 
+typedef int CANid_t;
+
+#pragma region ConstantsCanIds
+namespace ConstantsCanIds
+{
+    constexpr CANid_t conveyorMotorID = 17;
+    constexpr CANid_t uptakeMotorID = 18;
+}
+
+#pragma endregion
  typedef int CANid_t;
  
  #pragma region ConstantsCanIds
