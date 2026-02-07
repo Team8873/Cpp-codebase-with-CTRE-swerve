@@ -11,7 +11,7 @@
 #include <frc2/command/SubsystemBase.h>
 
 #include "Constants.h"
-//#include "misc/MaxMotorConfig.h"
+#include "misc/MaxMotorConfig.h"
 #pragma endregion
 
 class Shooter : public frc2::SubsystemBase
@@ -19,6 +19,8 @@ class Shooter : public frc2::SubsystemBase
     public:
 
         explicit Shooter();
+
+        void SetState();
 
     private:
 
