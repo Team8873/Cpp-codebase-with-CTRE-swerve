@@ -8,4 +8,15 @@
 #include "subsystems/AFCIntake.h"
 #pragma endregion
 
-frc2::CommandPtr IntakeSetState(AFCIntake* );
+class AFCIntakeComm : public frc2::CommandHelper<frc2::Command, AFCIntakeComm>
+{
+    public:
+        explicit AFCIntakeComm(AFCIntake* intake, IntakeStates state);
+
+        void Initialize() override;
+        bool IsFinished() override;
+
+    private:
+        AFCIntake* m_intake;
+        IntakeStates m_state;
+};
