@@ -4,11 +4,21 @@
 
 #pragma once
 
+#pragma region Includes
+
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/button/CommandXboxController.h>
+#include <frc/filter/SlewRateLimiter.h>
+
+#include "subsystems/AFCIntake.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
+
+#include "commands/AFCIntakeComm.h"
+
 #include "Telemetry.h"
+
+#pragma endregion
 
 class RobotContainer {
 private:
@@ -42,6 +52,11 @@ public:
 
     frc2::Command *GetAutonomousCommand();
 
+   
 private:
     void ConfigureBindings();
+
+     frc2::CommandXboxController m_operator{1};
+
+    AFCIntake m_afcintake{};
 };

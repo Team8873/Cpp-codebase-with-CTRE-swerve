@@ -8,7 +8,7 @@
 #include <frc2/command/button/RobotModeTriggers.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
 
-
+#pragma region RobotContainer
 RobotContainer::RobotContainer()
 {
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
@@ -16,7 +16,9 @@ RobotContainer::RobotContainer()
 
     ConfigureBindings();
 }
+#pragma endregion
 
+#pragma region ConfigueBindings
 void RobotContainer::ConfigureBindings()
 {
     // Note that X is defined as forward according to WPILib convention,
@@ -76,9 +78,17 @@ void RobotContainer::ConfigureBindings()
     joystick.LeftBumper().OnTrue(drivetrain.RunOnce([this] { drivetrain.SeedFieldCentric(); }));
 
     drivetrain.RegisterTelemetry([this](auto const &state) { logger.Telemeterize(state); });
-}
 
+
+    //♦♦♦♦♦♦Start of Operator controls reorganize later♦♦♦♦♦♦
+
+    m_operator.LeftBumper().OnTrue(AFCIntakeComm(&m_afcintake, IntakeStates::deployedOn).ToPtr());
+}
+#pragma endregion
+
+#pragma region Autonomous
 frc2::Command *RobotContainer::GetAutonomousCommand()
 {
     return autoChooser.GetSelected();
 }
+#pragma endregion
