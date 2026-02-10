@@ -81,8 +81,8 @@ void RobotContainer::ConfigureBindings()
 
 
     //♦♦♦♦♦♦Start of Operator controls reorganize later♦♦♦♦♦♦
-
-    m_operator.LeftBumper().OnTrue(AFCIntakeComm(&m_afcintake, IntakeStates::deployedOn).ToPtr());
+    m_operator.RightBumper().OnChange(AFCIntakeComm(&m_afcintake, IntakeStates::stowed).ToPtr());
+    m_operator.LeftBumper().OnChange(AFCIntakeComm(&m_afcintake, IntakeStates::deployedOn).ToPtr());
 }
 #pragma endregion
 
