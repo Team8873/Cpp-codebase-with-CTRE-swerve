@@ -62,5 +62,7 @@ void AFCIntake::SetState(IntakeStates newState)
         
     }
    
-    m_intakeDeployer.GetClosedLoopController().SetReference(90.0, rev::spark::SparkLowLevel::ControlType::kMAXMotionPositionControl); // Fix magic number
-}
+    m_intakeDeployer.GetClosedLoopController().SetReference(position.value(), rev::spark::SparkLowLevel::ControlType::kMAXMotionPositionControl); // Fix magic number
+    m_intakeMotor.Set(speed);
+} 
+#pragma endregion
