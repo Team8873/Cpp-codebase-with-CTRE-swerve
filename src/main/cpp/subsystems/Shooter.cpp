@@ -19,6 +19,22 @@ Shooter::Shooter()
 
 #pragma region Da thing to do things
 
-void Shooter::SetState(){
+void Shooter::SetState(ShooterRotateStates newState){
+
+    //I *THINK* this starts setting my rotate states (Manual/Automatic)
+    if(newState == m_ShooterRotateStates)
+     return;
+    m_ShooterRotateStates = newState;
+
+    auto position = ShooterRotateConstant::Manual;
+    auto speed = 0;
+
+    switch (newState)
+    {
+        case ShooterRotateStates::Manual:
+        break;
+
+    }
+    
     m_ShooterRotate.GetClosedLoopController().SetReference(90.0, rev::spark::SparkLowLevel::ControlType::kMAXMotionPositionControl);
 }
