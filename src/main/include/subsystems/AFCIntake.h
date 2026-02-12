@@ -17,7 +17,7 @@
 
 enum IntakeStates
 {
-    stowed,
+    intakeStowed,
     deployedOn,
     deployedOff
 };
@@ -51,7 +51,7 @@ class AFCIntake : public frc2::SubsystemBase
 
         ctre::phoenix6::hardware::CANcoder m_intakeStateEncoder{ConstantsCanIds::IntakeEncoderId};
 
-        IntakeStates m_intakeState = IntakeStates::stowed;
+        IntakeStates m_intakeState = IntakeStates::intakeStowed;
 
 
 };

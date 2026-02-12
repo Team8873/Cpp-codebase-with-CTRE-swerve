@@ -41,7 +41,7 @@ void AFCIntake::SetState(IntakeStates newState)
 
     switch (newState) // Set position and speed based on state
     {
-        case IntakeStates::stowed:
+        case IntakeStates::intakeStowed:
         {
             break; // Defualt
         }
