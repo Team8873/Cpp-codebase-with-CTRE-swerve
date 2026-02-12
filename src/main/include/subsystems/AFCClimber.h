@@ -13,9 +13,9 @@
 
 enum ClimberStates
 {
-    stowed,
-    deployed,
-    manual
+    climberStowed,
+    climberDeployed,
+    climberManual
 };
 #pragma endregion
 
@@ -37,11 +37,13 @@ class AFCClimber : public frc2::SubsystemBase
 
         void SetState(ClimberStates newState);
 
+        void SetManualSpeed(double speed);
+
         ClimberStates GetState() const { return m_climberState; }
     private:
 
         rev::spark::SparkMax m_climberMotor{ConstantsCanIds::ClimberMotor,rev::spark::SparkLowLevel::MotorType::kBrushless};
 
-        ClimberStates m_climberState = ClimberStates::stowed;
+        ClimberStates m_climberState = ClimberStates::climberStowed;
 
 };

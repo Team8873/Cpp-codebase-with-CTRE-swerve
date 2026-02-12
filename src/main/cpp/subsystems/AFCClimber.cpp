@@ -30,25 +30,26 @@ void AFCClimber::SetState(ClimberStates newState)
 
     switch (newState)
     {
-        case ClimberStates::stowed:
+        case ClimberStates::climberStowed:
         {
             position = ClimberConstant::ClimberStowedPos;
             break;
         }
 
-        case ClimberStates::deployed:
+        case ClimberStates::climberDeployed:
         {
             position = ClimberConstant::ClimberDeployedPos;
             break;
         }
 
-        case ClimberStates::manual:
+        case ClimberStates::climberManual:
         {
             speed = ClimberConstant::ClimberManual;
+            break;
         }
     }
 
-    if (newState == ClimberStates::manual)
+    if (newState == ClimberStates::climberManual)
     {
          m_climberMotor.Set(speed);
     }
@@ -59,3 +60,12 @@ void AFCClimber::SetState(ClimberStates newState)
    
 }
 #pragma endregion
+
+#pragma region SetManualSpeed
+
+void AFCClimber::SetManualSpeed(double speed)
+{
+    m_climberState = ClimberStates::climberManual;
+
+    m_climberMotor.Set(speed);
+}
