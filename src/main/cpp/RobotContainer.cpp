@@ -81,8 +81,16 @@ void RobotContainer::ConfigureBindings()
 
 
     //♦♦♦♦♦♦Start of Operator controls reorganize later♦♦♦♦♦♦
-    m_operator.RightBumper().OnChange(AFCIntakeComm(&m_afcintake, IntakeStates::stowed).ToPtr());
-    m_operator.LeftBumper().OnChange(AFCIntakeComm(&m_afcintake, IntakeStates::deployedOn).ToPtr());
+    m_operator.RightBumper().OnChange(AFCIntakeComm(&m_afcIntake, IntakeStates::intakeStowed).ToPtr());
+    m_operator.LeftBumper().OnChange(AFCIntakeComm(&m_afcIntake, IntakeStates::deployedOn).ToPtr());
+    m_operator.A().OnTrue(frc2::cmd::RunOnce([this]{ m_afcClimber.SetState(ClimberStates::climberStowed);}, {&m_afcClimber}));
+    m_operator.LeftTrigger().OnTrue(
+        frc2::cmd::RunEnd(
+            [this]{ m_afcClimber.SetManualSpeed(-m_operator.GetLeftTriggerAxis());},
+            [this]{ m_afcClimber.SetManualSpeed(0.0);},
+            {&m_afcClimber}
+        )
+    );
 }
 #pragma endregion
 

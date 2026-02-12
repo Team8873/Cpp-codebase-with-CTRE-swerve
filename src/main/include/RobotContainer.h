@@ -12,9 +12,11 @@
 #include <frc/filter/SlewRateLimiter.h>
 
 #include "subsystems/AFCIntake.h"
+#include "subsystems/AFCClimber.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
 
 #include "commands/AFCIntakeComm.h"
+#include "commands/AFCClimberComm.h"
 
 #include "Telemetry.h"
 
@@ -58,5 +60,6 @@ private:
 
      frc2::CommandXboxController m_operator{1};
 
-    AFCIntake m_afcintake{};
+    AFCIntake m_afcIntake{};
+    AFCClimber m_afcClimber{};
 };
