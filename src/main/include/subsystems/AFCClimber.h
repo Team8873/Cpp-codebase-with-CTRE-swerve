@@ -1,9 +1,11 @@
 #pragma once
 
 #pragma region Includes
+#include <string.h>
 
 #include <rev/SparkMax.h>
 #include <frc2/command/SubsystemBase.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Constants.h"
 #include "misc/MaxMotorConfig.h"
@@ -23,8 +25,8 @@ enum ClimberStates
 namespace ClimberConstant
 {
     // Placeholders
-    constexpr auto ClimberStowedPos = 0;
-    constexpr auto ClimberDeployedPos = 1;
+    constexpr auto ClimberStowedPos = 0.0;
+    constexpr auto ClimberDeployedPos = 1000.0;
     constexpr auto ClimberManual = 0.0;
 } 
 #pragma endregion
@@ -36,6 +38,7 @@ class AFCClimber : public frc2::SubsystemBase
         explicit AFCClimber();
 
         void SetState(ClimberStates newState);
+        void SetPosClimber(double pos);
 
         void SetManualSpeed(double speed);
 
