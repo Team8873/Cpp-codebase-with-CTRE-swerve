@@ -26,15 +26,29 @@ void Shooter::SetState(ShooterRotateStates newState){
      return;
     m_ShooterRotateStates = newState;
 
-    auto position = ShooterRotateConstant::Manual;
+    auto position = ShooterRotateConstant::Automatic;
     auto speed = 0;
 
     switch (newState)
     {
         case ShooterRotateStates::Manual:
-        break;
-
+        {
+            break;
+        }
+        
+        case ShooterRotateStates::Automatic:
+        {
+            break;
+        }
     }
     
     m_ShooterRotate.GetClosedLoopController().SetReference(90.0, rev::spark::SparkLowLevel::ControlType::kMAXMotionPositionControl);
+}
+
+void Shooter::SetAutomaticPosition(bool LockOn)
+{
+    m_ShooterRotateStates = ShooterRotateStates::Automatic;
+if (LockOn == true) {
+    m_ShooterRotate.GetClosedLoopController().SetReference(tx, rev::spark::SparkLowLevel::ControlType::kMAXMotionPositionControl);
+}
 }

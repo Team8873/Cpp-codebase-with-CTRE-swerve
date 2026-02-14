@@ -10,6 +10,8 @@
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "Telemetry.h"
 
+#include "subsystems/Shooter.h"
+
 class RobotContainer {
 private:
     units::meters_per_second_t MaxSpeed = 1.0 * TunerConstants::kSpeedAt12Volts; // kSpeedAt12Volts desired top speed
@@ -44,4 +46,6 @@ public:
 
 private:
     void ConfigureBindings();
+
+    Shooter m_Shooter{};
 };

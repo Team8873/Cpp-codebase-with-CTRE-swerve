@@ -9,6 +9,8 @@
 #include <ctre/phoenix6/CANcoder.hpp>
 #include <rev/SparkMax.h>
 #include <frc2/command/SubsystemBase.h>
+#include <frc/SmartDashboard/SmartDashboard.h>
+#include "LimelightHelpers.h"
 
 #include "Constants.h"
 #include "misc/MaxMotorConfig.h"
@@ -35,8 +37,14 @@ class Shooter : public frc2::SubsystemBase
 
         void SetState(ShooterRotateStates newState);
 
+        void SetAutomaticPosition( bool LockOn);
+
         ShooterRotateStates GetState() const { return m_ShooterRotateStates; }
     private:
+      
+    double tx = LimelightHelpers::getTX("");
+    bool hasTarget = LimelightHelpers::getTV("");
+
 
         rev::spark::SparkMax m_ShooterDriver{ConstantsCanIds::ShooterDriverID, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkMax m_ShooterRotate{ConstantsCanIds::ShooterRotateID, rev::spark::SparkLowLevel::MotorType::kBrushless};
