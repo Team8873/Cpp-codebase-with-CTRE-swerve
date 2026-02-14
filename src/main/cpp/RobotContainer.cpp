@@ -7,6 +7,7 @@
 #include <frc2/command/Commands.h>
 #include <frc2/command/button/RobotModeTriggers.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
+#include <units/time.h>
 
 
 RobotContainer::RobotContainer()
@@ -78,9 +79,19 @@ void RobotContainer::ConfigureBindings()
     drivetrain.RegisterTelemetry([this](auto const &state) { logger.Telemeterize(state); });
 
 
-    m_operator.Y().ToggleOnTrue(frc2::cmd::RunEnd([this]{m_Indexer.SetUptakeState(uptakeState::uptakeOn);},[this]{m_Indexer.SetUptakeState(uptakeState::uptakeOff);}, {&m_Indexer}));
     
-    m_operator.X().ToggleOnTrue(frc2::cmd::RunEnd([this]{m_Indexer.SetConveyorState(conveyorState::conveyorOn);},[this]{m_Indexer.SetConveyorState(conveyorState::conveyorOff);}, {&m_Indexer}));
+    m_operator.X().ToggleOnTrue(frc2::cmd::Run([this]{ m_Indexer.SetConveyorSpeed(true);},{&m_Indexer}));
+    m_operator.X().MultiPress(2, 0.25_s).ToggleOnFalse(frc2::cmd::Run([this]{ m_Indexer.SetConveyorSpeed(false);},{&m_Indexer}));
+    
+    m_operator.Y().ToggleOnTrue(frc2::cmd::Run([this]{ m_Indexer.SetUpTakeSpeed(true);},{&m_Indexer}));
+    m_operator.Y().MultiPress(2, 0.25_s).ToggleOnFalse(frc2::cmd::Run([this]{m_Indexer.SetUpTakeSpeed(false);},{&m_Indexer}));
+    //m_Indexer.SetConveyorSpeed(m_operator.Y().Get());
+    
+    
+    #pragma region commentedCode
+    //m_operator.Y().ToggleOnTrue(frc2::cmd::RunEnd([this]{m_Indexer.SetUptakeState(uptakeState::uptakeOn);},[this]{m_Indexer.SetUptakeState(uptakeState::uptakeOff);}, {&m_Indexer}));
+    
+    //m_operator.X().ToggleOnTrue(frc2::cmd::RunEnd([this]{m_Indexer.SetConveyorState(conveyorState::conveyorOn);},[this]{m_Indexer.SetConveyorState(conveyorState::conveyorOff);}, {&m_Indexer}));
     
     
     
@@ -92,7 +103,8 @@ void RobotContainer::ConfigureBindings()
     //m_operator.X().OnFalse(frc2::cmd::Run([this]{m_Indexer.SetConveyorState(conveyorState::conveyorOff);},{&m_Indexer}));
     
     //[this]{m_Indexer.SetUptakeState(uptakeState::uptakeOff);}, 
-   
+   #pragma endregion
+
 }
 
 frc2::Command *RobotContainer::GetAutonomousCommand()

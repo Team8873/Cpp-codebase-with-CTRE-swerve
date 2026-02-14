@@ -41,6 +41,10 @@ class Indexer : public frc2::SubsystemBase{
             void SetConveyorState(conveyorState newConveyorState);
             void SetUptakeState(uptakeState newUptakeState);
 
+            void SetConveyorSpeed(bool toggled);
+            void SetUpTakeSpeed(bool toggled);
+
+
 
         conveyorState GetConveyorState() const { return m_conveyorState;}
         uptakeState GetUptakeState() const {  return m_uptakeState;}

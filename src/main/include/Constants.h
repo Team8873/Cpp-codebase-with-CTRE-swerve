@@ -11,19 +11,18 @@
 
 typedef int CANid_t;
 
+
 #pragma region ConstantsCanIds
 namespace ConstantsCanIds
 {
-    constexpr CANid_t conveyorMotorID = 17;
-    constexpr CANid_t uptakeMotorID = 18;
+   constexpr CANid_t IntakeMotorId = 12;
+   constexpr CANid_t IntakeDeployerId = 13;
+   constexpr CANid_t IntakeEncoderId = 14; 
+   constexpr CANid_t ClimberMotor = 15;
+
+   constexpr CANid_t conveyorMotorID = 17;
+   constexpr CANid_t uptakeMotorID = 18;
 }
 
 #pragma endregion
- typedef int CANid_t;
- 
- #pragma region ConstantsCanIds
- namespace ConstantsCanIds
- {
-    constexpr CANid_t ShooterRotateID = 15;
-    constexpr CANid_t ShooterDriverID = 16;
- }
+

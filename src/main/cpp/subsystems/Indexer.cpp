@@ -79,3 +79,21 @@ switch(newUptakeState)
 }
 m_uptakeMotor.Set(uptakeSpeed);
 }
+#pragma endregion
+
+#pragma region ConveyorOn
+void Indexer::SetConveyorSpeed(bool toggled)
+{
+    if (toggled)
+        m_conveyorMotor.Set(0.5);
+    else
+        m_conveyorMotor.Set(0);
+}
+
+void Indexer::SetUpTakeSpeed(bool toggled)
+{
+    if (toggled)
+        m_uptakeMotor.Set(0.5);
+    else
+        m_uptakeMotor.Set(0.0);
+}
