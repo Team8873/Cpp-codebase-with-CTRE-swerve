@@ -76,6 +76,23 @@ void RobotContainer::ConfigureBindings()
     joystick.LeftBumper().OnTrue(drivetrain.RunOnce([this] { drivetrain.SeedFieldCentric(); }));
 
     drivetrain.RegisterTelemetry([this](auto const &state) { logger.Telemeterize(state); });
+
+
+    m_operator.Y().ToggleOnTrue(frc2::cmd::RunEnd([this]{m_Indexer.SetUptakeState(uptakeState::uptakeOn);},[this]{m_Indexer.SetUptakeState(uptakeState::uptakeOff);}, {&m_Indexer}));
+    
+    m_operator.X().ToggleOnTrue(frc2::cmd::RunEnd([this]{m_Indexer.SetConveyorState(conveyorState::conveyorOn);},[this]{m_Indexer.SetConveyorState(conveyorState::conveyorOff);}, {&m_Indexer}));
+    
+    
+    
+    
+    //m_operator.Y().ToggleOnTrue(frc2::cmd::Run([this]{m_Indexer.SetUptakeState(uptakeState::uptakeOn);},{&m_Indexer}));
+   //m_operator.Y().ToggleOnFalse(frc2::cmd::Run([this]{m_Indexer.SetUptakeState(uptakeState::uptakeOff);},{&m_Indexer}));
+
+    //m_operator.X().ToggleOnTrue(frc2::cmd::Run([this]{m_Indexer.SetConveyorState(conveyorState::conveyorOn);},{&m_Indexer}));
+    //m_operator.X().OnFalse(frc2::cmd::Run([this]{m_Indexer.SetConveyorState(conveyorState::conveyorOff);},{&m_Indexer}));
+    
+    //[this]{m_Indexer.SetUptakeState(uptakeState::uptakeOff);}, 
+   
 }
 
 frc2::Command *RobotContainer::GetAutonomousCommand()

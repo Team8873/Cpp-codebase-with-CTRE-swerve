@@ -27,46 +27,55 @@ Indexer::Indexer()
 
 #pragma region SetState
 
-void Indexer::SetState(IndexerState newState)
+double conveyorSpeed = 0;
+double uptakeSpeed = 0;
+
+void Indexer::SetConveyorState(conveyorState newConveyorState)
 {
-if (newState == m_IndexerState)
+if (newConveyorState == m_conveyorState)
         return;
 
-m_IndexerState = newState;
+m_conveyorState = newConveyorState;
 
-auto conveyorSpeed = 0;
-auto uptakeSpeed = 0;
-
-switch(newState)
+switch(newConveyorState)
 {
-    case IndexerState::conveyorOn:
+    case conveyorState::conveyorOn:
     {
         conveyorSpeed = IndexerConstant::conveyorSpeed;
         break;
     }
-    case IndexerState::uptakeOn:
-    {
-        uptakeSpeed = IndexerConstant::uptakeSpeed;
-        break;
-    }
-    case IndexerState::conveyorOff:
+
+    case conveyorState::conveyorOff:
     {
         conveyorSpeed = 0;
         break;
     }
-    case IndexerState::uptakeOff:
-    {
-        uptakeSpeed = 0;
-        break;
-    }
-    case IndexerState::syncOff:
-    {
-        conveyorSpeed = 0; 
-        uptakeSpeed = 0;
-        break;
-    }
-    
 }
+
+
 m_conveyorMotor.Set(conveyorSpeed);
+}
+
+void Indexer::SetUptakeState(uptakeState newUptakeState)
+{
+    if(newUptakeState == m_uptakeState)
+        return;
+
+m_uptakeState = newUptakeState;
+
+switch(newUptakeState)
+{
+    case uptakeState::uptakeOn:
+    {
+        uptakeSpeed = IndexerConstant::uptakeSpeed;
+        break;
+    }
+    case uptakeState::uptakeOff:
+    {
+        uptakeSpeed = 0;
+        break;
+    }
+
+}
 m_uptakeMotor.Set(uptakeSpeed);
 }

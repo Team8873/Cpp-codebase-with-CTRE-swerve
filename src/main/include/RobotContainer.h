@@ -7,7 +7,9 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/button/CommandXboxController.h>
+
 #include "subsystems/CommandSwerveDrivetrain.h"
+#include "subsystems/Indexer.h"
 #include "Telemetry.h"
 
 class RobotContainer {
@@ -44,4 +46,8 @@ public:
 
 private:
     void ConfigureBindings();
+    
+    frc2::CommandXboxController m_operator{1};
+
+    Indexer m_Indexer{};
 };

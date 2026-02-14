@@ -13,25 +13,24 @@
 
 #pragma region IndexerEnums
 
-enum IndexerState{
+enum conveyorState{
         conveyorOn,
-        uptakeOn,
-        syncOn,
         conveyorOff,
+};
+
+enum uptakeState{
+        uptakeOn,
         uptakeOff,
-        syncOff
+
 };
 
 #pragma endregion 
 
 #pragma region IndexerConstants
 namespace IndexerConstant{
-        //FIX ME (declaration not actually values)
-        constexpr auto conveyorSpeed = 0;
-        constexpr auto uptakeSpeed = 0;
+        constexpr double conveyorSpeed = 0.5;
+        constexpr double uptakeSpeed = 0.5;
 
-        constexpr auto conveyorSpeed = 0;
-        constexpr auto uptakeSpeed = 0;
 }
 #pragma endregion
 
@@ -39,15 +38,18 @@ class Indexer : public frc2::SubsystemBase{
 
     public:
             explicit Indexer(); 
-            void SetState(IndexerState newState);
+            void SetConveyorState(conveyorState newConveyorState);
+            void SetUptakeState(uptakeState newUptakeState);
 
 
-        IndexerState GetState() const { return m_IndexerState;}
+        conveyorState GetConveyorState() const { return m_conveyorState;}
+        uptakeState GetUptakeState() const {  return m_uptakeState;}
 
 
     private:
         rev::spark::SparkMax m_conveyorMotor{ConstantsCanIds::conveyorMotorID, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkMax m_uptakeMotor{ConstantsCanIds::uptakeMotorID, rev::spark::SparkLowLevel::MotorType::kBrushless};
 
-        IndexerState m_IndexerState = IndexerState::syncOff;
+        conveyorState m_conveyorState = conveyorState::conveyorOff;
+        uptakeState m_uptakeState = uptakeState::uptakeOff;
 };
