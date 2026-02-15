@@ -1,4 +1,5 @@
 #include "subsystems/AFCIntake.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #pragma region Constructor
 
@@ -24,45 +25,28 @@ AFCIntake::AFCIntake()
                     0.0,
                     0.0,
                     false);
+
+    
 }
 #pragma endregion
 
-#pragma region SetState
+    //m_intakeDeployer.GetClosedLoopController().SetReference(position.value(), rev::spark::SparkLowLevel::ControlType::kMAXMotionPositionControl); // Fix magic number
+void AFCIntake::Periodic(){
+    auto positionSignal = m_intakeStateEncoder.GetPosition();
+    double pos = positionSignal.GetValueAsDouble();
+    frc::SmartDashboard::PutNumber("Intake Encoder", pos);
+}
+void AFCIntake::Disable(){
 
-void AFCIntake::SetState(IntakeStates newState)
-{
-    if(newState == m_intakeState) // Check current state and do nothing if they are the same
-        return;
+}
+void AFCIntake::Deployer(units::angle::turn_t angleOfDangle){
+    auto positionSignal = m_intakeStateEncoder.GetPosition();
+    double pos = positionSignal.GetValueAsDouble();
+    m_intakeDeployer.GetClosedLoopController().SetSetpoint(pos, rev::spark::SparkLowLevel::ControlType::kPosition);
+}
+void AFCIntake::IntakeSpeed(){
 
-    m_intakeState = newState; // Hold new state
+}
+void AFCIntake::Stop(){
 
-    auto position = IntakeConstant::IntakeStowedAngle; // Determine position based on new state
-    auto speed = 0; // Determine speed based on new state
-
-    switch (newState) // Set position and speed based on state
-    {
-        case IntakeStates::intakeStowed:
-        {
-            break; // Defualt
-        }
-
-        case IntakeStates::deployedOff:
-        {
-            position = IntakeConstant::IntakeDeployedAngle;
-            break;
-        }
-
-        case IntakeStates::deployedOn:
-        {
-            position = IntakeConstant::IntakeDeployedAngle;
-            speed = IntakeConstant::IntakeSpeed;
-            break;
-        }
-
-        
-    }
-   
-    m_intakeDeployer.GetClosedLoopController().SetReference(position.value(), rev::spark::SparkLowLevel::ControlType::kMAXMotionPositionControl); // Fix magic number
-    m_intakeMotor.Set(speed);
-} 
-#pragma endregion
+}

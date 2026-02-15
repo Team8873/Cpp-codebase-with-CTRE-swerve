@@ -13,15 +13,6 @@
 #include "misc/MaxMotorConfig.h"
 #pragma endregion
 
-#pragma region IntakeEnums
-
-enum IntakeStates
-{
-    intakeStowed,
-    deployedOn,
-    deployedOff
-};
-#pragma endregion
 
 #pragma region IntakeConstant
 namespace IntakeConstant
@@ -40,10 +31,13 @@ class AFCIntake : public frc2::SubsystemBase
     public:
 
         explicit AFCIntake();
+        void Periodic() override;
+        void Disable();
+        void Deployer(units::angle::turn_t angleOfDangle);
+        void IntakeSpeed();
+        void Stop();
     
-        void SetState(IntakeStates newState);
-
-        IntakeStates GetState() const { return m_intakeState; }
+        
     private:
         
         rev::spark::SparkMax m_intakeMotor{ConstantsCanIds::IntakeMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
@@ -51,7 +45,7 @@ class AFCIntake : public frc2::SubsystemBase
 
         ctre::phoenix6::hardware::CANcoder m_intakeStateEncoder{ConstantsCanIds::IntakeEncoderId};
 
-        IntakeStates m_intakeState = IntakeStates::intakeStowed;
+        //IntakeStates m_intakeState = IntakeStates::intakeStowed;
 
 
 };
