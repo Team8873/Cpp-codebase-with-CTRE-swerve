@@ -5,14 +5,26 @@
 #include "RobotContainer.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/Commands.h>
+#include <frc2/command/CommandScheduler.h>
 #include <frc2/command/button/RobotModeTriggers.h>
+#include <frc2/command/CommandScheduler.h>
+#include <frc2/command/InstantCommand.h>
+#include <frc2/command/ParallelCommandGroup.h>
+#include <frc2/command/RunCommand.h>
+#include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/WaitCommand.h>
+#include <frc2/command/WaitUntilCommand.h>
+#include <frc2/command/button/Trigger.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
 
+#include "commands/AFCIndexerComm.h"
+
 #pragma region RobotContainer
-RobotContainer::RobotContainer()
+RobotContainer::RobotContainer() //: m_afcIndexer()
 {
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
     frc::SmartDashboard::PutData("Auto Mode", &autoChooser);
+    //frc::SmartDashboard::PutString("Climber State", );
 
     ConfigureBindings();
 }
@@ -81,16 +93,12 @@ void RobotContainer::ConfigureBindings()
 
 
     //♦♦♦♦♦♦Start of Operator controls reorganize later♦♦♦♦♦♦
-    m_operator.RightBumper().OnChange(AFCIntakeComm(&m_afcIntake, IntakeStates::intakeStowed).ToPtr());
-    m_operator.LeftBumper().OnChange(AFCIntakeComm(&m_afcIntake, IntakeStates::deployedOn).ToPtr());
-    m_operator.A().OnTrue(frc2::cmd::RunOnce([this]{ m_afcClimber.SetState(ClimberStates::climberStowed);}, {&m_afcClimber}));
-    m_operator.LeftTrigger().OnTrue(
-        frc2::cmd::RunEnd(
-            [this]{ m_afcClimber.SetManualSpeed(-m_operator.GetLeftTriggerAxis());},
-            [this]{ m_afcClimber.SetManualSpeed(0.0);},
-            {&m_afcClimber}
-        )
-    );
+    m_operator.Y().WhileTrue(frc2::cmd::RunEnd([this]{ m_afcClimber.SetManualSpeed(m_operator.GetLeftTriggerAxis());},[this]{ m_afcClimber.SetManualSpeed(0.0);},{&m_afcClimber}));
+    m_operator.A().OnTrue(AFCIndexerComm(&m_afcIndexer, true).ToPtr());
+    m_operator.B().ToggleOnTrue(AFCIntakeComm(&m_afcIntake, 0.5_tr).ToPtr());
+    //m_operator.A().ToggleOnTrue(frc2::InstantCommand([this]() {m_afcIndexer.ConveyorOn();}, {&m_afcIndexer}).ToPtr());
+    //m_operator.A()
+    //m_operator.A().OnFalse(frc2::WaitCommand(1000_ms).AndThen(frc2::InstantCommand([this]() { m_afcIndexer.Stop(); }, {&m_afcIndexer}).ToPtr())); 
 }
 #pragma endregion
 

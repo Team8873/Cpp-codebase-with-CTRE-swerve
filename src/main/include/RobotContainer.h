@@ -14,9 +14,11 @@
 #include "subsystems/AFCIntake.h"
 #include "subsystems/AFCClimber.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
+#include "subsystems/AFCIndexer.h"
 
 #include "commands/AFCIntakeComm.h"
 #include "commands/AFCClimberComm.h"
+#include "commands/AFCIndexerComm.h"
 
 #include "Telemetry.h"
 
@@ -62,4 +64,5 @@ private:
 
     AFCIntake m_afcIntake{};
     AFCClimber m_afcClimber{};
+    Indexer m_afcIndexer{};
 };
