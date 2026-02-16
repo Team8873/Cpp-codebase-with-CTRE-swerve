@@ -2,11 +2,25 @@
 #include <frc/RobotController.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
 #include <pathplanner/lib/controllers/PPHolonomicDriveController.h>
+#include "LimelightHelpers.h"
 
 using namespace subsystems;
 
 void CommandSwerveDrivetrain::ConfigureAutoBuilder()
 {
+double robotYaw = m_gyro.GetYaw();
+LimelightHelpers::SetRobotOrientation("", robotYaw, 0.0, 0.0, 0.0, 0.0, 0.0);
+
+// Get the pose estimate
+LimelightHelpers::PoseEstimate limelightMeasurement = LimelightHelpers::getBotPoseEstimate_wpiBlue_MegaTag2("");
+
+// Add it to your pose estimator
+m_poseEstimator.SetVisionMeasurementStdDevs({0.5, 0.5, 9999999});
+m_poseEstimator.AddVisionMeasurement(
+    limelightMeasurement.pose,
+    limelightMeasurement.timestampSeconds
+);
+
     auto config = pathplanner::RobotConfig::fromGUISettings();
     pathplanner::AutoBuilder::configure(
         // Supplier of current robot pose
