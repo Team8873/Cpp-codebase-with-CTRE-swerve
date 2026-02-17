@@ -14,33 +14,25 @@
 #include "misc/MaxMotorConfig.h"
 #pragma endregion
 
-enum ShooterRotateStates
-{
-    Manual,
-    Automatic
-};
+namespace TurretConstant
 
-namespace ShooterRotateConstant
-{
-    //Placeholer
-    constexpr auto Manual = 0;
-    constexpr auto Automatic = 0;
-};
+{}
 
-class Shooter : public frc2::SubsystemBase
+class Shooter: public frc2::SubsystemBase
 {
     public:
 
         explicit Shooter();
+        void Periodic() override;
+        void Rotate(double AngleOfTurret); //units::angle::turn_t AngleOfTurret
+        void Disable();
+        void Stop();
 
-        void SetState(ShooterRotateStates newState);
-
-        ShooterRotateStates GetState() const { return m_ShooterRotateStates; }
     private:
 
-        rev::spark::SparkMax m_ShooterDriver{ConstantsCanIds::ShooterDriverID, rev::spark::SparkLowLevel::MotorType::kBrushless};
-        rev::spark::SparkMax m_ShooterRotate{ConstantsCanIds::ShooterRotateID, rev::spark::SparkLowLevel::MotorType::kBrushless};
+        rev::spark::SparkMax m_Shooter{ConstantsCanIds::ShooterID, rev::spark::SparkLowLevel::MotorType::kBrushless};
+        rev::spark::SparkMax m_Turret{ConstantsCanIds::TurretID, rev::spark::SparkLowLevel::MotorType::kBrushless};
 
-        ShooterRotateStates m_ShooterRotateStates = ShooterRotateStates::Manual;
+        ctre::phoenix6::hardware::CANcoder m_TurretStateEncoder{ConstantsCanIds::TurretEncoderId};
 
 };
