@@ -5,7 +5,16 @@
 #include "RobotContainer.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/Commands.h>
+#include <frc2/command/CommandScheduler.h>
 #include <frc2/command/button/RobotModeTriggers.h>
+#include <frc2/command/CommandScheduler.h>
+#include <frc2/command/InstantCommand.h>
+#include <frc2/command/ParallelCommandGroup.h>
+#include <frc2/command/RunCommand.h>
+#include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/WaitCommand.h>
+#include <frc2/command/WaitUntilCommand.h>
+#include <frc2/command/button/Trigger.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
 
 
@@ -77,7 +86,7 @@ void RobotContainer::ConfigureBindings()
 
     drivetrain.RegisterTelemetry([this](auto const &state) { logger.Telemeterize(state); });
 
-    m_operator.A().OnTrue(frc2::cmd::RunOnce([this]{m_shooter.Rotate(40.0);}, {&m_shooter}));
+    m_operator.A().WhileTrue(frc2::cmd::RunEnd([this]{ m_Shooter.SetManualSpeed(m_operator.GetRightX());},[this]{ m_Shooter.SetManualSpeed(0.0);},{&m_Shooter}));
 }
 
 frc2::Command *RobotContainer::GetAutonomousCommand()

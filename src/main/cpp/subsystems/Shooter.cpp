@@ -35,7 +35,10 @@ void Shooter::Rotate(double AngleOfTurret){
     double pos = positionSignal.GetValueAsDouble();
     m_Turret.GetClosedLoopController().SetSetpoint(AngleOfTurret, rev::spark::SparkLowLevel::ControlType::kPosition);    
 }
- 
+void Shooter::SetManualSpeed(double speed)
+{   
+    m_Turret.Set(speed);
+} 
 void Shooter::Disable(){
 }
 

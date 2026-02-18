@@ -10,6 +10,7 @@
 
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "subsystems/Shooter.h"
+#include "Constants.h"
 
 #include "Telemetry.h"
 
@@ -49,6 +50,6 @@ private:
     void ConfigureBindings();
     
      frc2::CommandXboxController m_operator{1};
+     Shooter m_Shooter{};
 
-    Shooter m_shooter{};
 };

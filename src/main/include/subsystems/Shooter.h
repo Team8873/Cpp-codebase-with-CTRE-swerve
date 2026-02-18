@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 
 #pragma region Includes
 
@@ -7,16 +7,22 @@
 
 #include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/CANcoder.hpp>
+
 #include <rev/SparkMax.h>
+
 #include <frc2/command/SubsystemBase.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Constants.h"
 #include "misc/MaxMotorConfig.h"
 #pragma endregion
 
 namespace TurretConstant
+{
+    constexpr auto Turretsoup = 0.25_tr;
 
-{}
+    constexpr auto TurretSpeed = 0;
+}
 
 class Shooter: public frc2::SubsystemBase
 {
@@ -25,13 +31,14 @@ class Shooter: public frc2::SubsystemBase
         explicit Shooter();
         void Periodic() override;
         void Rotate(double AngleOfTurret); //units::angle::turn_t AngleOfTurret
+        void SetManualSpeed(double speed);
         void Disable();
         void Stop();
-
-    private:
-
+        
         rev::spark::SparkMax m_Shooter{ConstantsCanIds::ShooterID, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkMax m_Turret{ConstantsCanIds::TurretID, rev::spark::SparkLowLevel::MotorType::kBrushless};
+
+    private:
 
         ctre::phoenix6::hardware::CANcoder m_TurretStateEncoder{ConstantsCanIds::TurretEncoderId};
 
