@@ -33,6 +33,8 @@ private:
 
     frc2::CommandXboxController joystick{0};
 
+     bool target;// =  Shooter::autolock;
+
 public:
     subsystems::CommandSwerveDrivetrain drivetrain{TunerConstants::CreateDrivetrain()};
 

@@ -77,7 +77,7 @@ void RobotContainer::ConfigureBindings()
 
     drivetrain.RegisterTelemetry([this](auto const &state) { logger.Telemeterize(state); });
 
-    m_operator.A().OnTrue(frc2::cmd::RunOnce([this]{m_shooter.Rotate(40.0);}, {&m_shooter}));
+    m_operator.A().OnTrue(frc2::cmd::RunOnce([this]{m_shooter.Rotate(!target);}, {&m_shooter}));
 }
 
 frc2::Command *RobotContainer::GetAutonomousCommand()
