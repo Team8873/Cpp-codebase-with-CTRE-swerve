@@ -6,8 +6,8 @@
 #pragma endregion
 
 #pragma region MaxMotorConfig
-//Sets the Max Motor Config
-Shooter::Shooter()
+//Sets the Max Motor Config for both
+Turret::Turret()
 {
     MaxMotorConfig(&m_Turret,
                     30.0_A,
@@ -20,9 +20,23 @@ Shooter::Shooter()
                     0.0,
                     true);
 }
+Shooter::Shooter()
+{
+    MaxMotorConfig(&m_Shooter,
+                    30.0_A,
+                    true,
+                    0.1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    true);
+}
 #pragma endregion
 
-#pragma region SetsTheStates
+#pragma region SetsTheStatesTurret
+
 
 void Turret::Periodic(){
     auto positionSignal = m_TurretStateEncoder.GetPosition();
@@ -46,18 +60,16 @@ void Turret::Stop(){
 
 }
 
+#pragma endregion
+#pragma region SetTheStatesShooter
+
 void Shooter::Periodic(){
-    auto positionSignal = m_TurretStateEncoder.GetPosition();
+    auto positionSignal = m_ShooterStateEncoder.GetPosition();
     double pos = positionSignal.GetValueAsDouble();
-    frc::SmartDashboard::PutNumber("Turret Encoder", pos);
+    frc::SmartDashboard::PutNumber("Shooter Encoder", pos);
 }
 
-void Shooter::Rotate(double AngleOfTurret){
-    auto positionSignal = m_TurretStateEncoder.GetPosition();
-    double pos = positionSignal.GetValueAsDouble();
-    m_Shooter.GetClosedLoopController().SetSetpoint(AngleOfTurret, rev::spark::SparkLowLevel::ControlType::kPosition);    
-}
-void Shooter::SetManualSpeedTurret(double speed)
+void Shooter::SetManualSpeedShooter(double speed)
 {   
     m_Shooter.Set(speed);
 } 

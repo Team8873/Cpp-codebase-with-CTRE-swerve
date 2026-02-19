@@ -15,4 +15,6 @@
     constexpr CANid_t TurretID = 17;
     constexpr CANid_t ShooterID = 16;
     constexpr CANid_t TurretEncoderId = 18;
+    constexpr CANid_t ShooterEncoderId = 19;
+
  };

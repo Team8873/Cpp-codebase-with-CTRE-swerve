@@ -51,6 +51,6 @@ private:
     
      frc2::CommandXboxController m_operator{1};
      Shooter m_Shooter{};
-     Shooter m_Turret{};
+     Turret m_Turret{};
 
 };

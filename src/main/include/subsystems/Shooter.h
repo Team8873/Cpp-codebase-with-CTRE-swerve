@@ -49,8 +49,7 @@ class Shooter: public frc2::SubsystemBase
 
         explicit Shooter();
         void Periodic() override;
-        void Rotate(double AngleOfTurret); //units::angle::turn_t AngleOfTurret
-        void SetManualSpeedTurret(double speed);
+        void SetManualSpeedShooter(double speed);
         void Disable();
         void Stop();
         
@@ -58,6 +57,6 @@ class Shooter: public frc2::SubsystemBase
 
     private:
 
-        ctre::phoenix6::hardware::CANcoder m_TurretStateEncoder{ConstantsCanIds::TurretEncoderId};
+        ctre::phoenix6::hardware::CANcoder m_ShooterStateEncoder{ConstantsCanIds::ShooterEncoderId};
 
 };
