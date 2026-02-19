@@ -24,6 +24,26 @@ namespace TurretConstant
     constexpr auto TurretSpeed = 0;
 }
 
+class Turret: public frc2::SubsystemBase
+{
+    public:
+
+        explicit Turret();
+        void Periodic() override;
+        void Rotate(double AngleOfTurret); //units::angle::turn_t AngleOfTurret
+        void SetManualSpeedTurret(double speed);
+        void Disable();
+        void Stop();
+        
+        rev::spark::SparkMax m_Shooter{ConstantsCanIds::ShooterID, rev::spark::SparkLowLevel::MotorType::kBrushless};
+        rev::spark::SparkMax m_Turret{ConstantsCanIds::TurretID, rev::spark::SparkLowLevel::MotorType::kBrushless};
+
+    private:
+
+        ctre::phoenix6::hardware::CANcoder m_TurretStateEncoder{ConstantsCanIds::TurretEncoderId};
+
+};
+
 class Shooter: public frc2::SubsystemBase
 {
     public:
@@ -31,7 +51,7 @@ class Shooter: public frc2::SubsystemBase
         explicit Shooter();
         void Periodic() override;
         void Rotate(double AngleOfTurret); //units::angle::turn_t AngleOfTurret
-        void SetManualSpeed(double speed);
+        void SetManualSpeedTurret(double speed);
         void Disable();
         void Stop();
         

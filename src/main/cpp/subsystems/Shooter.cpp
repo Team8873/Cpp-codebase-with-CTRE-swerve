@@ -24,6 +24,28 @@ Shooter::Shooter()
 
 #pragma region SetsTheStates
 
+void Turret::Periodic(){
+    auto positionSignal = m_TurretStateEncoder.GetPosition();
+    double pos = positionSignal.GetValueAsDouble();
+    frc::SmartDashboard::PutNumber("Turret Encoder", pos);
+}
+
+void Turret::Rotate(double AngleOfTurret){
+    auto positionSignal = m_TurretStateEncoder.GetPosition();
+    double pos = positionSignal.GetValueAsDouble();
+    m_Turret.GetClosedLoopController().SetSetpoint(AngleOfTurret, rev::spark::SparkLowLevel::ControlType::kPosition);    
+}
+void Turret::SetManualSpeedTurret(double speed)
+{   
+    m_Turret.Set(speed);
+} 
+void Turret::Disable(){
+}
+
+void Turret::Stop(){
+
+}
+
 void Shooter::Periodic(){
     auto positionSignal = m_TurretStateEncoder.GetPosition();
     double pos = positionSignal.GetValueAsDouble();
@@ -33,11 +55,11 @@ void Shooter::Periodic(){
 void Shooter::Rotate(double AngleOfTurret){
     auto positionSignal = m_TurretStateEncoder.GetPosition();
     double pos = positionSignal.GetValueAsDouble();
-    m_Turret.GetClosedLoopController().SetSetpoint(AngleOfTurret, rev::spark::SparkLowLevel::ControlType::kPosition);    
+    m_Shooter.GetClosedLoopController().SetSetpoint(AngleOfTurret, rev::spark::SparkLowLevel::ControlType::kPosition);    
 }
-void Shooter::SetManualSpeed(double speed)
+void Shooter::SetManualSpeedTurret(double speed)
 {   
-    m_Turret.Set(speed);
+    m_Shooter.Set(speed);
 } 
 void Shooter::Disable(){
 }
