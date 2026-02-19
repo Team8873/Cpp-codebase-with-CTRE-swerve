@@ -23,7 +23,7 @@ class Shooter: public frc2::SubsystemBase
 {
     public:
 
-        bool autolock = false;
+        bool target = false;
 
         explicit Shooter();
         void Periodic() override;
