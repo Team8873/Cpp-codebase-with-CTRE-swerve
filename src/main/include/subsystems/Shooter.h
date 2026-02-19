@@ -35,7 +35,6 @@ class Turret: public frc2::SubsystemBase
         void Disable();
         void Stop();
         
-        rev::spark::SparkMax m_Shooter{ConstantsCanIds::ShooterID, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkMax m_Turret{ConstantsCanIds::TurretID, rev::spark::SparkLowLevel::MotorType::kBrushless};
 
     private:
@@ -56,7 +55,6 @@ class Shooter: public frc2::SubsystemBase
         void Stop();
         
         rev::spark::SparkMax m_Shooter{ConstantsCanIds::ShooterID, rev::spark::SparkLowLevel::MotorType::kBrushless};
-        rev::spark::SparkMax m_Turret{ConstantsCanIds::TurretID, rev::spark::SparkLowLevel::MotorType::kBrushless};
 
     private:
 
