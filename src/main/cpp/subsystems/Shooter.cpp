@@ -28,16 +28,20 @@ void Shooter::Periodic(){
     auto positionSignal = m_TurretStateEncoder.GetPosition();
     double pos = positionSignal.GetValueAsDouble();
     frc::SmartDashboard::PutNumber("Turret Encoder", pos);
+    frc::SmartDashboard::PutNumber("TX", tx);
+    double txNeed = tx * 100.0;
 }
 
 void Shooter::Rotate(bool autolock){
     auto positionSignal = m_TurretStateEncoder.GetPosition();
     double pos = positionSignal.GetValueAsDouble();
-    if (autolock == true)
+    m_Turret.Set(tx);
+    /*if (autolock == true)
     {
         if (hasTarget == true) 
         {
-           m_Turret.GetClosedLoopController().SetSetpoint(tx*100, rev::spark::SparkLowLevel::ControlType::kPosition);
+           m_Turret.Set(0.5); 
+          // m_Turret.GetClosedLoopController().SetSetpoint(tx*100, rev::spark::SparkLowLevel::ControlType::kPosition);
         } 
             else 
             {
@@ -49,7 +53,7 @@ void Shooter::Rotate(bool autolock){
         {
             m_Turret.Set(0);
         // m_Turret.GetClosedLoopController().SetSetpoint(0, rev::spark::SparkLowLevel::ControlType::kPosition);
-        }
+        }*/
 }
  
 void Shooter::Disable(){

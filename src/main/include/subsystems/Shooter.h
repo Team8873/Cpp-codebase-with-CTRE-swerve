@@ -9,6 +9,7 @@
 #include <ctre/phoenix6/CANcoder.hpp>
 #include <rev/SparkMax.h>
 #include <frc2/command/SubsystemBase.h>
+#include "frc/smartdashboard/SmartDashboard.h"
 
 #include "LimelightHelpers.h"
 #include "Constants.h"
