@@ -6,54 +6,28 @@
 
 #include <rev/SparkMax.h>
 #include <frc2/command/SubsystemBase.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Constants.h"
 #include "misc/MaxMotorConfig.h"
 #pragma endregion
 
-#pragma region IndexerEnums
-
-enum conveyorState{
-        conveyorOn,
-        conveyorOff,
-};
-
-enum uptakeState{
-        uptakeOn,
-        uptakeOff,
-
-};
-
-#pragma endregion 
-
-#pragma region IndexerConstants
-namespace IndexerConstant{
-        constexpr double conveyorSpeed = 0.5;
-        constexpr double uptakeSpeed = 0.5;
-
-}
-#pragma endregion
 
 class Indexer : public frc2::SubsystemBase{
 
     public:
             explicit Indexer(); 
-            void SetConveyorState(conveyorState newConveyorState);
-            void SetUptakeState(uptakeState newUptakeState);
-
-            void SetConveyorSpeed(bool toggled);
-            void SetUpTakeSpeed(bool toggled);
-
-
-
-        conveyorState GetConveyorState() const { return m_conveyorState;}
-        uptakeState GetUptakeState() const {  return m_uptakeState;}
+            void Periodic() override;
+            void Disable();
+            void ConveyorOn(double speed = 1.0);
+            void ConveyorOff(double speed = 0);
+            void UptakeOn(double speed = -1.0);
+            void UptakeOff(double speed = 0);
+            void Stop();
 
 
     private:
         rev::spark::SparkMax m_conveyorMotor{ConstantsCanIds::conveyorMotorID, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkMax m_uptakeMotor{ConstantsCanIds::uptakeMotorID, rev::spark::SparkLowLevel::MotorType::kBrushless};
 
-        conveyorState m_conveyorState = conveyorState::conveyorOff;
-        uptakeState m_uptakeState = uptakeState::uptakeOff;
 };

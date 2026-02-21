@@ -25,75 +25,33 @@ Indexer::Indexer()
 }
 #pragma endregion
 
-#pragma region SetState
 
 double conveyorSpeed = 0;
 double uptakeSpeed = 0;
 
-void Indexer::SetConveyorState(conveyorState newConveyorState)
-{
-if (newConveyorState == m_conveyorState)
-        return;
 
-m_conveyorState = newConveyorState;
+void Indexer::Periodic(){
+    frc::SmartDashboard::PutString("Work", "Please");
+}
+void Indexer::Disable(){}
 
-switch(newConveyorState)
-{
-    case conveyorState::conveyorOn:
-    {
-        conveyorSpeed = IndexerConstant::conveyorSpeed;
-        break;
-    }
-
-    case conveyorState::conveyorOff:
-    {
-        conveyorSpeed = 0;
-        break;
-    }
+void Indexer::ConveyorOn(double speed){
+    m_conveyorMotor.Set(speed);
 }
 
-
-m_conveyorMotor.Set(conveyorSpeed);
+void Indexer::ConveyorOff(double speed){ 
+    m_conveyorMotor.StopMotor();
 }
 
-void Indexer::SetUptakeState(uptakeState newUptakeState)
-{
-    if(newUptakeState == m_uptakeState)
-        return;
-
-m_uptakeState = newUptakeState;
-
-switch(newUptakeState)
-{
-    case uptakeState::uptakeOn:
-    {
-        uptakeSpeed = IndexerConstant::uptakeSpeed;
-        break;
-    }
-    case uptakeState::uptakeOff:
-    {
-        uptakeSpeed = 0;
-        break;
-    }
-
-}
-m_uptakeMotor.Set(uptakeSpeed);
-}
-#pragma endregion
-
-#pragma region ConveyorOn
-void Indexer::SetConveyorSpeed(bool toggled)
-{
-    if (toggled)
-        m_conveyorMotor.Set(0.5);
-    else
-        m_conveyorMotor.Set(0);
+void Indexer::UptakeOn(double speed){
+    m_uptakeMotor.Set(speed);
 }
 
-void Indexer::SetUpTakeSpeed(bool toggled)
-{
-    if (toggled)
-        m_uptakeMotor.Set(0.5);
-    else
-        m_uptakeMotor.Set(0.0);
+void Indexer::UptakeOff(double speed){
+    m_uptakeMotor.StopMotor();
+}
+
+void Indexer::Stop(){
+    m_conveyorMotor.StopMotor();
+    m_uptakeMotor.StopMotor();
 }
