@@ -80,9 +80,13 @@ void RobotContainer::ConfigureBindings()
 
 
    //Indexer
-   m_operator.A().ToggleOnTrue(IndexerComm(&m_Indexer).ToPtr());
+   m_operator.A().ToggleOnTrue(IndexerComm(&m_Indexer, &m_Shooter).ToPtr());
    m_Indexer.SetDefaultCommand(frc2::cmd::Run([this]{m_Indexer.Stop(); }, {&m_Indexer}));
-   //m_operator.A().MultiPress(2,0.5_s).ToggleOnFalse(frc2::cmd::Run([this]{m_Indexer.Stop(); }, {&m_Indexer}));
+   
+   //Intake
+   m_operator.LeftBumper().ToggleOnTrue(IntakeComm(&m_Intake).ToPtr());
+   m_Intake.SetDefaultCommand(frc2::cmd::Run([this]{m_Intake.Stop(); }, {&m_Intake}));
+
 
    
 
