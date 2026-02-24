@@ -14,7 +14,7 @@
 class AFCIntakeComm : public frc2::CommandHelper<frc2::Command, AFCIntakeComm>
 {
     public:
-        explicit AFCIntakeComm(AFCIntake* intakeSubsystem, units::angle::turn_t angleOfDangle);
+        explicit AFCIntakeComm(AFCIntake* intakeSubsystem, double angleOfDangle);
 
         void Initialize() override;
 
@@ -27,5 +27,5 @@ class AFCIntakeComm : public frc2::CommandHelper<frc2::Command, AFCIntakeComm>
     private:
         AFCIntake* m_pIntake;
         std::chrono::time_point<std::chrono::steady_clock> m_startTime;
-        const units::angle::turn_t m_pAngleOfDangle;
+        const double m_pAngleOfDangle;
 };

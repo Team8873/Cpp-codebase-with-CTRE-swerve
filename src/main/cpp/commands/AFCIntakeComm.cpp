@@ -2,7 +2,7 @@
 
 #pragma region Intakestate
 
-AFCIntakeComm::AFCIntakeComm(AFCIntake* intake, units::angle::turn_t angleOfDangle) : m_pIntake{intake}, m_pAngleOfDangle{angleOfDangle} 
+AFCIntakeComm::AFCIntakeComm(AFCIntake* intake, double angleOfDangle) : m_pIntake{intake}, m_pAngleOfDangle{angleOfDangle} 
 {
     AddRequirements({m_pIntake});
 }
