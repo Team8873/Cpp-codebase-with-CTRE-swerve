@@ -2,7 +2,7 @@
 
 #pragma region Constructor
 
-Indexer::Indexer()
+AFCIndexer::AFCIndexer()
 {
     MaxMotorConfig(&m_conveyorMotor,
                     30.0_A,  // Max Amp
@@ -27,33 +27,27 @@ Indexer::Indexer()
 }
 #pragma endregion
 
-#pragma region SetState
 
-double conveyorSpeed = 0;
-double uptakeSpeed = 0;
 
-void Indexer::Periodic() {
+void AFCIndexer::Periodic() {
 
 }
-void Indexer::Disable(){
+void AFCIndexer::Disable(){
 
 }
 
-void Indexer::ConveyorOn(double speed) {
-    m_conveyorMotor.Set(speed);
-}
-
-void Indexer::ConverorOff(double speed) {
-    m_conveyorMotor.Set(speed);
-}
-void Indexer::UptakeOn(double speed) {
-    m_uptakeMotor.Set(speed);
-}
-void Indexer::UptakeOff(double speed) {
-    m_uptakeMotor.Set(speed);
-}
-void Indexer::Stop() {
-    m_conveyorMotor.Set(0.0);
+void AFCIndexer::ConveyorOn() {
+    m_conveyorMotor.Set(0.5);
     m_uptakeMotor.Set(0.0);
+}
+
+void AFCIndexer::UptakeOn() {
+    m_uptakeMotor.GetClosedLoopController().SetSetpoint(450, rev::spark::SparkLowLevel::ControlType::kVelocity);
+    m_conveyorMotor.Set(0.5);
+}
+
+void AFCIndexer::Stop() {
+    m_conveyorMotor.StopMotor();
+    m_uptakeMotor.StopMotor();
 }
 

@@ -20,28 +20,23 @@ namespace IndexerConstant{
 }
 #pragma endregion
 
-class Indexer : public frc2::SubsystemBase{
+class AFCIndexer : public frc2::SubsystemBase{
 
     public:
-            explicit Indexer();
-            void Periodic() override;
-            void Disable();
-            void ConveyorOn(double speed = 0.8);
-            void ConverorOff(double speed = 0.0);
-            void UptakeOn(double speed = 0.5);
-            void UptakeOff(double speed = 0.0);
-            void Stop(); 
+        explicit AFCIndexer();
+        void Periodic() override;
+        void Disable();
+        void ConveyorOn();
+        void UptakeOn();
+        void Stop(); 
             
 
 
-        //conveyorState GetConveyorState() const { return m_conveyorState;}
-        //uptakeState GetUptakeState() const {  return m_uptakeState;}
-
+        
 
     private:
-        rev::spark::SparkMax m_conveyorMotor{ConstantsCanIds::conveyorMotorID, rev::spark::SparkLowLevel::MotorType::kBrushless};
-        rev::spark::SparkMax m_uptakeMotor{ConstantsCanIds::uptakeMotorID, rev::spark::SparkLowLevel::MotorType::kBrushless};
+        rev::spark::SparkMax m_conveyorMotor{ConstantsCanIds::ConveyorMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
+        rev::spark::SparkMax m_uptakeMotor{ConstantsCanIds::UptakeMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
 
-        //conveyorState m_conveyorState = conveyorState::conveyorOff;
-        //uptakeState m_uptakeState = uptakeState::uptakeOff;
+        
 };
