@@ -17,20 +17,19 @@
 #include <frc2/command/button/Trigger.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
 
-#include "commands/AFCIndexerComm.h"
+//#include "commands/AFCIndexerComm.h"
 
-#pragma region RobotContainer
-RobotContainer::RobotContainer() //: m_afcIndexer()
+
+RobotContainer::RobotContainer() 
 {
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
     frc::SmartDashboard::PutData("Auto Mode", &autoChooser);
-    //frc::SmartDashboard::PutString("Climber State", );
-
+   
     ConfigureBindings();
 }
-#pragma endregion
 
-#pragma region ConfigueBindings
+
+
 void RobotContainer::ConfigureBindings()
 {
     // Note that X is defined as forward according to WPILib convention,
@@ -43,6 +42,8 @@ void RobotContainer::ConfigureBindings()
                 .WithRotationalRate(-joystick.GetRightX() * MaxAngularRate); // Drive counterclockwise with negative X (left)
         })
     );
+    
+    
 
     // Idle while the robot is disabled. This ensures the configured
     // neutral mode is applied to the drive motors while disabled.
@@ -93,14 +94,16 @@ void RobotContainer::ConfigureBindings()
 
 
     //♦♦♦♦♦♦Start of Operator controls reorganize later♦♦♦♦♦♦
-    m_operator.Y().WhileTrue(frc2::cmd::RunEnd([this]{ m_afcClimber.SetManualSpeed(m_operator.GetLeftTriggerAxis());},[this]{ m_afcClimber.SetManualSpeed(0.0);},{&m_afcClimber}));
-    m_operator.A().OnTrue(AFCIndexerComm(&m_afcIndexer, true).ToPtr());
-    m_operator.B().ToggleOnTrue(AFCIntakeComm(&m_afcIntake, 0.5_tr).ToPtr());
-    //m_operator.A().ToggleOnTrue(frc2::InstantCommand([this]() {m_afcIndexer.ConveyorOn();}, {&m_afcIndexer}).ToPtr());
-    //m_operator.A()
-    //m_operator.A().OnFalse(frc2::WaitCommand(1000_ms).AndThen(frc2::InstantCommand([this]() { m_afcIndexer.Stop(); }, {&m_afcIndexer}).ToPtr())); 
+    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(1);},{&m_afcClimber}));
+    m_operator.POVUp().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(-1);},{&m_afcClimber}));
+    m_operator.A().OnTrue(AFCIndexerComm(&m_afcIndexer).ToPtr());
+    //m_operator.A().WhileTrue(frc2::cmd::RunEnd([this]{ m_afcShooter.Turret();},[this]{ m_afcShooter.Stop();},{&m_afcShooter}));
+    m_operator.B().ToggleOnTrue(AFCIntakeComm(&m_afcIntake, 0.5).ToPtr());
+    m_operator.B().MultiPress(2 , 0.25_s).ToggleOnTrue(AFCStowComm(&m_afcIndexer, &m_afcIntake).ToPtr());
+    //if(m_afcShooter.GetCurrentCommand()  m_afcShooter.AutomaticTurret())
+     
 }
-#pragma endregion
+
 
 #pragma region Autonomous
 frc2::Command *RobotContainer::GetAutonomousCommand()

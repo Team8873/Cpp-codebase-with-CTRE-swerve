@@ -4,7 +4,8 @@
 
 #pragma once
 
-#pragma region Includes
+
+#include <units/time.h>
 
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc2/command/CommandPtr.h>
@@ -13,16 +14,18 @@
 
 #include "subsystems/AFCIntake.h"
 #include "subsystems/AFCClimber.h"
-#include "subsystems/CommandSwerveDrivetrain.h"
 #include "subsystems/AFCIndexer.h"
+#include "subsystems/AFCShooter.h"
+#include "subsystems/CommandSwerveDrivetrain.h"
+
 
 #include "commands/AFCIntakeComm.h"
 #include "commands/AFCClimberComm.h"
 #include "commands/AFCIndexerComm.h"
+#include "commands/AFCStowComm.h"
 
 #include "Telemetry.h"
 
-#pragma endregion
 
 class RobotContainer {
 private:
@@ -55,6 +58,10 @@ public:
     RobotContainer();
 
     frc2::Command *GetAutonomousCommand();
+    AFCIntake m_afcIntake{};
+    AFCClimber m_afcClimber{};
+    AFCIndexer m_afcIndexer{};
+    AFCShooter m_afcShooter{};
 
    
 private:
@@ -62,7 +69,5 @@ private:
 
      frc2::CommandXboxController m_operator{1};
 
-    AFCIntake m_afcIntake{};
-    AFCClimber m_afcClimber{};
-    Indexer m_afcIndexer{};
+    
 };
