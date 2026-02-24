@@ -13,6 +13,8 @@
 #include <frc2/command/SubsystemBase.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc/Servo.h>
+#include <frc2/command/Commands.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include "LimelightHelpers.h"
 
@@ -29,6 +31,9 @@ class AFCShooter : public frc2::SubsystemBase
         void Periodic() override;
         frc2::CommandPtr AutomaticTurret();
         frc2::CommandPtr ManualTurret(double speed);
+        void TurretPOS(double pos);
+        void TurretSpeed(double speed);
+        double TurretTarget();
         void Disable();
         void Stop();
 
@@ -44,7 +49,10 @@ class AFCShooter : public frc2::SubsystemBase
 
         double m_tx = 0.0;
         double txNeed = 100.0;
-        bool hasTarget = LimelightHelpers::getTV("");
+        bool hasTarget = false;
+        double turPos = 0.0;
+        double velocity = 0.0;
+        
 
 
 };

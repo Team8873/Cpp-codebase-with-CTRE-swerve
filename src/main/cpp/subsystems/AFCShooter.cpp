@@ -1,6 +1,5 @@
 #include "subsystems/AFCShooter.h"
-#include <frc2/command/Commands.h>
-#include <frc/smartdashboard/SmartDashboard.h>
+
 
 AFCShooter::AFCShooter()
 {
@@ -47,24 +46,49 @@ void AFCShooter::Periodic(){
     auto velocitySignal = m_shooter1.GetVelocity();
     double velocity = velocitySignal.GetValueAsDouble();
     m_tx = LimelightHelpers::getTX("");
-    bool hasTarget = LimelightHelpers::getTV("");
-    double turPos = m_turretEncoder.GetPosition();
+    hasTarget = LimelightHelpers::getTV("");
+    turPos = m_turretEncoder.GetPosition();
     frc::SmartDashboard::PutNumber("Shooter Velocity", velocity);
     frc::SmartDashboard::PutNumber("Lime Target X Position", m_tx);
+    frc::SmartDashboard::PutNumber("Turret Target Position", TurretTarget());
     frc::SmartDashboard::PutBoolean("Limelight Has Target", hasTarget);
     frc::SmartDashboard::PutNumber("Turret POS", turPos);
 }
 
 void AFCShooter::Disable(){
+    Stop();
 
 }
 frc2::CommandPtr AFCShooter::AutomaticTurret() {
-    return this->RunOnce([this] { m_turretMotor.GetClosedLoopController().SetSetpoint(txNeed, rev::spark::SparkLowLevel::ControlType::kPosition);});
+    return this->Run(
+            [this] { 
+                TurretPOS(TurretTarget());
+            }
+    );
 }
 
 frc2::CommandPtr AFCShooter::ManualTurret(double speed) {
-    return this->Run([this, speed] { m_turretMotor.Set(speed);});
+    return this->Run(
+                [this, speed] {
+                   TurretSpeed(speed);
+                }
+    );
 }
+
+void AFCShooter::TurretPOS(double pos){
+    m_turretMotor.GetClosedLoopController().SetSetpoint(pos, rev::spark::SparkLowLevel::ControlType::kPosition);
+}
+
+void AFCShooter::TurretSpeed(double speed){
+    m_turretMotor.Set(speed);
+}
+
+double AFCShooter::TurretTarget(){
+    const double kP = 100.0;
+    double real_tx = LimelightHelpers::getTX("");
+    return (real_tx * kP);
+}
+
 void AFCShooter::Stop(){
     m_turretMotor.StopMotor();
 }
