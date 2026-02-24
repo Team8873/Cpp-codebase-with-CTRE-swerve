@@ -17,55 +17,30 @@ AFCClimber::AFCClimber()
 }
 #pragma endregion
 
-#pragma region SetState
+void AFCClimber::Periodic(){
+    double posNeo = m_climberEncoder.GetPosition();
 
-void AFCClimber::SetState(ClimberStates newState)
-{
-    if(newState == m_climberState)
-        return;
-    m_climberState = newState;
-    
-    auto position = ClimberConstant::ClimberDeployedPos;
-    auto speed = 0;
-
-    switch (newState)
-    {
-        case ClimberStates::climberStowed:
-        {
-            position = ClimberConstant::ClimberStowedPos;
-            break;
-        }
-
-        case ClimberStates::climberDeployed:
-        {
-            position = ClimberConstant::ClimberDeployedPos;
-            break;
-        }
-
-        case ClimberStates::climberManual:
-        {
-            speed = ClimberConstant::ClimberManual;
-            break;
-        }
-    }
-
-    if (newState == ClimberStates::climberManual)
-    {
-         m_climberMotor.Set(speed);
-    }
-    else
-    {
-        m_climberMotor.GetClosedLoopController().SetReference(position, rev::spark::SparkLowLevel::ControlType::kMAXMotionPositionControl);
-    }
-   
+    frc::SmartDashboard::PutNumber("Climber Encoder", posNeo);
 }
-#pragma endregion
+void AFCClimber::Disable(){
 
-#pragma region SetManualSpeed
+}
+
+void AFCClimber::ClimberDown()
+{
+    m_climberMotor.GetClosedLoopController().SetSetpoint(0.0, rev::spark::SparkLowLevel::ControlType::kPosition);
+    
+}
+
+void AFCClimber::ClimberUp()
+{
+    m_climberMotor.GetClosedLoopController().SetSetpoint(1000, rev::spark::SparkLowLevel::ControlType::kPosition);
+}
 
 void AFCClimber::SetManualSpeed(double speed)
-{
-    m_climberState = ClimberStates::climberManual;
-
+{    
     m_climberMotor.Set(speed);
+}
+void AFCClimber::Stop(){
+    m_climberMotor.StopMotor();
 }
