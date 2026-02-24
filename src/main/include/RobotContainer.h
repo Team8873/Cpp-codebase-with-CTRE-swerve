@@ -12,6 +12,8 @@
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "subsystems/Indexer.h"
 #include "Commands/IndexerComm.h"
+#include "subsystems/Intake.h"
+#include "Commands/IntakeComm.h"
 #include "subsystems/Climber.h"
 #include "Telemetry.h"
 
@@ -53,5 +55,7 @@ private:
     frc2::CommandXboxController m_operator{1};
 
     Indexer m_Indexer{};
+    Shooter m_Shooter{};
     Climber m_Climber{};
+    Intake m_Intake{};
 };

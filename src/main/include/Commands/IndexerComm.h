@@ -13,7 +13,7 @@
 class IndexerComm : public frc2::CommandHelper<frc2::Command, IndexerComm>
 {
     public:
-        explicit IndexerComm(Indexer* indexerSubsystem);
+        explicit IndexerComm(Indexer* indexerSubsystem, Shooter* shooterSubsytem);
     
         void Initialize() override;
 

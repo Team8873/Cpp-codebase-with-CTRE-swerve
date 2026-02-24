@@ -10,7 +10,8 @@ Climber::Climber()
                     0.0,
                     0.0,
                     0.0,
-                    0.0);
+                    0.0,
+                    true);
 }
 
 void Climber::SetState(ClimberState newState)
