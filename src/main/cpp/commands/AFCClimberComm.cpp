@@ -2,15 +2,22 @@
 
 #pragma region Climberstates
 
-AFCClimberComm::AFCClimberComm(AFCClimber* climber, ClimberStates state) : m_climber{climber}, m_state{state}
+AFCClimberComm::AFCClimberComm(AFCClimber* climber) : m_pClimber{climber}
 {
-    AddRequirements({m_climber});
+    AddRequirements({m_pClimber});
 }
 
 void AFCClimberComm::Initialize() {
-    m_climber->SetState(m_state);
+    m_startTime = std::chrono::steady_clock::now();  
+}
+
+void AFCClimberComm::Execute() {
+    m_pClimber->ClimberDown();
+}
+void AFCClimberComm::End(bool interrupted){
+    m_pClimber->Stop();
 }
 
 bool AFCClimberComm::IsFinished() {
-    return true;
+    return (std::chrono::steady_clock::now() - m_startTime) >= std::chrono::milliseconds(500);
 }
