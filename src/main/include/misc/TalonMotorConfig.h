@@ -15,15 +15,14 @@
 #pragma endregion
 
 void TalonMotorConfig(ctre::phoenix6::hardware::TalonFX *motor,
-                      units::ampere_t currentLimit,
-                      bool breakMode,
-                      bool continuousWrap,
-                      double                             P,
-                      double                             I,
-                      double                             D,
-                      double                             S,
-                      double                             V,
-                      double                             A,
-                          units::turns_per_second_t          velocityLimit,
-                          units::turns_per_second_squared_t  accelerationLimit,
-                          double                             sensorToMechanismRatio = 1.0);
+                    units::ampere_t currentLimit,
+                    bool breakMode,
+                    bool continuousWrap,
+                    double P,
+                    double I,
+                    double D,
+                    double S,
+                    double V,
+                    double A,
+                    units::turns_per_second_t velocityLimit,
+                    units::turns_per_second_squared_t accelerationLimit);
