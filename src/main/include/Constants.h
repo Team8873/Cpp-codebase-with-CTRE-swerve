@@ -12,6 +12,7 @@
  #pragma region ConstantsCanIds
  namespace ConstantsCanIds
  {
-    constexpr CANid_t ShooterRotateID = 15;
-    constexpr CANid_t ShooterDriverID = 16;
+    constexpr CANid_t TurretMotorID = 15;
+    constexpr CANid_t ShooterMotor1ID = 9;
+    constexpr CANid_t ShooterMotor2ID = 10;
  }
