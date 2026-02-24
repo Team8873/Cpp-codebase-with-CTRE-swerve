@@ -1,6 +1,6 @@
 #include "Commands/IndexerComm.h"
 
-IndexerComm::IndexerComm(Indexer* indexerSubsystem /*,Shooter* shooterSubsystem*/) : m_pIndexerSubsytem{indexerSubsystem}
+IndexerComm::IndexerComm(Indexer* indexerSubsystem, Shooter* shooterSubsystem) : m_pIndexerSubsytem{indexerSubsystem}
 {
     AddRequirements({m_pIndexerSubsytem});
 }
@@ -9,11 +9,8 @@ void IndexerComm::Initialize(){
 }
 void IndexerComm::Execute(){
     m_pIndexerSubsytem->ConveyorOn();
-    m_pIndexerSubsytem->UptakeOn();
-    /*if (m_shooter1 >= 5000){
-        m_pIndexerSubsystem->uptakeOn();
+    m_pIndexerSubsytem->UptakeOn(Shooter::AtShootingSpeed);
     
-    }*/
   
 }
 
