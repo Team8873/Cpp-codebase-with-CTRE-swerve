@@ -1,6 +1,6 @@
 #include "commands/AFCIndexerComm.h"
 
-AFCIndexerComm::AFCIndexerComm(Indexer* indexerSubsytem, bool OnOff) : m_pIndexerSubsystem{indexerSubsytem}, m_onOff{OnOff}
+AFCIndexerComm::AFCIndexerComm(AFCIndexer* indexerSubsytem, bool OnOff) : m_pIndexerSubsystem{indexerSubsytem}, m_onOff{OnOff}
 {
     AddRequirements({m_pIndexerSubsystem});
 }
@@ -10,14 +10,10 @@ void AFCIndexerComm::Initialize() {
 }
 
 void AFCIndexerComm::Execute() {
-    while(m_onOff) {
-        m_pIndexerSubsystem->ConveyorOn();
-        m_pIndexerSubsystem->UptakeOn();
-    } 
-   // else{
-        //m_pIndexerSubsystem->Stop();
-   // }
-
+    //m_pIndexerSubsystem->ConveyorOn();
+    m_pIndexerSubsystem->UptakeOn();
+     
+   
 }
 
 void AFCIndexerComm::End(bool interrupted) {
@@ -25,5 +21,6 @@ void AFCIndexerComm::End(bool interrupted) {
 }
 
 bool AFCIndexerComm::IsFinished() {
-   return (std::chrono::steady_clock::now() - m_startTime) >= std::chrono::milliseconds(500);
+   return (std::chrono::steady_clock::now() - m_startTime) >= std::chrono::milliseconds(2000);
+   
 }

@@ -9,7 +9,7 @@
 
 class AFCIndexerComm : public frc2::CommandHelper<frc2::Command, AFCIndexerComm> {
     public:
-        AFCIndexerComm(Indexer* indexerSubsystem, bool OnOff = false);
+        AFCIndexerComm(AFCIndexer* indexerSubsystem, bool OnOff = false);
 
         void Initialize() override;
 
@@ -21,7 +21,7 @@ class AFCIndexerComm : public frc2::CommandHelper<frc2::Command, AFCIndexerComm>
 
 
     private:
-        Indexer* m_pIndexerSubsystem;
+        AFCIndexer* m_pIndexerSubsystem;
         std::chrono::time_point<std::chrono::steady_clock> m_startTime;
         //IndexerConstant m_indexerConstant;
         const bool m_onOff;
