@@ -1,30 +1,20 @@
 #pragma once
 
-#pragma region Includes
 
 #include <functional>
 
-//#include <ctre/phoenix6/TalonFX.hpp>
+#include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/CANcoder.hpp>
 #include <rev/SparkMax.h>
+#include <rev/RelativeEncoder.h>
 #include <frc2/command/SubsystemBase.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include "Constants.h"
 #include "misc/MaxMotorConfig.h"
-#pragma endregion
 
 
-#pragma region IntakeConstant
-namespace IntakeConstant
-{
-    // FIX ME PLEASE
-    constexpr auto IntakeStowedAngle = 0.0_tr;
-    constexpr auto IntakeDeployedAngle = 0.25_tr;
 
-    constexpr auto IntakeSpeed = 0;
-
-}
-#pragma endregion
 
 class AFCIntake : public frc2::SubsystemBase
 {
@@ -33,8 +23,8 @@ class AFCIntake : public frc2::SubsystemBase
         explicit AFCIntake();
         void Periodic() override;
         void Disable();
-        void Deployer(units::angle::turn_t angleOfDangle);
-        void IntakeSpeed();
+        void Deployer(double pos);
+        void IntakeSpeed(double speed);
         void Stop();
     
         
@@ -42,10 +32,8 @@ class AFCIntake : public frc2::SubsystemBase
         
         rev::spark::SparkMax m_intakeMotor{ConstantsCanIds::IntakeMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkMax m_intakeDeployer{ConstantsCanIds::IntakeDeployerId, rev::spark::SparkLowLevel::MotorType::kBrushless};
-
+        rev::spark::SparkRelativeEncoder m_intakeEncoder = m_intakeMotor.GetEncoder();
         ctre::phoenix6::hardware::CANcoder m_intakeStateEncoder{ConstantsCanIds::IntakeEncoderId};
-
-        //IntakeStates m_intakeState = IntakeStates::intakeStowed;
 
 
 };

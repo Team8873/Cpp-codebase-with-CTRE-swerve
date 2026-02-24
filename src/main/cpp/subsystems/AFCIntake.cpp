@@ -1,7 +1,7 @@
 #include "subsystems/AFCIntake.h"
-#include <frc/smartdashboard/SmartDashboard.h>
 
-#pragma region Constructor
+
+
 
 AFCIntake::AFCIntake()
 {
@@ -28,25 +28,29 @@ AFCIntake::AFCIntake()
 
     
 }
-#pragma endregion
 
-    //m_intakeDeployer.GetClosedLoopController().SetReference(position.value(), rev::spark::SparkLowLevel::ControlType::kMAXMotionPositionControl); // Fix magic number
+    
 void AFCIntake::Periodic(){
     auto positionSignal = m_intakeStateEncoder.GetPosition();
     double pos = positionSignal.GetValueAsDouble();
+    double velNeo = m_intakeEncoder.GetVelocity();
+
     frc::SmartDashboard::PutNumber("Intake Encoder", pos);
+    frc::SmartDashboard::PutNumber("Intake Velocity", velNeo);
+    
 }
 void AFCIntake::Disable(){
 
 }
-void AFCIntake::Deployer(units::angle::turn_t angleOfDangle){
-    auto positionSignal = m_intakeStateEncoder.GetPosition();
-    double pos = positionSignal.GetValueAsDouble();
+void AFCIntake::Deployer(double pos){
+    
     m_intakeDeployer.GetClosedLoopController().SetSetpoint(pos, rev::spark::SparkLowLevel::ControlType::kPosition);
 }
-void AFCIntake::IntakeSpeed(){
+void AFCIntake::IntakeSpeed(double speed){
 
+    m_intakeMotor.GetClosedLoopController().SetSetpoint(speed, rev::spark::SparkLowLevel::ControlType::kVelocity);
 }
 void AFCIntake::Stop(){
+    m_intakeMotor.StopMotor();
 
 }
