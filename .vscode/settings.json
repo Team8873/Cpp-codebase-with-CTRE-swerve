@@ -16,6 +16,7 @@
   },
   "C_Cpp.default.configurationProvider": "vscode-wpilib",
   "cSpell.words": [
+    "ctre",
     "pathplanner",
     "Quasistatic",
     "Telemeterize"
