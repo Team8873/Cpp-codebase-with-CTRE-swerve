@@ -1,6 +1,5 @@
 #include "misc/MaxMotorConfig.h"
 
-#pragma region MaxMotorConfig
 void MaxMotorConfig(rev::spark::SparkMax *motor,
                     units::ampere_t currentLimit,
                     bool breakMode,
@@ -32,4 +31,3 @@ void MaxMotorConfig(rev::spark::SparkMax *motor,
             rev::ResetMode::kNoResetSafeParameters,
             rev::PersistMode::kPersistParameters);
 }
-#pragma endregion

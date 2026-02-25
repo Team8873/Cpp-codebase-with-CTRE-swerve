@@ -9,7 +9,6 @@
 
  typedef int CANid_t;
  
- #pragma region ConstantsCanIds
  namespace ConstantsCanIds
  {
     constexpr CANid_t TurretMotorID = 15;

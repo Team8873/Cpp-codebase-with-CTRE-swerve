@@ -4,11 +4,17 @@
 
 #pragma once
 
+#include <pathplanner/lib/auto/AutoBuilder.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include <frc2/command/Command.h>
+#include <memory>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/button/CommandXboxController.h>
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "Telemetry.h"
+#include "subsystems/Shooter.h"
+#include <pathplanner/lib/auto/AutoBuilder.h>
 
 class RobotContainer {
 private:
@@ -39,9 +45,25 @@ private:
 
 public:
     RobotContainer();
+    Shooter m_Shooter{};
 
     frc2::Command *GetAutonomousCommand();
 
 private:
     void ConfigureBindings();
 };
+
+// using namespace pathplanner;
+// // Load the path we want to pathfind to and follow
+
+// auto path = PathPlannerPath::fromPathFile("OverTheRamp.auto");
+// // Create the constraints to use while pathfinding. The constraints defined in the path will only be used for the path.
+// PathConstraints constraints = PathConstraints(
+//     3.0_mps, 4.0_mps_sq,
+//     540_deg_per_s, 720_deg_per_s_sq);
+
+// // Since AutoBuilder is configured, we can use it to build pathfinding commands
+// frc2::CommandPtr pathfindingCommand = AutoBuilder::pathfindThenFollowPath(
+//     path,
+//     constraints
+// );
