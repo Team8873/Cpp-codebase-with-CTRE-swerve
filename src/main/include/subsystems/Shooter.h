@@ -2,7 +2,6 @@
 
 #include <functional>
 
-#include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/CANcoder.hpp>
 
 #include <rev/SparkMax.h>
@@ -17,7 +16,6 @@
 #include "LimelightHelpers.h"
 
 #include "Constants.h"
-#include "misc/TalonMotorConfig.h"
 #include "misc/MaxMotorConfig.h"
 
 class Shooter : public frc2::SubsystemBase
@@ -35,8 +33,6 @@ class Shooter : public frc2::SubsystemBase
 
     private:
 
-        ctre::phoenix6::hardware::TalonFX m_shooter1{ConstantsCanIds::ShooterMotor1ID};
-        ctre::phoenix6::hardware::TalonFX m_shooter2{ConstantsCanIds::ShooterMotor2ID};
         rev::spark::SparkMax m_turretMotor{ConstantsCanIds::TurretMotorID, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkRelativeEncoder m_turretEncoder = m_turretMotor.GetEncoder();
         frc::Servo m_hoodServo1{0};
@@ -45,6 +41,5 @@ class Shooter : public frc2::SubsystemBase
         double txNeed = 100.0;
         bool hasTarget = false;
         double turPos = 0.0;
-        double velocity = 0.0;
-
-};
+    
+    };

@@ -12,7 +12,6 @@ RobotContainer::RobotContainer()
 {
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
     frc::SmartDashboard::PutData("Auto Mode", &autoChooser);
-
     ConfigureBindings();
 }
 
@@ -63,6 +62,11 @@ void RobotContainer::ConfigureBindings()
             return forwardStraight.WithVelocityX(0_mps).WithVelocityY(-0.5_mps);
         })
     );
+
+    m_Flywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_Flywheel.Idle();}, {&m_Flywheel}));
+    m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_Flywheel.SpinUp(0.8);}, {&m_Flywheel}));
+    
+
 
     // joystick.RightStick().OnTrue(AutoBuilder::pathfindThenFollowPath(
     // path,

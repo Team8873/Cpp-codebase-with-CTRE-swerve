@@ -15,41 +15,14 @@ Shooter::Shooter()
                     0.0,
                     true);
 
-    TalonMotorConfig(&m_shooter1,
-                    40.0_A,
-                    true,
-                    0.1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0_tps,
-                    0.0_tr_per_s_sq);
-
     
-    TalonMotorConfig(&m_shooter2,
-                    40.0_A,
-                    true,
-                    0.1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0_tps,
-                    0.0_tr_per_s_sq);
 }
 
 void Shooter::Periodic(){
-    auto velocitySignal = m_shooter1.GetVelocity();
-    double velocity = velocitySignal.GetValueAsDouble();
+    
     m_tx = LimelightHelpers::getTX("");
     hasTarget = LimelightHelpers::getTV("");
     turPos = m_turretEncoder.GetPosition();
-    frc::SmartDashboard::PutNumber("Shooter Velocity", velocity);
     frc::SmartDashboard::PutNumber("Lime Target X Position", m_tx);
     frc::SmartDashboard::PutNumber("Turret Target Position", TurretTarget());
     frc::SmartDashboard::PutBoolean("Limelight Has Target", hasTarget);
@@ -71,7 +44,7 @@ frc2::CommandPtr Shooter::AutoTurret() {
 frc2::CommandPtr Shooter::ManualTurret(double Tspeed) {
     return this->Run(
                 [this, Tspeed] {
-                   TurretSpeed(Tspeed);
+                TurretSpeed(Tspeed);
                 }
     );
 }
@@ -80,8 +53,8 @@ void Shooter::TurretPOS(double Tpos){
     m_turretMotor.GetClosedLoopController().SetSetpoint(Tpos, rev::spark::SparkLowLevel::ControlType::kPosition);
 }
 
-void Shooter::TurretSpeed(double tspeed){
-    m_turretMotor.Set(tspeed);
+void Shooter::TurretSpeed(double Tspeed){
+    m_turretMotor.Set(Tspeed);
 }
 
 double Shooter::TurretTarget(){

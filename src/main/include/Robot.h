@@ -11,6 +11,7 @@
 #include <optional>
 
 #include "RobotContainer.h"
+#include "subsystems/Flywheel.h"
 
 class Robot : public frc::TimedRobot {
 public:
