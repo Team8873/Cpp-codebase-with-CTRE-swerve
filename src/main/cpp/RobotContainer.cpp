@@ -101,11 +101,11 @@ void RobotContainer::ConfigureBindings()
     m_operator.POVUp().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(-1);},{&m_afcClimber}));
 
     //Indexer controls
-    m_operator.A().WhileTrue(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel).ToPtr());
+    m_operator.RightTrigger().WhileTrue(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel).ToPtr());
 
     //Intake controls
-    m_operator.X().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(m_operator.GetLeftY());},{&m_afcIntake}));
-    m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(m_operator.GetLeftTriggerAxis());},{&m_afcIntake}));
+    m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(m_operator.GetLeftY());},{&m_afcIntake}));
+    m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0.5);},{&m_afcIntake}));
     
     //Flywheel controls
     m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
