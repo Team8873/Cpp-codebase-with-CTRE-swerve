@@ -14,41 +14,41 @@ AFCShooter::AFCShooter()
                     0.0,
                     true);
 
-    TalonMotorConfig(&m_shooter1,
-                    40.0_A,
-                    true,
-                    0.1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0_tps,
-                    0.0_tr_per_s_sq);
+    // TalonMotorConfig(&m_shooter1,
+    //                 40.0_A,
+    //                 true,
+    //                 0.1,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0_tps,
+    //                 0.0_tr_per_s_sq);
 
     
-    TalonMotorConfig(&m_shooter2,
-                    40.0_A,
-                    true,
-                    0.1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0_tps,
-                    0.0_tr_per_s_sq);
+    // TalonMotorConfig(&m_shooter2,
+    //                 40.0_A,
+    //                 true,
+    //                 0.1,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0_tps,
+    //                 0.0_tr_per_s_sq);
 }
 
 void AFCShooter::Periodic(){
-    auto velocitySignal = m_shooter1.GetVelocity();
-    double velocity = velocitySignal.GetValueAsDouble();
+    //auto velocitySignal = m_shooter1.GetVelocity();
+    //double velocity = velocitySignal.GetValueAsDouble();
     m_tx = LimelightHelpers::getTX("");
     hasTarget = LimelightHelpers::getTV("");
     turPos = m_turretEncoder.GetPosition();
-    frc::SmartDashboard::PutNumber("Shooter Velocity", velocity);
+    //frc::SmartDashboard::PutNumber("Shooter Velocity", velocity);
     frc::SmartDashboard::PutNumber("Lime Target X Position", m_tx);
     frc::SmartDashboard::PutNumber("Turret Target Position", TurretTarget());
     frc::SmartDashboard::PutBoolean("Limelight Has Target", hasTarget);
@@ -68,7 +68,7 @@ frc2::CommandPtr AFCShooter::AutomaticTurret() {
 }
 
 frc2::CommandPtr AFCShooter::ManualTurret(double speed) {
-    return this->Run(
+    return this->RunOnce(
                 [this, speed] {
                    TurretSpeed(speed);
                 }

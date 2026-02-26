@@ -1,6 +1,6 @@
 #include "subsystems/AFCIndexer.h"
 
-#pragma region Constructor
+
 
 AFCIndexer::AFCIndexer()
 {
@@ -25,7 +25,7 @@ AFCIndexer::AFCIndexer()
                     0.0, // Acceleration constant
                     true);
 }
-#pragma endregion
+
 
 
 
@@ -42,8 +42,9 @@ void AFCIndexer::ConveyorOn() {
 }
 
 void AFCIndexer::UptakeOn() {
-    m_uptakeMotor.GetClosedLoopController().SetSetpoint(450, rev::spark::SparkLowLevel::ControlType::kVelocity);
-    m_conveyorMotor.Set(0.5);
+    //m_uptakeMotor.GetClosedLoopController().SetSetpoint(450, rev::spark::SparkLowLevel::ControlType::kVelocity);
+    m_uptakeMotor.Set(-0.5);
+    m_conveyorMotor.Set(-0.5);
 }
 
 void AFCIndexer::Stop() {

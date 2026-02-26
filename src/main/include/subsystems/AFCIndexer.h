@@ -1,6 +1,5 @@
 #pragma once
 
-#pragma region Includes
 
 #include <functional>
 
@@ -9,16 +8,15 @@
 
 #include "Constants.h"
 #include "misc/MaxMotorConfig.h"
-#pragma endregion
 
 
-#pragma region IndexerConstants
+
 namespace IndexerConstant{
         constexpr double conveyorSpeed = 0.5;
         constexpr double uptakeSpeed = 0.5;
 
 }
-#pragma endregion
+
 
 class AFCIndexer : public frc2::SubsystemBase{
 

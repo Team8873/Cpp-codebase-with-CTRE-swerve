@@ -24,6 +24,7 @@ RobotContainer::RobotContainer()
 {
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
     frc::SmartDashboard::PutData("Auto Mode", &autoChooser);
+    
    
     ConfigureBindings();
 }
@@ -94,20 +95,31 @@ void RobotContainer::ConfigureBindings()
 
 
     //♦♦♦♦♦♦Start of Operator controls reorganize later♦♦♦♦♦♦
+
+    //Climber controls
     m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(1);},{&m_afcClimber}));
     m_operator.POVUp().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(-1);},{&m_afcClimber}));
-    m_operator.A().OnTrue(AFCIndexerComm(&m_afcIndexer).ToPtr());
+
+    //Indexer controls
+    m_operator.A().WhileTrue(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel).ToPtr());
+
+    //Intake controls
+    m_operator.X().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(m_operator.GetLeftY());},{&m_afcIntake}));
+    m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(m_operator.GetLeftTriggerAxis());},{&m_afcIntake}));
+    
+    //Flywheel controls
+    m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
+    m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));
     //m_operator.A().WhileTrue(frc2::cmd::RunEnd([this]{ m_afcShooter.Turret();},[this]{ m_afcShooter.Stop();},{&m_afcShooter}));
-    m_operator.B().ToggleOnTrue(AFCIntakeComm(&m_afcIntake, 0.5).ToPtr());
-    m_operator.B().MultiPress(2 , 0.25_s).ToggleOnTrue(AFCStowComm(&m_afcIndexer, &m_afcIntake).ToPtr());
-    //if(m_afcShooter.GetCurrentCommand()  m_afcShooter.AutomaticTurret())
+    //m_operator.B().ToggleOnTrue(AFCIntakeComm(&m_afcIntake, 0.5).ToPtr());
+    //m_operator.B().MultiPress(2 , 0.25_s).ToggleOnTrue(AFCStowComm(&m_afcIndexer, &m_afcIntake).ToPtr());
+    //m_operator.X().WhileTrue(m_afcShooter.ManualTurret(m_operator.GetLeftX()));
+    
      
 }
 
 
-#pragma region Autonomous
 frc2::Command *RobotContainer::GetAutonomousCommand()
 {
     return autoChooser.GetSelected();
 }
-#pragma endregion

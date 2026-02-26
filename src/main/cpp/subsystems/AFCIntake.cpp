@@ -7,7 +7,7 @@ AFCIntake::AFCIntake()
 {
     MaxMotorConfig(&m_intakeMotor,
                     40.0_A,  // Max Amp
-                    true,// Brake mode
+                    false,// Brake mode
                     0.1, // Proportional gain
                     0.0, // Integral gain
                     0.0, // Derivative gain ♦♦DON'T TOUCH♦♦
@@ -24,7 +24,7 @@ AFCIntake::AFCIntake()
                     0.0,
                     0.0,
                     0.0,
-                    false);
+                    true);
 
     
 }
@@ -47,8 +47,11 @@ void AFCIntake::Deployer(double pos){
     m_intakeDeployer.GetClosedLoopController().SetSetpoint(pos, rev::spark::SparkLowLevel::ControlType::kPosition);
 }
 void AFCIntake::IntakeSpeed(double speed){
-
-    m_intakeMotor.GetClosedLoopController().SetSetpoint(speed, rev::spark::SparkLowLevel::ControlType::kVelocity);
+    m_intakeMotor.Set(speed);
+    //m_intakeMotor.GetClosedLoopController().SetSetpoint(speed, rev::spark::SparkLowLevel::ControlType::kVelocity);
+}
+void AFCIntake::DeploySpeed(double speed){
+    m_intakeDeployer.Set(speed);
 }
 void AFCIntake::Stop(){
     m_intakeMotor.StopMotor();

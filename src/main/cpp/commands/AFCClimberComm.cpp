@@ -1,6 +1,5 @@
 #include "commands/AFCClimberComm.h"
 
-#pragma region Climberstates
 
 AFCClimberComm::AFCClimberComm(AFCClimber* climber) : m_pClimber{climber}
 {

@@ -25,6 +25,7 @@ class AFCIntake : public frc2::SubsystemBase
         void Disable();
         void Deployer(double pos);
         void IntakeSpeed(double speed);
+        void DeploySpeed(double speed);
         void Stop();
     
         

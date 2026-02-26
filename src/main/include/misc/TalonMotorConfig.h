@@ -1,6 +1,5 @@
 #pragma once
 
-#pragma region Includes
 #include <iostream>
 #include <numbers>
 #include <units/angle.h>
@@ -12,7 +11,6 @@
 #include <frc/controller/SimpleMotorFeedforward.h>
 
 #include <ctre/phoenix6/TalonFX.hpp>
-#pragma endregion
 
 void TalonMotorConfig(ctre::phoenix6::hardware::TalonFX *motor,
                     units::ampere_t currentLimit,

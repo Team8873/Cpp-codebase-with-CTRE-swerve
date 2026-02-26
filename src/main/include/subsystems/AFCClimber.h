@@ -1,6 +1,5 @@
 #pragma once
 
-#pragma region Includes
 #include <string.h>
 
 #include <rev/SparkMax.h>
@@ -10,7 +9,6 @@
 
 #include "Constants.h"
 #include "misc/MaxMotorConfig.h"
-#pragma endregion
 
 
 

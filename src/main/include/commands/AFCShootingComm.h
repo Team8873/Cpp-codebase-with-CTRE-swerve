@@ -6,10 +6,11 @@
 #include <chrono>
 
 #include "subsystems/AFCIndexer.h"
+#include "subsystems/AFCFlywheel.h"
 
-class AFCIndexerComm : public frc2::CommandHelper<frc2::Command, AFCIndexerComm> {
+class AFCShootingComm : public frc2::CommandHelper<frc2::Command, AFCShootingComm> {
     public:
-        AFCIndexerComm(AFCIndexer* indexerSubsystem, bool OnOff = false);
+        AFCShootingComm(AFCIndexer* indexerSubsystem, AFCFlywheel* flywheelSubsystem);
 
         void Initialize() override;
 
@@ -22,7 +23,6 @@ class AFCIndexerComm : public frc2::CommandHelper<frc2::Command, AFCIndexerComm>
 
     private:
         AFCIndexer* m_pIndexerSubsystem;
+        AFCFlywheel* m_pFlywheelSubsytem;
         std::chrono::time_point<std::chrono::steady_clock> m_startTime;
-        //IndexerConstant m_indexerConstant;
-        const bool m_onOff;
 };

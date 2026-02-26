@@ -39,9 +39,6 @@ class AFCShooter : public frc2::SubsystemBase
 
     private:
         
-
-        ctre::phoenix6::hardware::TalonFX m_shooter1{ConstantsCanIds::ShooterMotor1Id};
-        ctre::phoenix6::hardware::TalonFX m_shooter2{ConstantsCanIds::ShooterMotor2Id};
         rev::spark::SparkMax m_turretMotor{ConstantsCanIds::TurretMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkRelativeEncoder m_turretEncoder = m_turretMotor.GetEncoder();
         frc::Servo m_hoodServo1{0};

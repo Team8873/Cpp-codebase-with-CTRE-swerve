@@ -17,11 +17,12 @@
 #include "subsystems/AFCIndexer.h"
 #include "subsystems/AFCShooter.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
+#include "subsystems/AFCFlywheel.h"
 
 
 #include "commands/AFCIntakeComm.h"
 #include "commands/AFCClimberComm.h"
-#include "commands/AFCIndexerComm.h"
+#include "commands/AFCShootingComm.h"
 #include "commands/AFCStowComm.h"
 
 #include "Telemetry.h"
@@ -62,6 +63,7 @@ public:
     AFCClimber m_afcClimber{};
     AFCIndexer m_afcIndexer{};
     AFCShooter m_afcShooter{};
+    AFCFlywheel m_afcFlywheel{};
 
    
 private:

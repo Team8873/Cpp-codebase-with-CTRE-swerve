@@ -1,6 +1,5 @@
 #pragma once
 
-#pragma region Includes
 #include <iostream>
 #include <numbers>
 #include <units/angle.h>
@@ -14,7 +13,6 @@
 #include <rev/SparkMax.h>
 #include <rev/SparkLowLevel.h>
 #include <rev/config/SparkMaxConfig.h>
-#pragma endregion
 
 void MaxMotorConfig(rev::spark::SparkMax *motor,
                     units::ampere_t currentLimit,

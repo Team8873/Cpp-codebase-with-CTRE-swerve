@@ -1,6 +1,5 @@
 #include "subsystems/AFCClimber.h"
 
-#pragma region Constructor
 
 AFCClimber::AFCClimber()
 {
@@ -15,7 +14,7 @@ AFCClimber::AFCClimber()
                     0.0,
                     true);
 }
-#pragma endregion
+
 
 void AFCClimber::Periodic(){
     double posNeo = m_climberEncoder.GetPosition();

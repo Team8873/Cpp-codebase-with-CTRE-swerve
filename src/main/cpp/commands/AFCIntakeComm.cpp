@@ -1,6 +1,6 @@
 #include "commands/AFCIntakeComm.h"
 
-#pragma region Intakestate
+
 
 AFCIntakeComm::AFCIntakeComm(AFCIntake* intake, double angleOfDangle) : m_pIntake{intake}, m_pAngleOfDangle{angleOfDangle} 
 {
