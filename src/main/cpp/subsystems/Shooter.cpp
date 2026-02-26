@@ -26,7 +26,7 @@ Shooter::Shooter()
                     30.0_A,
                      true,
                       0.1,
-                       0.0,
+                       1.0,
                         0.0,
                          0.0,
                           0.0,
@@ -49,11 +49,12 @@ void Turret::Rotate(double AngleOfTurret){
                 m_Turret.GetClosedLoopController().SetSetpoint(AngleOfTurret, rev::spark::SparkLowLevel::ControlType::kPosition);    
 }
 
-void Turret::SetManualSpeedTurret(double speed)
-
-{   
-    m_Turret.Set(speed);
+void Turret::SetManualSpeedTurret(double speed){   
+    m_Turret.Set(speed / 5);
 } 
+
+void Turret::Reset(){    
+}
 
 void Turret::Disable(){
 }
@@ -71,8 +72,8 @@ void Shooter::Periodic(){
             frc::SmartDashboard::PutNumber("Shooter Encoder", pos);
 }
 
-void Shooter::SetManualSpeedShooter(double speed){   
-    m_Shooter.Set(speed);
+void Shooter::SetSpeedShooter(double speed){   
+    m_Shooter.GetClosedLoopController().SetReference(speed,rev::spark::SparkLowLevel::ControlType::kVelocity);
 } 
 
 void Shooter::Disable(){

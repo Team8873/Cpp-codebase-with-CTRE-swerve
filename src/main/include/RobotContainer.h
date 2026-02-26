@@ -11,6 +11,7 @@
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "subsystems/Shooter.h"
 #include "Constants.h"
+#include "Commands/ShooterComm.h"
 
 #include "Telemetry.h"
 

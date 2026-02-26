@@ -4,6 +4,7 @@
 
 #include <functional>
 #include <units/angle.h>
+#include <string.h>
 
 #include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/CANcoder.hpp>
@@ -39,8 +40,9 @@ class Turret: public frc2::SubsystemBase
             void Periodic() override;
                 void Rotate(double AngleOfTurret); //units::angle::turn_t AngleOfTurret
                     void SetManualSpeedTurret(double speed);
-                        void Disable();
-                            void Stop();
+                        void Reset();    
+                            void Disable();
+                                void Stop();
         
         rev::spark::SparkMax m_Turret{ConstantsCanIds::TurretID, rev::spark::SparkLowLevel::MotorType::kBrushless};
 
@@ -60,7 +62,7 @@ class Shooter: public frc2::SubsystemBase
 
         explicit Shooter();
             void Periodic() override;
-                void SetManualSpeedShooter(double speed);
+                void SetSpeedShooter(double speed);
                     void Disable();
                         void Stop();
         
