@@ -14,6 +14,7 @@ AFCIntake::AFCIntake()
                     0.0, // Static friction
                     0.0, // Velocity constant
                     0.0, // Acceleration constant
+                    true,
                     true); // Onboard encoder
     MaxMotorConfig(&m_intakeDeployer,
                     30.0_A,
@@ -24,6 +25,7 @@ AFCIntake::AFCIntake()
                     0.0,
                     0.0,
                     0.0,
+                    true,
                     true);
 
     
@@ -47,7 +49,7 @@ void AFCIntake::Deployer(double pos){
     m_intakeDeployer.GetClosedLoopController().SetSetpoint(pos, rev::spark::SparkLowLevel::ControlType::kPosition);
 }
 void AFCIntake::IntakeSpeed(double speed){
-    m_intakeMotor.Set(speed);
+        m_intakeMotor.Set(speed);
     //m_intakeMotor.GetClosedLoopController().SetSetpoint(speed, rev::spark::SparkLowLevel::ControlType::kVelocity);
 }
 void AFCIntake::DeploySpeed(double speed){

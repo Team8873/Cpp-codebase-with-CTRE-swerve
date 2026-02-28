@@ -11,9 +11,7 @@ void AFCShootingComm::Initialize() {
 }
 
 void AFCShootingComm::Execute() {
-    if(m_pFlywheelSubsytem->Flywheelrpm()){
         m_pIndexerSubsystem->UptakeOn();
-    }
      
    
 }
@@ -23,6 +21,6 @@ void AFCShootingComm::End(bool interrupted) {
 }
 
 bool AFCShootingComm::IsFinished() {
-   return (!m_pFlywheelSubsytem->Flywheelrpm());
+   return (false);
    
 }

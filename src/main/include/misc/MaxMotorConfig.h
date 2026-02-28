@@ -23,4 +23,5 @@ void MaxMotorConfig(rev::spark::SparkMax *motor,
                     double S,
                     double V,
                     double A,
-                    bool onboard);
+                    bool onboard,
+                    bool continuousWrap);

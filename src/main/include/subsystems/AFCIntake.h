@@ -9,6 +9,8 @@
 #include <rev/RelativeEncoder.h>
 #include <frc2/command/SubsystemBase.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <chrono>
+#include <thread>
 
 #include "Constants.h"
 #include "misc/MaxMotorConfig.h"

@@ -47,7 +47,7 @@ void AFCFlywheel::SpinUp(double Sspeed){
     m_shooter2.Set(-Sspeed);
 };
 
-bool AFCFlywheel::Flywheelrpm(){
+bool AFCFlywheel::Flywheelrpm(){   
     bool upToSpeed = false;
     if (m_shooter1.GetVelocity().GetValueAsDouble() >= 500){
         upToSpeed = true;

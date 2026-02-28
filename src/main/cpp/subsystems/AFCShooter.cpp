@@ -6,13 +6,14 @@ AFCShooter::AFCShooter()
     MaxMotorConfig(&m_turretMotor,
                     40.0_A,
                     true,
-                    0.75,
+                    0.004,
                     0.0,
                     0.0,
                     0.0,
                     0.0,
                     0.0,
-                    true);
+                    true,
+                    false);
 
     // TalonMotorConfig(&m_shooter1,
     //                 40.0_A,
@@ -59,21 +60,21 @@ void AFCShooter::Disable(){
     Stop();
 
 }
-frc2::CommandPtr AFCShooter::AutomaticTurret() {
-    return this->Run(
-            [this] { 
-                TurretPOS(TurretTarget());
-            }
-    );
-}
+// frc2::CommandPtr AFCShooter::AutomaticTurret() {
+//     return this->Run(
+//             [this] { 
+//                 TurretPOS(TurretTarget());
+//             }
+//     );
+// }
 
-frc2::CommandPtr AFCShooter::ManualTurret(double speed) {
-    return this->RunOnce(
-                [this, speed] {
-                   TurretSpeed(speed);
-                }
-    );
-}
+// frc2::CommandPtr AFCShooter::ManualTurret(double speed) {
+//     return this->RunOnce(
+//                 [this, speed] {
+//                    TurretSpeed(speed);
+//                 }
+//     );
+// }
 
 void AFCShooter::TurretPOS(double pos){
     m_turretMotor.GetClosedLoopController().SetSetpoint(pos, rev::spark::SparkLowLevel::ControlType::kPosition);

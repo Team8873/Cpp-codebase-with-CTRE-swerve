@@ -13,6 +13,7 @@ AFCIndexer::AFCIndexer()
                     0.0, // Static friction
                     0.0, // Velocity constant
                     0.0, // Acceleration constant
+                    true,
                     true);
     MaxMotorConfig(&m_uptakeMotor,
                     40.0_A,  // Max Amp
@@ -23,6 +24,7 @@ AFCIndexer::AFCIndexer()
                     0.0, // Static friction
                     0.0, // Velocity constant
                     0.0, // Acceleration constant
+                    true,
                     true);
 }
 
@@ -43,7 +45,7 @@ void AFCIndexer::ConveyorOn() {
 
 void AFCIndexer::UptakeOn() {
     //m_uptakeMotor.GetClosedLoopController().SetSetpoint(450, rev::spark::SparkLowLevel::ControlType::kVelocity);
-    m_uptakeMotor.Set(-0.5);
+    m_uptakeMotor.Set(-1);
     m_conveyorMotor.Set(-0.5);
 }
 

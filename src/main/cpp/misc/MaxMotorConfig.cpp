@@ -9,7 +9,8 @@ void MaxMotorConfig(rev::spark::SparkMax *motor,
                     double S,
                     double V,
                     double A,
-                    bool onboard)
+                    bool onboard,
+                    bool continuousWrap)
 {
     rev::spark::SparkMaxConfig sparkMaxConfig{};
 
@@ -25,7 +26,7 @@ void MaxMotorConfig(rev::spark::SparkMax *motor,
         sparkMaxConfig.absoluteEncoder.VelocityConversionFactor(360.0 / 60.0);
     }                                                                                                         
     sparkMaxConfig.closedLoop.Pid(P, I, D);
-    //sparkMaxConfig.closedLoop.PositionWrappingEnabled(continuousWrap);
+    sparkMaxConfig.closedLoop.PositionWrappingEnabled(continuousWrap);
     auto status = motor->Configure(
             sparkMaxConfig,
             rev::ResetMode::kNoResetSafeParameters,

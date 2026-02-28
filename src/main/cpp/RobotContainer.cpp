@@ -97,16 +97,26 @@ void RobotContainer::ConfigureBindings()
     //♦♦♦♦♦♦Start of Operator controls reorganize later♦♦♦♦♦♦
 
     //Climber controls
-    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(1);},{&m_afcClimber}));
-    m_operator.POVUp().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(-1);},{&m_afcClimber}));
+    // m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(1);},{&m_afcClimber}));
+    // m_operator.POVUp().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(-1);},{&m_afcClimber}));
 
     //Indexer controls
     m_operator.RightTrigger().WhileTrue(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel).ToPtr());
 
     //Intake controls
-    m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(m_operator.GetLeftY());},{&m_afcIntake}));
-    m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0.5);},{&m_afcIntake}));
+    m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-m_operator.GetRightY());},{&m_afcIntake}));
+    m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
+    m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(1);},{&m_afcIntake}));
+    //.WhileFalse(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
     
+    //Turret Turn
+    m_afcShooter.SetDefaultCommand(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(0);},{&m_afcShooter}));
+    m_operator.POVLeft().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(-0.1);},{&m_afcShooter}));
+    m_operator.POVRight().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(0.1);},{&m_afcShooter}));
+    m_operator.X().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(0);},{&m_afcShooter}));
+    m_operator.Y().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(200);},{&m_afcShooter}));
+    m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(-200);},{&m_afcShooter}));
+
     //Flywheel controls
     m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
     m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));

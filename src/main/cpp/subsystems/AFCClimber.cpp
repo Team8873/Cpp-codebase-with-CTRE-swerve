@@ -12,6 +12,7 @@ AFCClimber::AFCClimber()
                     0.0,
                     0.0,
                     0.0,
+                    true,
                     true);
 }
 
