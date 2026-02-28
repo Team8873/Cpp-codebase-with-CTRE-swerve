@@ -33,6 +33,7 @@ class AFCShooter : public frc2::SubsystemBase
         frc2::CommandPtr ManualTurret(double speed);
         void TurretPOS(double pos);
         void TurretSpeed(double speed);
+        void AutoLock(double TX/*, double TA*/);
         double TurretTarget();
         void Disable();
         void Stop();
@@ -42,7 +43,7 @@ class AFCShooter : public frc2::SubsystemBase
         rev::spark::SparkMax m_turretMotor{ConstantsCanIds::TurretMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkRelativeEncoder m_turretEncoder = m_turretMotor.GetEncoder();
         frc::Servo m_hoodServo1{0};
-        frc::Servo m_hoodServo2{1};
+        //frc::Servo m_hoodServo2{1};
 
         double m_tx = 0.0;
         double txNeed = 100.0;

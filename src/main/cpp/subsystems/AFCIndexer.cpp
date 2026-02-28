@@ -50,7 +50,7 @@ void AFCIndexer::UptakeOn() {
 }
 
 void AFCIndexer::Stop() {
-    m_conveyorMotor.StopMotor();
-    m_uptakeMotor.StopMotor();
+    m_conveyorMotor.Set(0.0);
+    m_uptakeMotor.Set(0.0);
 }
 
