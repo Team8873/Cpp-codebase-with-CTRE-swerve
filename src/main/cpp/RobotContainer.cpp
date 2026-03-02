@@ -16,17 +16,28 @@
 #include <frc2/command/WaitUntilCommand.h>
 #include <frc2/command/button/Trigger.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
+#include <pathplanner/lib/commands/PathPlannerAuto.h>
+#include <pathplanner/lib/auto/NamedCommands.h>
+#include <memory>
+
+
 
 //#include "commands/AFCIndexerComm.h"
 
-
-RobotContainer::RobotContainer() 
+using namespace pathplanner;
+RobotContainer::RobotContainer() : m_afcIndexer(), m_afcClimber(), m_afcFlywheel(), m_afcIntake(), m_afcShooter()
 {
+    //NamedCommands::registerCommand("Targeting", std::move(AFCShooter(&m_afcShooter).ToPtr()));
+    NamedCommands::registerCommand("Shooting", std::move(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter).ToPtr()));
+    NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, 0.0).ToPtr()));    
+   
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
     frc::SmartDashboard::PutData("Auto Mode", &autoChooser);
     
    
     ConfigureBindings();
+
+
 }
 
 
@@ -101,7 +112,8 @@ void RobotContainer::ConfigureBindings()
     // m_operator.POVUp().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(-1);},{&m_afcClimber}));
 
     //Indexer controls
-    m_operator.RightTrigger().WhileTrue(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel).ToPtr());
+    m_afcIndexer.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIndexer.Stop();}, {&m_afcIndexer}));
+    m_operator.RightTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeOn();}, {&m_afcIndexer}));
 
     //Intake controls
     m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-m_operator.GetRightY());},{&m_afcIntake}));
@@ -117,13 +129,10 @@ void RobotContainer::ConfigureBindings()
     m_operator.Y().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(200);},{&m_afcShooter}));
     m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(-200);},{&m_afcShooter}));
 
+
     //Flywheel controls
     m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
     m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));
-    //m_operator.A().WhileTrue(frc2::cmd::RunEnd([this]{ m_afcShooter.Turret();},[this]{ m_afcShooter.Stop();},{&m_afcShooter}));
-    //m_operator.B().ToggleOnTrue(AFCIntakeComm(&m_afcIntake, 0.5).ToPtr());
-    //m_operator.B().MultiPress(2 , 0.25_s).ToggleOnTrue(AFCStowComm(&m_afcIndexer, &m_afcIntake).ToPtr());
-    //m_operator.X().WhileTrue(m_afcShooter.ManualTurret(m_operator.GetLeftX()));
     
      
 }

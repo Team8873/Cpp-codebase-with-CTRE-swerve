@@ -32,7 +32,9 @@ class AFCShooter : public frc2::SubsystemBase
         frc2::CommandPtr AutomaticTurret();
         frc2::CommandPtr ManualTurret(double speed);
         void TurretPOS(double pos);
+        void TurretDirectionInput(double othernumber);
         void TurretSpeed(double speed);
+        void AutoLock(double TX/*, double TA*/);
         double TurretTarget();
         void Disable();
         void Stop();

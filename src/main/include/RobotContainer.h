@@ -16,6 +16,7 @@
 #include "subsystems/AFCClimber.h"
 #include "subsystems/AFCIndexer.h"
 #include "subsystems/AFCShooter.h"
+#include "subsystems/AFCVision.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "subsystems/AFCFlywheel.h"
 
@@ -64,6 +65,7 @@ public:
     AFCIndexer m_afcIndexer{};
     AFCShooter m_afcShooter{};
     AFCFlywheel m_afcFlywheel{};
+    AFCVision m_afcVision{};
 
    
 private:

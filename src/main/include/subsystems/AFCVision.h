@@ -9,7 +9,7 @@
 
 #include "LimelightHelpers.h"
 
-class AFCVision : frc2::SubsystemBase
+class AFCVision : public frc2::SubsystemBase
 {
     public:
 

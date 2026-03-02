@@ -84,6 +84,11 @@ void AFCShooter::TurretSpeed(double speed){
     m_turretMotor.Set(speed);
 }
 
+void AFCShooter::AutoLock(double TX/*,double TA*/){
+    m_turretMotor.Set(TX*0.01);
+}
+
+
 double AFCShooter::TurretTarget(){
     const double kP = 100.0;
     double real_tx = LimelightHelpers::getTX("");

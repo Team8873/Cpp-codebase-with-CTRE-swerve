@@ -93,5 +93,11 @@
     "typeinfo": "cpp",
     "valarray": "cpp",
     "variant": "cpp"
-  }
+  },
+  "search.useIgnoreFiles": true,
+  "search.useGlobalIgnoreFiles": false,
+  "search.useParentIgnoreFiles": false,
+  "cSpell.words": [
+    "choreo"
+  ]
 }
