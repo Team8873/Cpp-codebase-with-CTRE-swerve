@@ -5,9 +5,9 @@ AFCShootingComm::AFCShootingComm(AFCIndexer* indexerSubsytem,
                                  AFCShooter* shooterSubsystem, 
                                  AFCVision* visionSubsystem)
                                   : m_pIndexerSubsystem{indexerSubsytem}, 
-                                  m_pFlywheelSubsytem{flywheelSubsystem}, 
-                                  m_pShootersubsystem{shooterSubsystem},
-                                   m_pVisionsubsystem{visionSubsystem}
+                                    m_pFlywheelSubsytem{flywheelSubsystem}, 
+                                    m_pShootersubsystem{shooterSubsystem},
+                                    m_pVisionsubsystem{visionSubsystem}
 {
     AddRequirements({m_pIndexerSubsystem});
     AddRequirements({m_pFlywheelSubsytem});

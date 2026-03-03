@@ -12,7 +12,10 @@
 
 class AFCShootingComm : public frc2::CommandHelper<frc2::Command, AFCShootingComm> {
     public:
-        AFCShootingComm(AFCIndexer* indexerSubsystem, AFCFlywheel* flywheelSubsystem, AFCShooter* shooterSubsystem, AFCVision* visionSubsystem);
+        AFCShootingComm(AFCIndexer* indexerSubsystem, 
+                        AFCFlywheel* flywheelSubsystem,
+                        AFCShooter* shooterSubsystem,
+                        AFCVision* visionSubsystem);
 
         void Initialize() override;
 
