@@ -29,7 +29,7 @@ RobotContainer::RobotContainer() : m_afcIndexer(), m_afcClimber(), m_afcFlywheel
 {
     //NamedCommands::registerCommand("Targeting", std::move(AFCShooter(&m_afcShooter).ToPtr()));
     NamedCommands::registerCommand("Shooting", std::move(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter, &m_afcVision).ToPtr()));
-    NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, 0.0).ToPtr()));    
+    NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, -49.0).ToPtr()));    
    
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
     frc::SmartDashboard::PutData("Auto Mode", &autoChooser);
