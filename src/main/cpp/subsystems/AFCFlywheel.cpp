@@ -38,8 +38,8 @@ void AFCFlywheel::Periodic(){
 }
 
 void AFCFlywheel::Idle(){
-    m_shooter1.Set(0.5);
-    m_shooter2.Set(-0.5);
+    m_shooter1.Set(0.55);
+    m_shooter2.Set(-0.55);
 }
 
 void AFCFlywheel::SpinUp(double Sspeed){

@@ -123,7 +123,7 @@ void RobotContainer::ConfigureBindings()
 
     //Flywheel controls
     m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
-    m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));
+    m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.7);}, {&m_afcFlywheel}));
 
    
     //m_operator.A().WhileTrue(frc2::cmd::RunEnd([this]{ m_afcShooter.Turret();},[this]{ m_afcShooter.Stop();},{&m_afcShooter}));
