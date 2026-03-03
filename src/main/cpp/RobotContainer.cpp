@@ -112,14 +112,18 @@ void RobotContainer::ConfigureBindings()
     // m_operator.POVUp().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(-1);},{&m_afcClimber}));
 
     //Indexer controls
+<<<<<<< HEAD
     m_afcIndexer.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIndexer.Stop();}, {&m_afcIndexer}));
     m_operator.RightTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeOn();}, {&m_afcIndexer}));
+=======
+    m_afcIndexer.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIndexer.Stop();},{&m_afcIndexer}));
+    m_operator.RightTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeOn();},{&m_afcIndexer}));
+>>>>>>> 76f3ed364f1f4d534f2bd8ed99aee86b9deac9c5
 
     //Intake controls
     m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-m_operator.GetRightY());},{&m_afcIntake}));
-    m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
-    m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(1);},{&m_afcIntake}));
-    //.WhileFalse(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
+    m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0.6);},{&m_afcIntake}));
+   // m_operator.LeftTrigger().WhileFalse(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
     
     //Turret Turn
     m_afcShooter.SetDefaultCommand(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(0);},{&m_afcShooter}));
@@ -129,12 +133,28 @@ void RobotContainer::ConfigureBindings()
     m_operator.Y().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(200);},{&m_afcShooter}));
     m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(-200);},{&m_afcShooter}));
 
+<<<<<<< HEAD
 
     //Flywheel controls
     m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
     m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));
+=======
+//Auto Lock
+    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.AutoLock(LimelightHelpers::getTX("")/*, LimelightHelpers::getTA("")*/);},{&m_afcShooter}));
+    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp((1-(LimelightHelpers::getTA("")*0.2))*0.8+((LimelightHelpers::getTA("")*0.2)*0.3));}, {&m_afcFlywheel}));
+
+    //Flywheel controls
+    m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
+    m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.7);}, {&m_afcFlywheel}));
+
+   
+    //m_operator.A().WhileTrue(frc2::cmd::RunEnd([this]{ m_afcShooter.Turret();},[this]{ m_afcShooter.Stop();},{&m_afcShooter}));
+    //m_operator.B().ToggleOnTrue(AFCIntakeComm(&m_afcIntake, 0.5).ToPtr());
+    //m_operator.B().MultiPress(2 , 0.25_s).ToggleOnTrue(AFCStowComm(&m_afcIndexer, &m_afcIntake).ToPtr());
+    //m_operator.X().WhileTrue(m_afcShooter.ManualTurret(m_operator.GetLeftX()));
+>>>>>>> 76f3ed364f1f4d534f2bd8ed99aee86b9deac9c5
     
-     
+       
 }
 
 
