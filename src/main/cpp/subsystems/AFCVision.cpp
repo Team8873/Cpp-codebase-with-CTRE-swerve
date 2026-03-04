@@ -15,9 +15,11 @@ void AFCVision::Periodic(){
 }
 
 double turretFaceCalc(double m_txTurret){
-        const double kP = 0.02;
+      
+    
+    // const double kP = 0.02;
         
-        return m_txTurret * kP;
+        // return m_txTurret * kP;
     }
 
 void AFCVision::TurretFace(){
