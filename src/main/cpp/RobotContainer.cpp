@@ -16,6 +16,7 @@
 #include <frc2/command/WaitUntilCommand.h>
 #include <frc2/command/button/Trigger.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
+#include <pathplanner/lib/auto/NamedCommands.h>
 
 //#include "commands/AFCIndexerComm.h"
 
@@ -38,6 +39,19 @@ void RobotContainer::ConfigureBindings()
     drivetrain.SetDefaultCommand(
         // Drivetrain will execute this command periodically
         drivetrain.ApplyRequest([this]() -> auto&& {
+
+        if (DriverButton.GetLeftBumper()) {
+            MaxSpeed = 1.5_mps;
+        }
+
+        else if (DriverButton.GetRightTriggerAxis()) {
+            MaxSpeed = 4.68_mps;
+        }
+
+        else {
+            MaxSpeed = 2.75_mps;
+        }
+
             return drive.WithVelocityX(-joystick.GetLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
                 .WithVelocityY(-joystick.GetLeftX() * MaxSpeed) // Drive left with negative X (left)
                 .WithRotationalRate(-joystick.GetRightX() * MaxAngularRate); // Drive counterclockwise with negative X (left)
@@ -89,7 +103,7 @@ void RobotContainer::ConfigureBindings()
     (joystick.Start() && joystick.X()).WhileTrue(drivetrain.SysIdQuasistatic(frc2::sysid::Direction::kReverse));
 
     // reset the field-centric heading on left bumper press
-    joystick.LeftBumper().OnTrue(drivetrain.RunOnce([this] { drivetrain.SeedFieldCentric(); }));
+    joystick.LeftStick().OnTrue(drivetrain.RunOnce([this] { drivetrain.SeedFieldCentric(); }));
 
     drivetrain.RegisterTelemetry([this](auto const &state) { logger.Telemeterize(state); });
 
@@ -103,11 +117,13 @@ void RobotContainer::ConfigureBindings()
     //Indexer controls
     m_afcIndexer.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIndexer.Stop();},{&m_afcIndexer}));
     m_operator.RightTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeOn();},{&m_afcIndexer}));
+    
 
     //Intake controls
     m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-m_operator.GetRightY());},{&m_afcIntake}));
-    m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0.6);},{&m_afcIntake}));
-   // m_operator.LeftTrigger().WhileFalse(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
+    m_operator.LeftBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0.6);},{&m_afcIntake}));
+    m_operator.LeftBumper().MultiPress(2, 250_ms).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
+    // m_operator.LeftTrigger().WhileFalse(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
     
     //Turret Turn
     m_afcShooter.SetDefaultCommand(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(0);},{&m_afcShooter}));
@@ -117,8 +133,8 @@ void RobotContainer::ConfigureBindings()
     m_operator.Y().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(200);},{&m_afcShooter}));
     m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(-200);},{&m_afcShooter}));
 
-//Auto Lock
-    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.AutoLock(LimelightHelpers::getTX("")/*, LimelightHelpers::getTA("")*/);},{&m_afcShooter}));
+    //Auto Lock
+    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.AutoLock(LimelightHelpers::getTX(""), LimelightHelpers::getTA(""));},{&m_afcShooter}));
     m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp((1-(LimelightHelpers::getTA("")*0.2))*0.8+((LimelightHelpers::getTA("")*0.2)*0.3));}, {&m_afcFlywheel}));
 
     //Flywheel controls
@@ -126,10 +142,7 @@ void RobotContainer::ConfigureBindings()
     m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));
 
    
-    //m_operator.A().WhileTrue(frc2::cmd::RunEnd([this]{ m_afcShooter.Turret();},[this]{ m_afcShooter.Stop();},{&m_afcShooter}));
-    //m_operator.B().ToggleOnTrue(AFCIntakeComm(&m_afcIntake, 0.5).ToPtr());
-    //m_operator.B().MultiPress(2 , 0.25_s).ToggleOnTrue(AFCStowComm(&m_afcIndexer, &m_afcIntake).ToPtr());
-    //m_operator.X().WhileTrue(m_afcShooter.ManualTurret(m_operator.GetLeftX()));
+    
     
        
 }

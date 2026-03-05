@@ -19,6 +19,7 @@ void MaxMotorConfig(rev::spark::SparkMax *motor,
 
     if(onboard) {
         sparkMaxConfig.closedLoop.SetFeedbackSensor(rev::spark::FeedbackSensor::kPrimaryEncoder);
+        sparkMaxConfig.encoder.PositionConversionFactor(17.5);
     }
     else {
         sparkMaxConfig.closedLoop.SetFeedbackSensor(rev::spark::FeedbackSensor::kDetachedAbsoluteEncoder, 14);  // ♦♦♦CHANGE THIS LATER♦♦♦ This sets the off-board encoder's ID 
@@ -26,6 +27,7 @@ void MaxMotorConfig(rev::spark::SparkMax *motor,
         sparkMaxConfig.absoluteEncoder.VelocityConversionFactor(360.0 / 60.0);
     }                                                                                                         
     sparkMaxConfig.closedLoop.Pid(P, I, D);
+    //sparkMaxConfig.closedLoop.feedForward.kS(S);//.kV(V).kA(A);
     sparkMaxConfig.closedLoop.PositionWrappingEnabled(continuousWrap);
     auto status = motor->Configure(
             sparkMaxConfig,

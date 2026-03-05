@@ -5,29 +5,29 @@ AFCFlywheel::AFCFlywheel(){
     TalonMotorConfig(&m_shooter1,
                     40.0_A,
                     false,
-                    0.1,
+                    true,
+                    0.4,
                     0.0,
                     0.0,
                     0.0,
                     0.0,
                     0.0,
-                    0.0,
-                    0.0_tps,
-                    0.0_tr_per_s_sq);
+                    100.0_tps,
+                    600.0_tr_per_s_sq);
 
     
     TalonMotorConfig(&m_shooter2,
                     40.0_A,
                     false,
-                    0.1,
+                    true,
+                    0.4,
                     0.0,
                     0.0,
                     0.0,
                     0.0,
                     0.0,
-                    0.0,
-                    0.0_tps,
-                    0.0_tr_per_s_sq);
+                    100.0_tps,
+                    600.0_tr_per_s_sq);
 
 }
 
@@ -38,16 +38,24 @@ void AFCFlywheel::Periodic(){
 }
 
 void AFCFlywheel::Idle(){
-    m_shooter1.Set(0.5);
-    m_shooter2.Set(-0.5);
+    m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{55_tps});
+    m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-55_tps});
+    //m_shooter1.Set(0.5);
+    //m_shooter2.Set(-0.5);
+    
+    
 }
 
 void AFCFlywheel::SpinUp(double Sspeed){
-    m_shooter1.Set(Sspeed);
-    m_shooter2.Set(-Sspeed);
+    m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{70_tps});
+    m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-70_tps});
+    //m_shooter1.Set(Sspeed);
+    //m_shooter2.Set(-Sspeed);
+    //m_shooter1.SetControl(m_velReq.WithVelocity(50_tr / 1_s));
+    //m_shooter2.SetControl(m_velReq.WithVelocity(-50_tr / 1_s));
 };
 
-bool AFCFlywheel::Flywheelrpm(){   
+bool AFCFlywheel::Flywheelrpm(){
     bool upToSpeed = false;
     if (m_shooter1.GetVelocity().GetValueAsDouble() >= 500){
         upToSpeed = true;

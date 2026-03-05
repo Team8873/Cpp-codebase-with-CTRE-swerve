@@ -12,7 +12,7 @@ void TalonMotorConfig(ctre::phoenix6::hardware::TalonFX *motor,
                             double A,
                             units::turns_per_second_t velocityLimit,
                             units::turns_per_second_squared_t accelerationLimit)
-{
+{   
     ctre::phoenix6::configs::TalonFXConfiguration talonFXConfiguration{};
 
     talonFXConfiguration.ClosedLoopGeneral.ContinuousWrap = continuousWrap;
@@ -25,6 +25,7 @@ void TalonMotorConfig(ctre::phoenix6::hardware::TalonFX *motor,
     ctre::phoenix6::configs::CurrentLimitsConfigs &currentLimitsConfigs = talonFXConfiguration.CurrentLimits;
     currentLimitsConfigs.SupplyCurrentLimit       = currentLimit;
     currentLimitsConfigs.SupplyCurrentLimitEnable = true;
+    
 
     ctre::phoenix6::configs::Slot0Configs &slot0Configs = talonFXConfiguration.Slot0;
     slot0Configs.kP = P;
@@ -38,4 +39,6 @@ void TalonMotorConfig(ctre::phoenix6::hardware::TalonFX *motor,
     motionMagicConfigs.MotionMagicCruiseVelocity = units::turns_per_second_t{velocityLimit};
     motionMagicConfigs.MotionMagicAcceleration   = units::turns_per_second_squared_t{accelerationLimit};
     motionMagicConfigs.MotionMagicJerk           = units::turns_per_second_cubed_t{0.0};
+    
+    motor->GetConfigurator().Apply(talonFXConfiguration, 50_ms);
 }

@@ -3,6 +3,8 @@
 
 
 #include <functional>
+#include <vector>
+#include <algorithm>
 
 #include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/CANcoder.hpp>
@@ -15,6 +17,7 @@
 #include <frc/Servo.h>
 #include <frc2/command/Commands.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+//#include <frc/controller/PIDController.h>
 
 #include "LimelightHelpers.h"
 
@@ -22,19 +25,23 @@
 #include "misc/MaxMotorConfig.h"
 #include "misc/TalonMotorConfig.h"
 
-
+struct ShootingPoint {
+    double distance;
+    double hoodAngle;
+};
+// std::vector<ShootingPoint> shooterLUT = {
+//     {}
+// };
 class AFCShooter : public frc2::SubsystemBase
 {
     public:
 
         explicit AFCShooter();
         void Periodic() override;
-        frc2::CommandPtr AutomaticTurret();
-        frc2::CommandPtr ManualTurret(double speed);
         void TurretPOS(double pos);
         void TurretSpeed(double speed);
-        void AutoLock(double TX/*, double TA*/);
-        double TurretTarget();
+        void AutoLock(double TX, double TA);
+        double GetPosition();
         void Disable();
         void Stop();
 
@@ -42,6 +49,7 @@ class AFCShooter : public frc2::SubsystemBase
         
         rev::spark::SparkMax m_turretMotor{ConstantsCanIds::TurretMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkRelativeEncoder m_turretEncoder = m_turretMotor.GetEncoder();
+        //frc::PIDController anglePIDController{0.00075, 0, 0};
         frc::Servo m_hoodServo1{0};
         //frc::Servo m_hoodServo2{1};
 
@@ -54,3 +62,4 @@ class AFCShooter : public frc2::SubsystemBase
 
 
 };
+

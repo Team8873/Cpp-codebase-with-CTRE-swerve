@@ -18,6 +18,7 @@
 #include "subsystems/AFCShooter.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "subsystems/AFCFlywheel.h"
+#include "subsystems/AFCVision.h"
 #include "LimelightHelpers.h"
 
 
@@ -25,6 +26,8 @@
 #include "commands/AFCClimberComm.h"
 #include "commands/AFCShootingComm.h"
 #include "commands/AFCStowComm.h"
+
+#include "frc/XboxController.h"
 
 #include "Telemetry.h"
 
@@ -46,8 +49,9 @@ private:
     /* Note: This must be constructed before the drivetrain, otherwise we need to
      *       define a destructor to un-register the telemetry from the drivetrain */
     Telemetry logger{MaxSpeed};
-
-    frc2::CommandXboxController joystick{0};
+    
+    frc::XboxController DriverButton {1};
+    frc2::CommandXboxController joystick{1};
 
 public:
     subsystems::CommandSwerveDrivetrain drivetrain{TunerConstants::CreateDrivetrain()};
@@ -65,12 +69,13 @@ public:
     AFCIndexer m_afcIndexer{};
     AFCShooter m_afcShooter{};
     AFCFlywheel m_afcFlywheel{};
+    AFCVision m_afcVision{};
 
    
 private:
     void ConfigureBindings();
 
-     frc2::CommandXboxController m_operator{1};
+     frc2::CommandXboxController m_operator{0};
 
     
 };
