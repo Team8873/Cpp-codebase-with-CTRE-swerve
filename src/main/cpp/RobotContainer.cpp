@@ -28,7 +28,7 @@ using namespace pathplanner;
 RobotContainer::RobotContainer() : m_afcIndexer(), m_afcClimber(), m_afcFlywheel(), m_afcIntake(), m_afcShooter()
 {
     //NamedCommands::registerCommand("Targeting", std::move(AFCShooter(&m_afcShooter).ToPtr()));
-    NamedCommands::registerCommand("Shooting", std::move(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter).ToPtr()));
+    NamedCommands::registerCommand("Shooting", std::move(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter, &m_afcVision).ToPtr()));
     NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, 0.0).ToPtr()));    
    
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
@@ -112,8 +112,8 @@ void RobotContainer::ConfigureBindings()
     // m_operator.POVUp().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(-1);},{&m_afcClimber}));
 
     //Indexer controls
-    m_afcIndexer.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIndexer.Stop();}, {&m_afcIndexer}));
-    m_operator.RightTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeOn();}, {&m_afcIndexer}));
+    m_afcIndexer.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIndexer.Stop();},{&m_afcIndexer}));
+    m_operator.RightTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeOn();},{&m_afcIndexer}));
 
     //Intake controls
     m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-m_operator.GetRightY());},{&m_afcIntake}));
@@ -129,6 +129,10 @@ void RobotContainer::ConfigureBindings()
     m_operator.Y().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(200);},{&m_afcShooter}));
     m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(-200);},{&m_afcShooter}));
 
+
+//Auto Lock
+    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.AutoLock(LimelightHelpers::getTX("")/*, LimelightHelpers::getTA("")*/);},{&m_afcShooter}));
+    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp((1-(LimelightHelpers::getTA("")*0.2))*0.8+((LimelightHelpers::getTA("")*0.2)*0.3));}, {&m_afcFlywheel}));
 
     //Flywheel controls
     m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));

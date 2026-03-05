@@ -19,6 +19,7 @@
 #include "subsystems/AFCVision.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "subsystems/AFCFlywheel.h"
+#include "LimelightHelpers.h"
 
 
 #include "commands/AFCIntakeComm.h"
