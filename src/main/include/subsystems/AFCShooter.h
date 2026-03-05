@@ -39,6 +39,7 @@ class AFCShooter : public frc2::SubsystemBase
         explicit AFCShooter();
         void Periodic() override;
         void TurretPOS(double pos);
+        void TurretDirectionInput(double othernumber);
         void TurretSpeed(double speed);
         void AutoLock(double TX, double TA);
         double GetPosition();
@@ -51,7 +52,7 @@ class AFCShooter : public frc2::SubsystemBase
         rev::spark::SparkRelativeEncoder m_turretEncoder = m_turretMotor.GetEncoder();
         //frc::PIDController anglePIDController{0.00075, 0, 0};
         frc::Servo m_hoodServo1{0};
-        //frc::Servo m_hoodServo2{1};
+        frc::Servo m_hoodServo2{1};
 
         double m_tx = 0.0;
         double txNeed = 100.0;

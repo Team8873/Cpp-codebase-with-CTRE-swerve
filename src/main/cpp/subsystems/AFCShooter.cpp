@@ -14,6 +14,33 @@ AFCShooter::AFCShooter()
                     0.0,
                     true,
                     false);
+
+    // TalonMotorConfig(&m_shooter1,
+    //                 40.0_A,
+    //                 true,
+    //                 0.1,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0_tps,
+    //                 0.0_tr_per_s_sq);
+
+    
+    // TalonMotorConfig(&m_shooter2,
+    //                 40.0_A,
+    //                 true,
+    //                 0.1,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                 0.0,
+    //                   0.0,
+    //                 0.0,
+    //                 0.0_tps,
+    //                 0.0_tr_per_s_sq);
 }
 
 void AFCShooter::Periodic(){

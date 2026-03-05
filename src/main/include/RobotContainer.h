@@ -16,6 +16,7 @@
 #include "subsystems/AFCClimber.h"
 #include "subsystems/AFCIndexer.h"
 #include "subsystems/AFCShooter.h"
+#include "subsystems/AFCVision.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "subsystems/AFCFlywheel.h"
 #include "subsystems/AFCVision.h"
@@ -34,7 +35,7 @@
 
 class RobotContainer {
 private:
-    units::meters_per_second_t MaxSpeed = 0.75 * TunerConstants::kSpeedAt12Volts; // kSpeedAt12Volts desired top speed
+    units::meters_per_second_t MaxSpeed = 1 * TunerConstants::kSpeedAt12Volts; // kSpeedAt12Volts desired top speed
     units::radians_per_second_t MaxAngularRate = 0.75_tps; // 3/4 of a rotation per second max angular velocity
 
     /* Setting up bindings for necessary control of the swerve drive platform */

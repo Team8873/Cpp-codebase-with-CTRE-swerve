@@ -1,9 +1,18 @@
 #include "commands/AFCShootingComm.h"
 
-AFCShootingComm::AFCShootingComm(AFCIndexer* indexerSubsytem, AFCFlywheel* flywheelSubsystem) : m_pIndexerSubsystem{indexerSubsytem}, m_pFlywheelSubsytem{flywheelSubsystem}
+AFCShootingComm::AFCShootingComm(AFCIndexer* indexerSubsytem, 
+                                 AFCFlywheel* flywheelSubsystem, 
+                                 AFCShooter* shooterSubsystem, 
+                                 AFCVision* visionSubsystem)
+                                  : m_pIndexerSubsystem{indexerSubsytem}, 
+                                    m_pFlywheelSubsytem{flywheelSubsystem}, 
+                                    m_pShootersubsystem{shooterSubsystem},
+                                    m_pVisionsubsystem{visionSubsystem}
 {
     AddRequirements({m_pIndexerSubsystem});
     AddRequirements({m_pFlywheelSubsytem});
+    AddRequirements({m_pShootersubsystem});
+    AddRequirements({m_pVisionsubsystem});
 }
 
 void AFCShootingComm::Initialize() {
@@ -11,16 +20,18 @@ void AFCShootingComm::Initialize() {
 }
 
 void AFCShootingComm::Execute() {
-        m_pIndexerSubsystem->UptakeOn();
-     
+    // m_pShootersubsystem->TurretPOS(m_pVisionsubsystem->turretFaceCalc());
+    m_pIndexerSubsystem->UptakeOn();
+
+        
+    
    
 }
 
 void AFCShootingComm::End(bool interrupted) {
-    m_pIndexerSubsystem->Stop();
+    // m_pIndexerSubsystem->Stop(); 
 }
 
 bool AFCShootingComm::IsFinished() {
-   return (false);
-   
+   return (std::chrono::steady_clock::now() - m_startTime) >= std::chrono::seconds(10);
 }

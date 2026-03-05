@@ -7,10 +7,15 @@
 
 #include "subsystems/AFCIndexer.h"
 #include "subsystems/AFCFlywheel.h"
+#include "subsystems/AFCShooter.h"
+#include "subsystems/AFCVision.h"
 
 class AFCShootingComm : public frc2::CommandHelper<frc2::Command, AFCShootingComm> {
     public:
-        AFCShootingComm(AFCIndexer* indexerSubsystem, AFCFlywheel* flywheelSubsystem);
+        AFCShootingComm(AFCIndexer* indexerSubsystem, 
+                        AFCFlywheel* flywheelSubsystem,
+                        AFCShooter* shooterSubsystem,
+                        AFCVision* visionSubsystem);
 
         void Initialize() override;
 
@@ -24,5 +29,7 @@ class AFCShootingComm : public frc2::CommandHelper<frc2::Command, AFCShootingCom
     private:
         AFCIndexer* m_pIndexerSubsystem;
         AFCFlywheel* m_pFlywheelSubsytem;
+        AFCShooter* m_pShootersubsystem;
+        AFCVision* m_pVisionsubsystem;
         std::chrono::time_point<std::chrono::steady_clock> m_startTime;
 };

@@ -16,18 +16,29 @@
 #include <frc2/command/WaitUntilCommand.h>
 #include <frc2/command/button/Trigger.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
+#include <pathplanner/lib/commands/PathPlannerAuto.h>
+#include <pathplanner/lib/auto/NamedCommands.h>
+#include <memory>
+
+
 #include <pathplanner/lib/auto/NamedCommands.h>
 
 //#include "commands/AFCIndexerComm.h"
 
-
-RobotContainer::RobotContainer() 
+using namespace pathplanner;
+RobotContainer::RobotContainer() : m_afcIndexer(), m_afcClimber(), m_afcFlywheel(), m_afcIntake(), m_afcShooter()
 {
+    //NamedCommands::registerCommand("Targeting", std::move(AFCShooter(&m_afcShooter).ToPtr()));
+    NamedCommands::registerCommand("Shooting", std::move(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter, &m_afcVision).ToPtr()));
+    NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, 0.0).ToPtr()));    
+   
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
     frc::SmartDashboard::PutData("Auto Mode", &autoChooser);
     
    
     ConfigureBindings();
+
+
 }
 
 
@@ -144,7 +155,7 @@ void RobotContainer::ConfigureBindings()
    
     
     
-       
+     
 }
 
 
