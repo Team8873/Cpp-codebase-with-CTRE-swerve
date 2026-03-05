@@ -48,7 +48,7 @@ private:
      *       define a destructor to un-register the telemetry from the drivetrain */
     Telemetry logger{MaxSpeed};
 
-    frc2::CommandXboxController joystick{0};
+    frc2::CommandXboxController joystick{1};
 
 public:
     subsystems::CommandSwerveDrivetrain drivetrain{TunerConstants::CreateDrivetrain()};
@@ -72,7 +72,7 @@ public:
 private:
     void ConfigureBindings();
 
-     frc2::CommandXboxController m_operator{1};
+     frc2::CommandXboxController m_operator{0};
 
     
 };

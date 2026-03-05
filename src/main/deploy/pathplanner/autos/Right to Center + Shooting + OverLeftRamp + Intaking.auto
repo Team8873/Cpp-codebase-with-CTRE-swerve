@@ -1,0 +1,31 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right to Center"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooting"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Center to + OverLeftRamp + Intaking"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

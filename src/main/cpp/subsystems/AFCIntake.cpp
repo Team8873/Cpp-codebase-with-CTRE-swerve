@@ -34,7 +34,7 @@ AFCIntake::AFCIntake()
     
 void AFCIntake::Periodic(){
     auto positionSignal = m_intakeStateEncoder.GetPosition();
-    double pos = positionSignal.GetValueAsDouble();
+    double pos = m_intakeEncoder.GetPosition();
     double velNeo = m_intakeEncoder.GetVelocity();
 
     frc::SmartDashboard::PutNumber("Intake Encoder", pos);

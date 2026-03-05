@@ -35,7 +35,7 @@ class AFCIntake : public frc2::SubsystemBase
         
         rev::spark::SparkMax m_intakeMotor{ConstantsCanIds::IntakeMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkMax m_intakeDeployer{ConstantsCanIds::IntakeDeployerId, rev::spark::SparkLowLevel::MotorType::kBrushless};
-        rev::spark::SparkRelativeEncoder m_intakeEncoder = m_intakeMotor.GetEncoder();
+        rev::spark::SparkRelativeEncoder m_intakeEncoder = m_intakeDeployer.GetEncoder();
         ctre::phoenix6::hardware::CANcoder m_intakeStateEncoder{ConstantsCanIds::IntakeEncoderId};
 
 

@@ -3,55 +3,60 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.63796005706134,
-        "y": 0.7032952924393738
+        "x": 3.6120827389443653,
+        "y": 0.34101283880171307
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.637960057061342,
-        "y": 0.7032952924393738
+        "x": 2.5769900142653355,
+        "y": 0.40570613409415135
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.0502282453637657,
-        "y": 5.9952068473609135
+        "x": 0.8203707865168532,
+        "y": 5.308876404494382
       },
       "prevControl": {
-        "x": 2.1241369472182585,
-        "y": 6.616262482168331
+        "x": 0.7052511885020343,
+        "y": 6.759383339481095
       },
       "nextControl": {
-        "x": -0.3856309078034488,
-        "y": 5.164830469625658
+        "x": 0.8713258426966286,
+        "y": 4.666842696629215
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.664943820224719,
-        "y": 4.075764044943821
+        "x": 1.635651685393258,
+        "y": 3.943280898876405
       },
       "prevControl": {
-        "x": 3.592325842696629,
-        "y": 4.554741573033708
+        "x": 1.342393258426965,
+        "y": 4.6760596739809905
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "LineUp and Shoot"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.8107086614173167,
+      "rotationDegrees": -45.0
+    }
+  ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.7948717948717993,
-      "maxWaypointRelativePos": 1.4558404558404603,
+      "minWaypointRelativePos": 0.6928057553956802,
+      "maxWaypointRelativePos": 1.3798670465337126,
       "constraints": {
-        "maxVelocity": 1.0,
+        "maxVelocity": 0.75,
         "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
@@ -63,30 +68,13 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "",
-      "waypointRelativePos": 0,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
       "name": "Intaking",
-      "waypointRelativePos": 0.7733812949640313,
-      "endWaypointRelativePos": 1.8964862298195608,
+      "waypointRelativePos": 0.586330935251796,
+      "endWaypointRelativePos": 2.0,
       "command": {
         "type": "named",
         "data": {
           "name": "Intaking"
-        }
-      }
-    },
-    {
-      "name": "Shooting",
-      "waypointRelativePos": 2.0,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "Shooting"
         }
       }
     }
