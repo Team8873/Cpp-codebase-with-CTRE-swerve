@@ -14,12 +14,11 @@ void AFCVision::Periodic(){
     frc::SmartDashboard::PutNumber("Robot X Position", m_txRobot);
 }
 
-double turretFaceCalc(double m_txTurret){
-      
-    
-    // const double kP = 0.02;
-        
-        // return m_txTurret * kP;
+double turretFaceCalc(){
+     if (LimelightHelpers::getTV("") == 1){
+    double xcord = LimelightHelpers::getBotpose("")[0];
+    double ycord = LimelightHelpers::getBotpose("")[1];
+}     
     }
 
 void AFCVision::TurretFace(){
@@ -27,3 +26,5 @@ void AFCVision::TurretFace(){
 }
 
 void AFCVision::Disable(){}
+
+   
