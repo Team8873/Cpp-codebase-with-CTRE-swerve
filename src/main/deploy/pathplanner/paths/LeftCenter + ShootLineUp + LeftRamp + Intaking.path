@@ -3,53 +3,42 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.6738539325842687,
-        "y": 0.48852808988764085
+        "x": 2.196157303370786,
+        "y": 5.920337078651685
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.788516853932584,
-        "y": 0.5496741573033703
+        "x": 3.9286292134831458,
+        "y": 5.594224719101123
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Left Center + ShootLineUp"
     },
     {
       "anchor": {
-        "x": 3.184685393258427,
-        "y": 2.485966292134831
+        "x": 7.261089887640448,
+        "y": 5.68594382022472
       },
       "prevControl": {
-        "x": 2.8365203651685396,
-        "y": 2.051574438202246
-      },
-      "nextControl": {
-        "x": 3.5328504213483147,
-        "y": 2.9203581460674157
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 7.413955056179774,
-        "y": 2.7611235955056177
-      },
-      "prevControl": {
-        "x": 6.413955056179774,
-        "y": 2.7611235955056177
+        "x": 5.936258426966291,
+        "y": 5.82861797752809
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.7492913385826815,
+      "rotationDegrees": 180.0
+    }
+  ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 1.7978417266187108,
-      "maxWaypointRelativePos": 2.0,
+      "minWaypointRelativePos": 0.7233812949640344,
+      "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 1.25,
         "maxAcceleration": 3.0,
@@ -63,20 +52,20 @@
   "pointTowardsZones": [
     {
       "fieldPosition": {
-        "x": 7.0,
-        "y": 5.5
+        "x": 6.5,
+        "y": 4.5
       },
       "rotationOffset": 0.0,
-      "minWaypointRelativePos": 0.8769784172661759,
-      "maxWaypointRelativePos": 1.6913669064748202,
-      "name": "Point Towards Zone"
+      "minWaypointRelativePos": 0.3478417266187065,
+      "maxWaypointRelativePos": 0.74,
+      "name": "Diagonal for Ramp"
     }
   ],
   "eventMarkers": [
     {
       "name": "Intaking",
-      "waypointRelativePos": 1.8640287769784252,
-      "endWaypointRelativePos": null,
+      "waypointRelativePos": 0.9,
+      "endWaypointRelativePos": 1.0,
       "command": {
         "type": "named",
         "data": {
@@ -101,7 +90,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -34.77783136636376
   },
   "useDefaultConstraints": true
 }
