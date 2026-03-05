@@ -20,16 +20,16 @@ void AFCShootingComm::Initialize() {
 }
 
 void AFCShootingComm::Execute() {
-    m_pShootersubsystem->TurretPOS(m_pVisionsubsystem->turretFaceCalc());
-    m_pFlywheelSubsytem->SpinUp(0.55);
+    // m_pShootersubsystem->TurretPOS(m_pVisionsubsystem->turretFaceCalc());
     m_pIndexerSubsystem->UptakeOn();
+
         
     
    
 }
 
 void AFCShootingComm::End(bool interrupted) {
-    m_pIndexerSubsystem->Stop();
+    // m_pIndexerSubsystem->Stop(); 
 }
 
 bool AFCShootingComm::IsFinished() {
