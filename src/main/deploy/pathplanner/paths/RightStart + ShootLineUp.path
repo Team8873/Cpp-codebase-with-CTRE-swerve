@@ -3,6 +3,7 @@
   "waypoints": [
     {
       "anchor": {
+<<<<<<<< Updated upstream:src/main/deploy/pathplanner/paths/RightStart + ShootLineUp.path
         "x": 3.650898716119829,
         "y": 0.30219686162624837
       },
@@ -10,12 +11,22 @@
       "nextControl": {
         "x": 2.589928673323822,
         "y": 0.5997860199714704
+========
+        "x": 3.622898876404494,
+        "y": 7.785292134831462
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.0522022471910106,
+        "y": 7.336887640449438
+>>>>>>>> Stashed changes:src/main/deploy/pathplanner/paths/Left to LeftCenter + ShootLineUp.path
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
+<<<<<<<< Updated upstream:src/main/deploy/pathplanner/paths/RightStart + ShootLineUp.path
         "x": 2.9651497860199716,
         "y": 1.3502282453637668
       },
@@ -26,6 +37,18 @@
       "nextControl": null,
       "isLocked": false,
       "linkedName": "RightShoot Line Up"
+========
+        "x": 2.196157303370786,
+        "y": 5.920337078651685
+      },
+      "prevControl": {
+        "x": 2.8483820224719096,
+        "y": 6.83752808988764
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Left Center + ShootLineUp"
+>>>>>>>> Stashed changes:src/main/deploy/pathplanner/paths/Left to LeftCenter + ShootLineUp.path
     }
   ],
   "rotationTargets": [],
@@ -42,7 +65,11 @@
   },
   "goalEndState": {
     "velocity": 0,
+<<<<<<<< Updated upstream:src/main/deploy/pathplanner/paths/RightStart + ShootLineUp.path
     "rotation": 59.620873988631644
+========
+    "rotation": -34.77783136636376
+>>>>>>>> Stashed changes:src/main/deploy/pathplanner/paths/Left to LeftCenter + ShootLineUp.path
   },
   "reversed": false,
   "folder": null,

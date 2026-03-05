@@ -3,6 +3,7 @@
   "waypoints": [
     {
       "anchor": {
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:src/main/deploy/pathplanner/paths/Right to Center.path
         "x": 3.5991440798858774,
         "y": 0.34101283880171307
@@ -11,6 +12,16 @@
       "nextControl": {
         "x": 3.068659058487874,
         "y": 1.6348787446505004
+=======
+<<<<<<<< Updated upstream:src/main/deploy/pathplanner/paths/RightStart + ShootLineUp.path
+        "x": 3.650898716119829,
+        "y": 0.30219686162624837
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.589928673323822,
+        "y": 0.5997860199714704
+>>>>>>> Stashed changes
 ========
         "x": 3.622898876404494,
         "y": 7.785292134831462
@@ -26,6 +37,7 @@
     },
     {
       "anchor": {
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:src/main/deploy/pathplanner/paths/Right to Center.path
         "x": 2.2535235378031384,
         "y": 4.054407988587732
@@ -37,6 +49,19 @@
       "nextControl": null,
       "isLocked": false,
       "linkedName": "Center"
+=======
+<<<<<<<< Updated upstream:src/main/deploy/pathplanner/paths/RightStart + ShootLineUp.path
+        "x": 2.9651497860199716,
+        "y": 1.3502282453637668
+      },
+      "prevControl": {
+        "x": 2.564051355206847,
+        "y": 0.8068045649072757
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "RightShoot Line Up"
+>>>>>>> Stashed changes
 ========
         "x": 2.196157303370786,
         "y": 5.920337078651685
@@ -65,8 +90,13 @@
   },
   "goalEndState": {
     "velocity": 0,
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:src/main/deploy/pathplanner/paths/Right to Center.path
     "rotation": 0.0
+=======
+<<<<<<<< Updated upstream:src/main/deploy/pathplanner/paths/RightStart + ShootLineUp.path
+    "rotation": 59.620873988631644
+>>>>>>> Stashed changes
 ========
     "rotation": -34.77783136636376
 >>>>>>>> Stashed changes:src/main/deploy/pathplanner/paths/Left to LeftCenter + ShootLineUp.path

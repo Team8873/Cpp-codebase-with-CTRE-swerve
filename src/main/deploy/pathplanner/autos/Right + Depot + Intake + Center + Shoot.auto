@@ -7,11 +7,15 @@
         {
           "type": "path",
           "data": {
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:src/main/deploy/pathplanner/autos/Right Hand Depot Intake + Lineup + Shooting.auto
             "pathName": "Right Hand Depot Intake + Lineup"
 ========
             "pathName": "Right + Depot + Intake + Center"
 >>>>>>>> Stashed changes:src/main/deploy/pathplanner/autos/Right + Depot + Intake + Center + Shoot.auto
+=======
+            "pathName": "Right + Depot + Intake + Center"
+>>>>>>> Stashed changes
           }
         },
         {

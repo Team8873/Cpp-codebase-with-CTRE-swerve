@@ -3,6 +3,7 @@
   "waypoints": [
     {
       "anchor": {
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:src/main/deploy/pathplanner/paths/Right Hand Depot Intake + Lineup.path
         "x": 3.6120827389443653,
         "y": 0.34101283880171307
@@ -12,6 +13,8 @@
         "x": 2.5769900142653355,
         "y": 0.40570613409415135
 ========
+=======
+>>>>>>> Stashed changes
         "x": 3.612707865168539,
         "y": 0.34585393258426966
       },
@@ -19,13 +22,17 @@
       "nextControl": {
         "x": 3.128860167657759,
         "y": 2.026614819920173
+<<<<<<< Updated upstream
 >>>>>>>> Stashed changes:src/main/deploy/pathplanner/paths/Right + Depot + Intake + Center.path
+=======
+>>>>>>> Stashed changes
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:src/main/deploy/pathplanner/paths/Right Hand Depot Intake + Lineup.path
         "x": 0.8203707865168532,
         "y": 5.308876404494382
@@ -38,6 +45,8 @@
         "x": 0.8713258426966286,
         "y": 4.666842696629215
 ========
+=======
+>>>>>>> Stashed changes
         "x": 1.0547640449438196,
         "y": 6.368741573033708
       },
@@ -48,13 +57,17 @@
       "nextControl": {
         "x": 0.5599402939620763,
         "y": 5.621265062751445
+<<<<<<< Updated upstream
 >>>>>>>> Stashed changes:src/main/deploy/pathplanner/paths/Right + Depot + Intake + Center.path
+=======
+>>>>>>> Stashed changes
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:src/main/deploy/pathplanner/paths/Right Hand Depot Intake + Lineup.path
         "x": 1.635651685393258,
         "y": 3.943280898876405
@@ -63,12 +76,15 @@
         "x": 1.342393258426965,
         "y": 4.6760596739809905
 ========
+=======
+>>>>>>> Stashed changes
         "x": 1.8700449438202247,
         "y": 3.943280898876405
       },
       "prevControl": {
         "x": 2.175775280898876,
         "y": 4.86047191011236
+<<<<<<< Updated upstream
 >>>>>>>> Stashed changes:src/main/deploy/pathplanner/paths/Right + Depot + Intake + Center.path
       },
       "nextControl": null,
@@ -89,6 +105,22 @@
       "maxWaypointRelativePos": 1.3798670465337126,
       "constraints": {
         "maxVelocity": 0.75,
+=======
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.7948717948717993,
+      "maxWaypointRelativePos": 1.4558404558404603,
+      "constraints": {
+        "maxVelocity": 1.0,
+>>>>>>> Stashed changes
         "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
@@ -101,6 +133,7 @@
   "eventMarkers": [
     {
       "name": "Intaking",
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:src/main/deploy/pathplanner/paths/Right Hand Depot Intake + Lineup.path
       "waypointRelativePos": 0.586330935251796,
       "endWaypointRelativePos": 2.0,
@@ -108,6 +141,10 @@
       "waypointRelativePos": 0.6352517985611482,
       "endWaypointRelativePos": 1.8964862298195608,
 >>>>>>>> Stashed changes:src/main/deploy/pathplanner/paths/Right + Depot + Intake + Center.path
+=======
+      "waypointRelativePos": 0.6352517985611482,
+      "endWaypointRelativePos": 1.8964862298195608,
+>>>>>>> Stashed changes
       "command": {
         "type": "named",
         "data": {
