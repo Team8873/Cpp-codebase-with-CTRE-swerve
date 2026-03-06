@@ -25,8 +25,9 @@ class AFCIndexer : public frc2::SubsystemBase{
         void Periodic() override;
         void Disable();
         void ConveyorOn();
+        void UptakeReverse();
         void UptakeOn();
-        void Stop(); 
+         void Stop(); 
             
 
 
