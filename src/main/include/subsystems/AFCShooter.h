@@ -41,7 +41,7 @@ class AFCShooter : public frc2::SubsystemBase
         void TurretPOS(double pos);
         void TurretDirectionInput(double othernumber);
         void TurretSpeed(double speed);
-        void AutoLock(double TX, double TA);
+        void AutoLock(double TX);
         double GetPosition();
         void Disable();
         void Stop();

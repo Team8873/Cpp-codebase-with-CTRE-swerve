@@ -160,8 +160,8 @@ void RobotContainer::ConfigureBindings()
     m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(-200);},{&m_afcShooter}));
 
     //Auto Lock
-    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.AutoLock(LimelightHelpers::getTX(""), LimelightHelpers::getTA(""));},{&m_afcShooter}));
-    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp((1-(LimelightHelpers::getTA("")*0.2))*0.8+((LimelightHelpers::getTA("")*0.2)*0.3));}, {&m_afcFlywheel}));
+    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.AutoLock(LimelightHelpers::getTX(""));},{&m_afcShooter}));
+    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.AutoSpeed(m_afcVision.TgtDistance);}, {&m_afcVision}));
 
     //Flywheel controls
     m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));

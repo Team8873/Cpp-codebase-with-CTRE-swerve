@@ -69,3 +69,19 @@ void AFCFlywheel::Disable(){
     m_shooter1.Disable();
     m_shooter2.Disable();
 }
+
+void AFCFlywheel::AutoSpeed(double Sspeed){
+    if (Sspeed < 2.4){
+        m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{55_tps});
+        m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-55_tps});
+    }  else if (Sspeed >= 2.4 && Sspeed < 3.4) {
+         m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{65_tps});
+         m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-65_tps});
+    } else if (Sspeed >= 3.4 && Sspeed < 4.4) {
+         m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{75_tps});
+         m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-75_tps});
+} else if (Sspeed >= 4.4 ) {
+         m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{90_tps});
+         m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-90_tps});
+}
+}

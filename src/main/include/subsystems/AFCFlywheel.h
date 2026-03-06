@@ -20,6 +20,7 @@ class AFCFlywheel : public frc2::SubsystemBase
     void Periodic() override;
     void Idle();
     void SpinUp(double Sspeed);
+    void AutoSpeed(double Sspeed);
     bool Flywheelrpm();
     void Disable();
 

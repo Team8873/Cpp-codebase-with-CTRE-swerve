@@ -68,7 +68,7 @@ void AFCShooter::TurretSpeed(double speed){
     m_turretMotor.Set(speed);
 }
 
-void AFCShooter::AutoLock(double TX, double TA){
+void AFCShooter::AutoLock(double TX){
     //m_turretMotor.GetClosedLoopController().GetSetpoint();
     m_turretMotor.Set(TX * 0.01);
     m_hoodServo1.Set(0);//-(TA * 20));
