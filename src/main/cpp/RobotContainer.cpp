@@ -146,11 +146,9 @@ void RobotContainer::ConfigureBindings()
 
     //Intake controls
     m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-m_operator.GetRightY());},{&m_afcIntake}));
-    m_operator.LeftBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0.6);},{&m_afcIntake}));
+    m_operator.LeftBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(1);},{&m_afcIntake}));
     m_operator.LeftBumper().MultiPress(2, 250_ms).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
-    // m_operator.LeftBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-0.05);},{&m_afcIntake}));
-    // m_operator.LeftBumper().MultiPress(2, 250_ms).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(0);},{&m_afcIntake}));
-    // m_operator.LeftTrigger().WhileFalse(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
+    
     
     //Turret Turn
     m_afcShooter.SetDefaultCommand(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(0);},{&m_afcShooter}));
