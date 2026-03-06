@@ -71,17 +71,44 @@ void AFCFlywheel::Disable(){
 }
 
 void AFCFlywheel::AutoSpeed(double Sspeed){
-    if (Sspeed < 2.4){
+
+units::turns_per_second_t speed = units::turns_per_second_t{Sspeed};
+
+    m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{speed});
+    m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-speed});
+
+//     if (Sspeed < 2.4){
+//         m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{55_tps});
+//         m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-55_tps});
+//     }  else if (Sspeed >= 2.4 && Sspeed < 3.4) {
+//          m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{65_tps});
+//          m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-65_tps});
+//     } else if (Sspeed >= 3.4 && Sspeed < 4.4) {
+//          m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{75_tps});
+//          m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-75_tps});
+// } else if (Sspeed >= 4.4 ) {
+//          m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{90_tps});
+//          m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-90_tps});
+// }
+}
+
+void AFCFlywheel::ManualSpeed(double Sspeed){
+    if (Sspeed < -0.5){
         m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{55_tps});
         m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-55_tps});
-    }  else if (Sspeed >= 2.4 && Sspeed < 3.4) {
+    }  else if (Sspeed >= -0.5 && Sspeed <= 0.5) {
          m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{65_tps});
          m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-65_tps});
-    } else if (Sspeed >= 3.4 && Sspeed < 4.4) {
+    } else if (Sspeed > 0.5) {
          m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{75_tps});
          m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-75_tps});
-} else if (Sspeed >= 4.4 ) {
-         m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{90_tps});
-         m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-90_tps});
+} 
+
 }
+
+void AFCFlywheel::SuperShoot(){
+
+         m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{100_tps});
+         m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-100_tps});
+
 }

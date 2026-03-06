@@ -11,6 +11,7 @@ void AFCVision::Periodic(){
     m_tyTurret = LimelightHelpers::getTY("");
     turretHasTarget = LimelightHelpers::getTV("");
     TgtDistance = TurretDistanceCalc(LLAngleToRad());
+    FlySpeed = SpeedRamp(TgtDistance);
     // robotHasTarget = LimelightHelpers::getTV("");
     x_cord = LimelightHelpers::getBotpose_wpiBlue("").at(0); //supposedly
     y_cord = LimelightHelpers::getBotpose_wpiBlue("").at(1); //supposedly
@@ -37,6 +38,11 @@ double AFCVision::TurretDistanceCalc(double LLAngleToRad){
         
         return 0.5207/tan(LLAngleToRad);
 }
+
+double AFCVision::SpeedRamp(double TgtDistance){
+        return (1.59*(TgtDistance*TgtDistance)) + (1.84 * TgtDistance) + 50.92;
+}
+
 
 // Vector2D GetCurrentTarget(){
 //     double txTarget = LimelightHelpers::getTX("");

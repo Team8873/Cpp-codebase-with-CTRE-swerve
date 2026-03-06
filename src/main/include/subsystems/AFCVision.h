@@ -23,7 +23,8 @@ class AFCVision : public frc2::SubsystemBase
         void Periodic() override;
         double TurretDistanceCalc(double LLAngleToRad);
         double LLAngleToRad();
-        double TgtDistance = 0.0;
+        double SpeedRamp(double TurretDistanceCalc);
+        double FlySpeed = 0.0;
 
 
         // Vector2D GetCurrentTarget();
@@ -43,5 +44,6 @@ class AFCVision : public frc2::SubsystemBase
 
         double x_cord = 0.0;
         double y_cord = 0.0;
+        double TgtDistance = 0.0;
         
 };
