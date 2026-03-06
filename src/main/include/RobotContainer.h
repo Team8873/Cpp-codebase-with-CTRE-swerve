@@ -52,7 +52,7 @@ private:
     Telemetry logger{MaxSpeed};
     
     frc::XboxController DriverButton {1};
-    frc2::CommandXboxController joystick{1};
+    frc2::CommandXboxController joystick{0};
 
 public:
     subsystems::CommandSwerveDrivetrain drivetrain{TunerConstants::CreateDrivetrain()};
@@ -76,7 +76,7 @@ public:
 private:
     void ConfigureBindings();
 
-     frc2::CommandXboxController m_operator{0};
+     frc2::CommandXboxController m_operator{1};
 
     
 };

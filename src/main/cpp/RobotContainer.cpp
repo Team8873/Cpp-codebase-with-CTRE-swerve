@@ -51,17 +51,17 @@ void RobotContainer::ConfigureBindings()
         // Drivetrain will execute this command periodically
         drivetrain.ApplyRequest([this]() -> auto&& {
 
-        if (DriverButton.GetLeftBumper()) {
-            MaxSpeed = 1.5_mps;
-        }
+        // if (DriverButton.GetLeftBumper()) {
+        //     MaxSpeed = 1.5_mps;
+        // }
 
-        else if (DriverButton.GetRightTriggerAxis()) {
-            MaxSpeed = 4.68_mps;
-        }
+        // else if (DriverButton.GetRightTriggerAxis()) {
+        //     MaxSpeed = 4.68_mps;
+        // }
 
-        else {
-            MaxSpeed = 2.75_mps;
-        }
+        // else {
+        //     MaxSpeed = 2.75_mps;
+        // }
 
             return drive.WithVelocityX(-joystick.GetLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
                 .WithVelocityY(-joystick.GetLeftX() * MaxSpeed) // Drive left with negative X (left)
@@ -118,6 +118,20 @@ void RobotContainer::ConfigureBindings()
 
     drivetrain.RegisterTelemetry([this](auto const &state) { logger.Telemeterize(state); });
 
+        joystick.LeftBumper().WhileTrue(drivetrain.ApplyRequest([this]() -> auto&& {
+            return drive.WithVelocityX(-joystick.GetLeftY() * 1.0_mps) // Drive forward with negative Y (forward)
+                .WithVelocityY(-joystick.GetLeftX() * 1.0_mps) // Drive left with negative X (left)
+                .WithRotationalRate(-joystick.GetRightX() * MaxAngularRate); // Drive counterclockwise with negative X (left)
+        }));
+
+        joystick.RightTrigger().WhileTrue(drivetrain.ApplyRequest([this]() -> auto&& {
+            return drive.WithVelocityX(-joystick.GetLeftY() * 4.68_mps) // Drive forward with negative Y (forward)
+                .WithVelocityY(-joystick.GetLeftX() * 4.68_mps) // Drive left with negative X (left)
+                .WithRotationalRate(-joystick.GetRightX() * MaxAngularRate); // Drive counterclockwise with negative X (left)
+        }));
+
+
+
 
     //♦♦♦♦♦♦Start of Operator controls reorganize later♦♦♦♦♦♦
 
@@ -134,6 +148,8 @@ void RobotContainer::ConfigureBindings()
     m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-m_operator.GetRightY());},{&m_afcIntake}));
     m_operator.LeftBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0.6);},{&m_afcIntake}));
     m_operator.LeftBumper().MultiPress(2, 250_ms).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
+    // m_operator.LeftBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-0.05);},{&m_afcIntake}));
+    // m_operator.LeftBumper().MultiPress(2, 250_ms).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(0);},{&m_afcIntake}));
     // m_operator.LeftTrigger().WhileFalse(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
     
     //Turret Turn
