@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.63796005706134,
-        "y": 0.7032952924393738
+        "x": 3.612707865168539,
+        "y": 0.34585393258426966
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.637960057061342,
-        "y": 0.7032952924393738
+        "x": 3.128860167657759,
+        "y": 2.026614819920173
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.0502282453637657,
-        "y": 5.9952068473609135
+        "x": 1.0547640449438196,
+        "y": 6.368741573033708
       },
       "prevControl": {
-        "x": 2.1241369472182585,
-        "y": 6.616262482168331
+        "x": 1.739552019993264,
+        "y": 7.403176409392444
       },
       "nextControl": {
-        "x": -0.3856309078034488,
-        "y": 5.164830469625658
+        "x": 0.5599402939620763,
+        "y": 5.621265062751445
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.664943820224719,
-        "y": 4.075764044943821
+        "x": 1.8700449438202247,
+        "y": 3.943280898876405
       },
       "prevControl": {
-        "x": 3.592325842696629,
-        "y": 4.554741573033708
+        "x": 2.175775280898876,
+        "y": 4.86047191011236
       },
       "nextControl": null,
       "isLocked": false,
@@ -63,30 +63,13 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "",
-      "waypointRelativePos": 0,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
       "name": "Intaking",
-      "waypointRelativePos": 0.7733812949640313,
+      "waypointRelativePos": 0.6352517985611482,
       "endWaypointRelativePos": 1.8964862298195608,
       "command": {
         "type": "named",
         "data": {
           "name": "Intaking"
-        }
-      }
-    },
-    {
-      "name": "Shooting",
-      "waypointRelativePos": 2.0,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "Shooting"
         }
       }
     }

@@ -30,7 +30,8 @@ RobotContainer::RobotContainer() : m_afcIndexer(), m_afcClimber(), m_afcFlywheel
 {
     //NamedCommands::registerCommand("Targeting", std::move(AFCShooter(&m_afcShooter).ToPtr()));
     NamedCommands::registerCommand("Shooting", std::move(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter, &m_afcVision).ToPtr()));
-    NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, 0.0).ToPtr()));    
+    NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, -740.0).ToPtr())); 
+    NamedCommands::registerCommand("PartialIntakeOut", std::move(AFCIntakeComm(&m_afcIntake, -300.0).ToPtr()));   
    
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
     frc::SmartDashboard::PutData("Auto Mode", &autoChooser);
@@ -166,9 +167,19 @@ void RobotContainer::ConfigureBindings()
     m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
     m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));
 
-   
+    // *
+    // *
+    // * 
+    // * 
+
+    // REMOVE FOR COMP
+    m_operator.Start().ToggleOnTrue(frc2::cmd::Run([this]{m_afcFlywheel.Disable();}, {&m_afcFlywheel}));
+    // REMOVE FOR COMP
     
-    
+    // *
+    // *
+    // * 
+    // * 
      
 }
 

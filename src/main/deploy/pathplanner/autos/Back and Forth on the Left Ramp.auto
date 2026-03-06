@@ -7,7 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "OverTheRamp"
+            "pathName": "LeftRampStart + OverLeftRamp"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "NeutralZone + OverLeftRamp"
           }
         }
       ]

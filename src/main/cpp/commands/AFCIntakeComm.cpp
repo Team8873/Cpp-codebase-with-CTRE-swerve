@@ -21,5 +21,5 @@ void AFCIntakeComm::End(bool interrupted){
     m_pIntake->Stop();
 }
 bool AFCIntakeComm::IsFinished() {
-    return (false);
+return (std::chrono::steady_clock::now() - m_startTime) >= std::chrono::milliseconds(2500);
 }

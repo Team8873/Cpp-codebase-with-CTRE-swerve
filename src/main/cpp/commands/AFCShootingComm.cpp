@@ -20,8 +20,9 @@ void AFCShootingComm::Initialize() {
 }
 
 void AFCShootingComm::Execute() {
-    // m_pShootersubsystem->TurretPOS(m_pVisionsubsystem->turretFaceCalc());
+    //  m_pShootersubsystem->TurretPOS(m_pVisionsubsystem->turretFaceCalc());
     m_pIndexerSubsystem->UptakeOn();
+    m_pFlywheelSubsytem->SpinUp(0);
 
         
     
@@ -33,5 +34,5 @@ void AFCShootingComm::End(bool interrupted) {
 }
 
 bool AFCShootingComm::IsFinished() {
-   return (std::chrono::steady_clock::now() - m_startTime) >= std::chrono::seconds(10);
+   return (std::chrono::steady_clock::now() - m_startTime) >= std::chrono::seconds(5);
 }
