@@ -15,6 +15,7 @@ typedef int CANid_t;
 
 namespace ConstantsCanIds
 {
+   constexpr CANid_t IntakerMotorID = 20;
    constexpr CANid_t ShooterMotor1Id = 9;
    constexpr CANid_t ShooterMotor2Id = 10;
    constexpr CANid_t ConveyorMotorId = 11;
