@@ -7,13 +7,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LeftRampStart + OverLeftRamp"
+            "pathName": "LeftRampStart + OverLeftRamp + Intaking"
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": "NeutralZone + OverLeftRamp"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "PartialIntakeOut"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooting"
           }
         }
       ]

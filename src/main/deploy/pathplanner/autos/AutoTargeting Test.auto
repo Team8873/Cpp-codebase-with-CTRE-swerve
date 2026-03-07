@@ -5,18 +5,6 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "Right + Depot + Intake + Center"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "PartialIntakeOut"
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "Shooting"

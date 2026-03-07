@@ -33,12 +33,6 @@
           "data": {
             "name": "Intaking"
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Shooting"
-          }
         }
       ]
     }

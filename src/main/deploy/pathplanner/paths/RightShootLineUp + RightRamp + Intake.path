@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.9651497860199716,
-        "y": 1.3502282453637668
+        "x": 3.1851069900142646,
+        "y": 1.828958630527818
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.874579172610556,
-        "y": 2.695848787446506
+        "x": 3.094536376604849,
+        "y": 3.1745791726105574
       },
       "isLocked": false,
       "linkedName": "RightShoot Line Up"
     },
     {
       "anchor": {
-        "x": 7.040827389443652,
-        "y": 2.7087874465049935
+        "x": 7.390171184022824,
+        "y": 2.695848787446506
       },
       "prevControl": {
-        "x": 6.040827389443652,
-        "y": 2.7087874465049935
+        "x": 6.390171184022824,
+        "y": 2.695848787446506
       },
       "nextControl": null,
       "isLocked": false,
@@ -59,8 +59,8 @@
   "eventMarkers": [
     {
       "name": "Intaking",
-      "waypointRelativePos": 0.7146248812915483,
-      "endWaypointRelativePos": 1.0,
+      "waypointRelativePos": 0.0,
+      "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
@@ -85,7 +85,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 59.620873988631644
+    "rotation": 57.528807709151586
   },
   "useDefaultConstraints": true
 }
