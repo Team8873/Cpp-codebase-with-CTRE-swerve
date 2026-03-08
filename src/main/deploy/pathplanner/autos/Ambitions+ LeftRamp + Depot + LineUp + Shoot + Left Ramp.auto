@@ -7,7 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LeftRamp + Depot Intake"
+            "pathName": "LeftRamp + Depot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intaking"
           }
         },
         {
@@ -20,6 +26,18 @@
           "type": "named",
           "data": {
             "name": "Shooting"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Depot Shoot to Balls"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intaking"
           }
         }
       ]

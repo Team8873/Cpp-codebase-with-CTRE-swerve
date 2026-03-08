@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 7.390171184022824,
-        "y": 2.695848787446506
+        "x": 8.101797432239657,
+        "y": 2.669971469329529
       },
       "prevControl": {
-        "x": 6.390171184022824,
-        "y": 2.695848787446506
+        "x": 7.101797432239657,
+        "y": 2.669971469329529
       },
       "nextControl": null,
       "isLocked": false,
@@ -52,7 +52,7 @@
       },
       "rotationOffset": 0.0,
       "minWaypointRelativePos": 0.25,
-      "maxWaypointRelativePos": 0.75,
+      "maxWaypointRelativePos": 0.5639219934994615,
       "name": "BlueAlliance + TopLeft"
     }
   ],
@@ -60,7 +60,7 @@
     {
       "name": "Intaking",
       "waypointRelativePos": 0.0,
-      "endWaypointRelativePos": null,
+      "endWaypointRelativePos": 1.0,
       "command": {
         "type": "named",
         "data": {
