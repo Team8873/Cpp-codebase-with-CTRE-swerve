@@ -1,0 +1,135 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.5484078711985685,
+        "y": 5.552075134168158
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 4.548407871198569,
+        "y": 5.552075134168158
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.12397137745975,
+        "y": 7.742504472271914
+      },
+      "prevControl": {
+        "x": 7.479693757251573,
+        "y": 6.740294840836973
+      },
+      "nextControl": {
+        "x": 8.562057245080501,
+        "y": 8.423971377459749
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.7994633273703045,
+        "y": 5.681878354203935
+      },
+      "prevControl": {
+        "x": 7.685885509838998,
+        "y": 6.2010912343470475
+      },
+      "nextControl": {
+        "x": 7.91342640283333,
+        "y": 5.16090429494439
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.890840787119857,
+        "y": 4.64345259391771
+      },
+      "prevControl": {
+        "x": 7.604758497316637,
+        "y": 5.227567084078712
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "Looping Left Ramp End"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.3226452905811619,
+      "rotationDegrees": 90.0
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.0,
+      "maxWaypointRelativePos": 3.0,
+      "constraints": {
+        "maxVelocity": 2.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 7.0,
+        "y": 4.0
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.06428571428571402,
+      "maxWaypointRelativePos": 0.48571428571428954,
+      "name": "Point Towards Zone"
+    }
+  ],
+  "eventMarkers": [
+    {
+      "name": "Intaking",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "Intaking",
+      "waypointRelativePos": 1.478571428571429,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "Intaking",
+      "waypointRelativePos": 2.15,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -4.573921259900824
+  },
+  "reversed": false,
+  "folder": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -52.69605172201658
+  },
+  "useDefaultConstraints": true
+}
