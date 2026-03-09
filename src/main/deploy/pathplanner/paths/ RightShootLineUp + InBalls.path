@@ -16,28 +16,12 @@
     },
     {
       "anchor": {
-        "x": 8.386447931526389,
-        "y": 2.592339514978602
+        "x": 9.085135520684736,
+        "y": 2.6311554921540665
       },
       "prevControl": {
-        "x": 8.788171938645013,
-        "y": 2.592339514978602
-      },
-      "nextControl": {
-        "x": 8.136447931526389,
-        "y": 2.592339514978602
-      },
-      "isLocked": false,
-      "linkedName": "BallsEnd"
-    },
-    {
-      "anchor": {
-        "x": 3.1851069900142646,
-        "y": 1.828958630527818
-      },
-      "prevControl": {
-        "x": 2.1851069900142646,
-        "y": 1.8289586305278183
+        "x": 9.48685952780336,
+        "y": 2.6311554921540665
       },
       "nextControl": null,
       "isLocked": false,
@@ -53,8 +37,8 @@
   "constraintZones": [
     {
       "name": "Intake Constraint",
-      "minWaypointRelativePos": 1.75,
-      "maxWaypointRelativePos": 2.0,
+      "minWaypointRelativePos": 0.5877573131094269,
+      "maxWaypointRelativePos": 1.5,
       "constraints": {
         "maxVelocity": 0.75,
         "maxAcceleration": 3.0,
@@ -82,8 +66,8 @@
         "y": 0.0
       },
       "rotationOffset": 0.0,
-      "minWaypointRelativePos": 1.4572047670639168,
-      "maxWaypointRelativePos": 1.6912242686890613,
+      "minWaypointRelativePos": 1,
+      "maxWaypointRelativePos": 1,
       "name": "Point Towards Zone"
     }
   ],
@@ -110,7 +94,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 57.380756928807074
+    "rotation": -177.61405596961117
   },
   "reversed": false,
   "folder": null,

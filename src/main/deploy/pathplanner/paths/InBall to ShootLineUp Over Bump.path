@@ -3,26 +3,10 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.1851069900142646,
-        "y": 1.828958630527818
-      },
-      "prevControl": null,
-      "nextControl": {
-        "x": 3.094536376604849,
-        "y": 3.1745791726105574
-      },
-      "isLocked": false,
-      "linkedName": "RightShoot Line Up"
-    },
-    {
-      "anchor": {
         "x": 8.386447931526389,
         "y": 2.592339514978602
       },
-      "prevControl": {
-        "x": 8.788171938645013,
-        "y": 2.592339514978602
-      },
+      "prevControl": null,
       "nextControl": {
         "x": 8.136447931526389,
         "y": 2.592339514978602
@@ -46,15 +30,15 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5613565372601541,
+      "waypointRelativePos": 0.0,
       "rotationDegrees": 180.0
     }
   ],
   "constraintZones": [
     {
       "name": "Intake Constraint",
-      "minWaypointRelativePos": 1.75,
-      "maxWaypointRelativePos": 2.0,
+      "minWaypointRelativePos": 0.75,
+      "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 0.75,
         "maxAcceleration": 3.0,
@@ -73,7 +57,7 @@
       },
       "rotationOffset": 0.0,
       "minWaypointRelativePos": 0.0,
-      "maxWaypointRelativePos": 0.4517876489707465,
+      "maxWaypointRelativePos": 0.0,
       "name": "BlueAlliance + TopLeft"
     },
     {
@@ -82,8 +66,8 @@
         "y": 0.0
       },
       "rotationOffset": 0.0,
-      "minWaypointRelativePos": 1.4572047670639168,
-      "maxWaypointRelativePos": 1.6912242686890613,
+      "minWaypointRelativePos": 0.4572047670639168,
+      "maxWaypointRelativePos": 0.6912242686890613,
       "name": "Point Towards Zone"
     }
   ],
@@ -116,7 +100,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 57.528807709151586
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

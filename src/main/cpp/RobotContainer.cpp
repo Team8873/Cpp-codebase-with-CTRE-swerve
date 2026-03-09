@@ -149,8 +149,9 @@ void RobotContainer::ConfigureBindings()
     m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-m_operator.GetRightY());},{&m_afcIntake}));
     m_operator.LeftBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(1);},{&m_afcIntake})); //Be aware this is a built in negative on variable in the subsytem file
     m_operator.LeftBumper().MultiPress(2, 250_ms).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
-    // m_operator.Back().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(-1);},{&m_afcIntake})); //Be aware this is a built in negative on variable in the subsytem file
-
+   //Outake Controls
+    m_operator.Button(7).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(-1);},{&m_afcIntake})); //Be aware this is a built in negative on variable in the subsytem file
+    m_operator.Button(7).MultiPress(2, 250_ms).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake})); //Be aware this is a built in negative on variable in the subsytem file
     
     //Turret Turn
     m_afcShooter.SetDefaultCommand(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(0);},{&m_afcShooter}));
