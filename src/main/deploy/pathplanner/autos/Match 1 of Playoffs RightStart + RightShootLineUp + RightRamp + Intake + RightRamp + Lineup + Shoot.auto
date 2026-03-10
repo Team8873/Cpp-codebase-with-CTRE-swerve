@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Right + Depot + Intake + Center"
+            "pathName": "RightStart + ShootLineUp"
           }
         },
         {
@@ -20,6 +20,12 @@
           "type": "named",
           "data": {
             "name": "Shooting"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RightShootLineUp + RightRamp + Intake"
           }
         }
       ]

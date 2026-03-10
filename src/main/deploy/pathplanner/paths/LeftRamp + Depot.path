@@ -3,36 +3,36 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.5991440798858774,
-        "y": 5.619985734664765
+        "x": 3.63796005706134,
+        "y": 6.202225392296718
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.599144079885878,
-        "y": 5.619985734664765
+        "x": 2.3570328102710407,
+        "y": 6.1763480741797405
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 6.976134094151213,
-        "y": 5.4647218259629105
+        "x": 0.5655955056179769,
+        "y": 5.95091011235955
       },
       "prevControl": {
-        "x": 5.976134094151213,
-        "y": 5.4647218259629105
+        "x": 1.7579438202247188,
+        "y": 6.01205617977528
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "OverLeftRampFinishedState"
+      "linkedName": "Depot Intake"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0,
+      "minWaypointRelativePos": 0.6393509127789048,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 2.0,
@@ -45,7 +45,14 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "Intaking",
+      "waypointRelativePos": 0.5744421906693713,
+      "endWaypointRelativePos": 1.0,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -56,7 +63,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -1.4320961841646513
+    "rotation": 0.0
   },
   "reversed": false,
   "folder": null,

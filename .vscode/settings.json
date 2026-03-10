@@ -98,6 +98,9 @@
   "search.useGlobalIgnoreFiles": false,
   "search.useParentIgnoreFiles": false,
   "cSpell.words": [
-    "choreo"
+    "choreo",
+    "intaker",
+    "xcord",
+    "ycord"
   ]
 }

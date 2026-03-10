@@ -8,6 +8,7 @@
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/Commands.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <units/angular_velocity.h>
 
 #include "misc/TalonMotorConfig.h"
 
@@ -21,8 +22,10 @@ class AFCFlywheel : public frc2::SubsystemBase
     void Idle();
     void SpinUp(double Sspeed);
     void AutoSpeed(double Sspeed);
+    void ManualSpeed(double Sspeed);
     bool Flywheelrpm();
     void Disable();
+    void SuperShoot();
 
     private:
     ctre::phoenix6::hardware::TalonFX m_shooter1{ConstantsCanIds::ShooterMotor1Id};

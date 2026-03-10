@@ -5,10 +5,12 @@
 
 #include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/CANcoder.hpp>
+#include <ctre/phoenix6/TalonFX.hpp>
 #include <rev/SparkMax.h>
 #include <rev/RelativeEncoder.h>
 #include <frc2/command/SubsystemBase.h>
 #include <frc/smartdashboard/SmartDashboard.h>
+#include "misc/TalonMotorConfig.h"
 #include <chrono>
 #include <thread>
 
@@ -33,6 +35,7 @@ class AFCIntake : public frc2::SubsystemBase
         
     private:
         
+        ctre::phoenix6::hardware::TalonFX m_intaker{ConstantsCanIds::IntakerMotorID};
         rev::spark::SparkMax m_intakeMotor{ConstantsCanIds::IntakeMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkMax m_intakeDeployer{ConstantsCanIds::IntakeDeployerId, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkRelativeEncoder m_intakeEncoder = m_intakeMotor.GetEncoder();

@@ -7,7 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RightStart + ShootLineUp"
+            "pathName": "LeftRamp + Depot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intaking"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Depot to Center"
           }
         },
         {
@@ -19,7 +31,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RightShootLineUp + RightRamp + Intake"
+            "pathName": "Depot Shoot to Balls"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intaking"
           }
         }
       ]

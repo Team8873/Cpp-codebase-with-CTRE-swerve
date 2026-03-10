@@ -7,13 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Right + Depot + Intake + Center"
+            "pathName": "LeftRamp + Depot"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "PartialIntakeOut"
+            "name": "Intaking"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Depot to Center"
           }
         },
         {

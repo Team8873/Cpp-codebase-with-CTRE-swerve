@@ -7,7 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Right + Depot + Intake + Center"
+            "pathName": "LeftRampStart + OverLeftRamp +Loop Intaking"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "NeutralZone + OverLeftRamp"
           }
         },
         {

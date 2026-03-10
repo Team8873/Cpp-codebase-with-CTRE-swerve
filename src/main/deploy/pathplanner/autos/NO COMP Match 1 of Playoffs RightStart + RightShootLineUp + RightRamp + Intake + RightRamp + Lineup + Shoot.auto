@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Left to LeftCenter + ShootLineUp"
+            "pathName": "RightStart + ShootLineUp"
           }
         },
         {
@@ -25,13 +25,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LeftCenter + ShootLineUp + LeftRamp + Intaking"
+            "pathName": " RightShootLineUp + InBalls"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "Intaking"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "InBall to ShootLineUp Over Bump"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooting"
           }
         }
       ]

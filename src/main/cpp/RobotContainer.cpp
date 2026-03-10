@@ -122,7 +122,7 @@ void RobotContainer::ConfigureBindings()
         joystick.LeftBumper().WhileTrue(drivetrain.ApplyRequest([this]() -> auto&& {
             return drive.WithVelocityX(-joystick.GetLeftY() * 1.0_mps) // Drive forward with negative Y (forward)
                 .WithVelocityY(-joystick.GetLeftX() * 1.0_mps) // Drive left with negative X (left)
-                .WithRotationalRate(-joystick.GetRightX() * MaxAngularRate); // Drive counterclockwise with negative X (left)
+                .WithRotationalRate(-joystick.GetRightX() * 0.45_tps); // Drive counterclockwise with negative X (left)
         }));
 
         joystick.RightTrigger().WhileTrue(drivetrain.ApplyRequest([this]() -> auto&& {
@@ -147,9 +147,11 @@ void RobotContainer::ConfigureBindings()
 
     //Intake controls
     m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-m_operator.GetRightY());},{&m_afcIntake}));
-    m_operator.LeftBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(1);},{&m_afcIntake}));
+    m_operator.LeftBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(1);},{&m_afcIntake})); //Be aware this is a built in negative on variable in the subsytem file
     m_operator.LeftBumper().MultiPress(2, 250_ms).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
-    
+   //Outake Controls
+    m_operator.Button(7).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(-1);},{&m_afcIntake})); //Be aware this is a built in negative on variable in the subsytem file
+    m_operator.Button(7).MultiPress(2, 250_ms).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake})); //Be aware this is a built in negative on variable in the subsytem file
     
     //Turret Turn
     m_afcShooter.SetDefaultCommand(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(0);},{&m_afcShooter}));
@@ -160,12 +162,14 @@ void RobotContainer::ConfigureBindings()
     m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(-200);},{&m_afcShooter}));
 
     //Auto Lock
-    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.AutoLock(LimelightHelpers::getTX(""));},{&m_afcShooter}));
-    m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.AutoSpeed(m_afcVision.TgtDistance);}, {&m_afcVision}));
+    m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.AutoLock(LimelightHelpers::getTX(""));},{&m_afcShooter}));
+   // m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.AutoSpeed(m_afcVision.FlySpeed);}, {&m_afcVision}));
 
     //Flywheel controls
     m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
-    m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));
+    // m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));
+    m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.ManualSpeed(m_operator.GetLeftY());}, {&m_afcFlywheel}));
+    m_operator.LeftStick().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SuperShoot();}, {&m_afcFlywheel}));
 
     // *
     // *
