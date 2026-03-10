@@ -5,7 +5,6 @@
 
 #include <ctre/phoenix6/TalonFX.hpp>
 #include <ctre/phoenix6/CANcoder.hpp>
-#include <ctre/phoenix6/TalonFX.hpp>
 #include <rev/SparkMax.h>
 #include <rev/RelativeEncoder.h>
 #include <frc2/command/SubsystemBase.h>
