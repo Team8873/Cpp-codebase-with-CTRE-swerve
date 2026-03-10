@@ -3,17 +3,25 @@
 #include <functional>
 #include <cmath>
 #include <numbers>
+#include <vector>
+#include <algorithm>
 
 #include <frc2/command/SubsystemBase.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/Commands.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/DriverStation.h>
+#include <units/angular_velocity.h>
+// #include <frc/smartdashboard/
 
 #include "LimelightHelpers.h"
 struct Vector2D {
     double x, y;
 };
+//std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");   
+// stuct ShootingPoint {
+
+// }
 
 class AFCVision : public frc2::SubsystemBase
 {

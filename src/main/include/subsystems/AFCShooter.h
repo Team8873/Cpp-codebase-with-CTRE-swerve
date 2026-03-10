@@ -27,7 +27,13 @@
 
 struct ShootingPoint {
     double distance;
+    double rpm;
     double hoodAngle;
+    //units::turns_per_second rpm;
+
+};
+std::vector<ShootingPoint> shooterLUT = {
+    {60.0, 20.0, 25.0},//75_tps},  5 feet 
 };
 // std::vector<ShootingPoint> shooterLUT = {
 //     {}
@@ -53,6 +59,7 @@ class AFCShooter : public frc2::SubsystemBase
         //frc::PIDController anglePIDController{0.00075, 0, 0};
         frc::Servo m_hoodServo1{0};
         frc::Servo m_hoodServo2{1};
+        frc::Servo m_hoodServo3{2};
 
         double m_tx = 0.0;
         double txNeed = 100.0;
