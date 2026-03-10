@@ -32,9 +32,9 @@ struct ShootingPoint {
     //units::turns_per_second rpm;
 
 };
-std::vector<ShootingPoint> shooterLUT = {
-    {60.0, 20.0, 25.0},//75_tps},  5 feet 
-};
+// std::vector<ShootingPoint> shooterLUT = {
+//     {60.0, 20.0, 25.0},//75_tps},  5 feet 
+// };
 // std::vector<ShootingPoint> shooterLUT = {
 //     {}
 // };
