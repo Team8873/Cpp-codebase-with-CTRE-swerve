@@ -11,18 +11,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "PartialIntakeOut"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Shooting"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "RightShootLineUp + RightRamp + Intake"

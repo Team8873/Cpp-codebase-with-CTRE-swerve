@@ -3,37 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.386447931526389,
-        "y": 2.592339514978602
+        "x": 8.451141226818828,
+        "y": 2.450014265335236
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.136447931526389,
-        "y": 2.592339514978602
+        "x": 8.03710413694722,
+        "y": 2.4111982881597713
       },
       "isLocked": false,
       "linkedName": "BallsEnd"
     },
     {
       "anchor": {
-        "x": 3.1851069900142646,
-        "y": 1.828958630527818
+        "x": 3.107475035663337,
+        "y": 2.100670470756063
       },
       "prevControl": {
-        "x": 2.1851069900142646,
-        "y": 1.8289586305278183
+        "x": 4.504850213980029,
+        "y": 2.3853209700427964
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.0,
-      "rotationDegrees": 180.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [
     {
       "name": "Intake Constraint",
@@ -56,8 +51,8 @@
         "y": 8.0
       },
       "rotationOffset": 0.0,
-      "minWaypointRelativePos": 0.0,
-      "maxWaypointRelativePos": 0.0,
+      "minWaypointRelativePos": 0.4294395678595532,
+      "maxWaypointRelativePos": 1.0,
       "name": "BlueAlliance + TopLeft"
     },
     {
@@ -94,7 +89,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 57.380756928807074
+    "rotation": 54.2461127455631
   },
   "reversed": false,
   "folder": null,
