@@ -65,18 +65,18 @@ public:
     RobotContainer();
 
     frc2::Command *GetAutonomousCommand();
-    AFCIntake m_afcIntake{};
-    AFCClimber m_afcClimber{};
-    AFCIndexer m_afcIndexer{};
-    AFCShooter m_afcShooter{};
-    AFCFlywheel m_afcFlywheel{};
-    AFCVision m_afcVision{};
+    AFCIntake m_afcIntake{}; // Intake subsystem initialization
+    AFCClimber m_afcClimber{}; // Climber subsystem initialization ♦♦♦ NOT USED ♦♦♦
+    AFCIndexer m_afcIndexer{}; // Indexer subsystem initialization
+    AFCShooter m_afcShooter{}; // Shooter Subsystem initialization
+    AFCFlywheel m_afcFlywheel{}; // Flywheel subsytem initialization
+    AFCVision m_afcVision{}; // Vision subsytem initialization
 
    
 private:
     void ConfigureBindings();
 
-     frc2::CommandXboxController m_operator{1};
+     frc2::CommandXboxController m_operator{1}; //Operator Controller initialization
 
     
 };
