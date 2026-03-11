@@ -4,6 +4,19 @@
 
 AFCIndexer::AFCIndexer()
 {
+
+    TalonMotorConfig(&m_uptaker,
+                    40.0_A,
+                    false,
+                    true,
+                    0.4,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    100.0_tps,
+                    600.0_tr_per_s_sq);
     MaxMotorConfig(&m_conveyorMotor,
                     30.0_A,  // Max Amp
                     true,// Brake mode
@@ -40,23 +53,23 @@ void AFCIndexer::Disable(){
 
 void AFCIndexer::ConveyorOn() {
     m_conveyorMotor.Set(0.5);
-    m_uptakeMotor.Set(0.0);
+    m_uptaker.Set(0.0);
 }
 void AFCIndexer::UptakeReverse(){
-    m_uptakeMotor.Set(1);
-    m_conveyorMotor.Set(-0.5);
+    m_uptaker.Set(-1.0);
+    m_conveyorMotor.Set(-0.3);
 
 }
 
 void AFCIndexer::UptakeOn() {
     //m_uptakeMotor.GetClosedLoopController().SetSetpoint(450, rev::spark::SparkLowLevel::ControlType::kVelocity);
-    m_uptakeMotor.Set(-1);
-    m_conveyorMotor.Set(-0.3);
+    m_uptaker.Set(-1.0);
+    m_conveyorMotor.Set(0.3);
     // if m_conveyorMotor.Spark
 }
 
 void AFCIndexer::Stop() {
     m_conveyorMotor.Set(0.0);
-    m_uptakeMotor.Set(0.0);
+    m_uptaker.Set(0.0);
 }
 
