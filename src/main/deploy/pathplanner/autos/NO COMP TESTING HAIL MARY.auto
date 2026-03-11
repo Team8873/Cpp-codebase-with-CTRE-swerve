@@ -7,13 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RightStart + ShootLineUp"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "RightShootLineUp + RightRamp + Intake"
+            "pathName": "Copy of RightShootLineUp + RightRamp + Intake"
           }
         },
         {
