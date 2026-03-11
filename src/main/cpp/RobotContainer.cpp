@@ -155,11 +155,11 @@ void RobotContainer::ConfigureBindings()
     
     //Turret Turn
     m_afcShooter.SetDefaultCommand(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(0);},{&m_afcShooter}));
-    m_operator.POVLeft().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(-0.1);},{&m_afcShooter}));
-    m_operator.POVRight().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(0.1);},{&m_afcShooter}));
+    m_operator.POVLeft().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(0.1);},{&m_afcShooter}));
+    m_operator.POVRight().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(-0.1);},{&m_afcShooter}));
     m_operator.X().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(0);},{&m_afcShooter}));
-    m_operator.Y().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(200);},{&m_afcShooter}));
-    m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(-200);},{&m_afcShooter}));
+    m_operator.Y().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(-200);},{&m_afcShooter}));
+    m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(200);},{&m_afcShooter}));
 
     //Auto Lock
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.AutoLock(LimelightHelpers::getTX(""));},{&m_afcShooter}));

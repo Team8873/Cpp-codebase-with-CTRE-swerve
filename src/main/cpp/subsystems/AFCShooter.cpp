@@ -72,7 +72,7 @@ void AFCShooter::AutoLock(double TX){
 double tx = std::trunc(TX*100);
 double truex = tx/100;
     //m_turretMotor.GetClosedLoopController().GetSetpoint();
-    m_turretMotor.Set( truex * 0.01);
+    m_turretMotor.Set(-truex * 0.01);
     //m_hoodServo1.Set(0);//-(TA * 20));
     
 }

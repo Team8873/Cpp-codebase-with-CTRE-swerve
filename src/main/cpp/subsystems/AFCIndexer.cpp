@@ -17,6 +17,7 @@ AFCIndexer::AFCIndexer()
                     0.0,
                     100.0_tps,
                     600.0_tr_per_s_sq);
+
     MaxMotorConfig(&m_conveyorMotor,
                     30.0_A,  // Max Amp
                     true,// Brake mode
