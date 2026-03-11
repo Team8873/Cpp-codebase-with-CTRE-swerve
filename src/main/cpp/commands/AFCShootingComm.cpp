@@ -32,6 +32,7 @@ void AFCShootingComm::Execute() {
 
 void AFCShootingComm::End(bool interrupted) {
     m_pIndexerSubsystem->Stop(); 
+    m_pShootersubsystem->Stop();
 }
 
 bool AFCShootingComm::IsFinished() {
