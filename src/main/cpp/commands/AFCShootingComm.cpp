@@ -31,7 +31,7 @@ void AFCShootingComm::Execute() {
 }
 
 void AFCShootingComm::End(bool interrupted) {
-    // m_pIndexerSubsystem->Stop(); 
+    m_pIndexerSubsystem->Stop(); 
 }
 
 bool AFCShootingComm::IsFinished() {
