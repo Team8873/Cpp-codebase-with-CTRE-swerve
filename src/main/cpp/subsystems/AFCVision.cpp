@@ -34,9 +34,14 @@ double AFCVision::LLAngleToRad (){
 }
 
 double AFCVision::TurretDistanceCalc(double LLAngleToRad){
-        const double AdjustedTgtHight = 0.5207;
-        
-        return 0.5207/tan(LLAngleToRad);
+        //const double AdjustedTgtHight = 0.5207;
+        //PastDistance[PastDistanceIndex++] = 0.5207/tan(LLAngleToRad);
+        //PastDistanceIndex = PastDistanceIndex % 5;
+        //double total = 0;
+        //for(int i = 0; i < 5; ++i){
+        //        total += PastDistance[i];
+        //} 
+        //return total / 5;
 }
 
 double AFCVision::SpeedRamp(double TgtDistance){

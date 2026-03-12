@@ -16,10 +16,10 @@
 #include "subsystems/AFCClimber.h"
 #include "subsystems/AFCIndexer.h"
 #include "subsystems/AFCShooter.h"
-#include "subsystems/AFCVision.h"
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "subsystems/AFCFlywheel.h"
 #include "subsystems/AFCVision.h"
+#include "subsystems/AFCLights.h"
 #include "LimelightHelpers.h"
 
 
@@ -54,6 +54,7 @@ private:
     
     frc::XboxController DriverButton {1};
     frc2::CommandXboxController joystick{0};
+    frc::XboxController DriverButton{0};
 
 public:
     subsystems::CommandSwerveDrivetrain drivetrain{TunerConstants::CreateDrivetrain()};

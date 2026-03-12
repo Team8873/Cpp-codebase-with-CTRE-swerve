@@ -15,6 +15,8 @@
 // #include <frc/smartdashboard/
 
 #include "LimelightHelpers.h"
+#include <vector>
+
 struct Vector2D {
     double x, y;
 };
