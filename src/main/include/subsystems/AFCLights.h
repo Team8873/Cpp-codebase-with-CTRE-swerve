@@ -6,7 +6,6 @@
 #include <frc2/command/Commands.h>
 #include <frc2/command/CommandPtr.h>
 #include <frc/smartdashboard/SmartDashboard.h>
-#include <frc/TimedRobot.h>
 
 #include "LimelightHelpers.h"
 #include "Constants.h"
@@ -18,10 +17,6 @@ class AFCLights : public frc2::SubsystemBase
         explicit AFCLights();
         void Periodic() override;
         void Disable();
-        void SetColor();
-        void HubShifts();
-        void Intaking();
-        void Targeting();
         void Stop();
 
     private:
