@@ -69,14 +69,14 @@ void AFCIndexer::UptakeOn() {
     // if m_conveyorMotor.Spark
 }
 
-bool AFCIndexer::HopperEmpty(){
-    if (m_distanceSensor.GetRange() <= 5){
+// bool AFCIndexer::HopperEmpty(){
+//     if (m_distanceSensor.GetRange() <= 5){
 
-    }
-}
-double AFCIndexer::GetDis(){
-    m_distanceSensor.GetRange();
-}
+//     }
+// }
+// double AFCIndexer::GetDis(){
+//     m_distanceSensor.GetRange();
+// }
 void AFCIndexer::Stop() {
     m_conveyorMotor.StopMotor();
     m_uptaker.StopMotor();
