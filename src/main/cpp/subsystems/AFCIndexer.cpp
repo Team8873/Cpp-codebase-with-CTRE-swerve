@@ -70,8 +70,12 @@ void AFCIndexer::UptakeOn() {
 }
 
 bool AFCIndexer::HopperEmpty(){
+    if (m_distanceSensor.GetRange() <= 5){
+
+    }
 }
 double AFCIndexer::GetDis(){
+    m_distanceSensor.GetRange();
 }
 void AFCIndexer::Stop() {
     m_conveyorMotor.StopMotor();
