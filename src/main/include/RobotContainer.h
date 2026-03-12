@@ -26,6 +26,7 @@
 #include "commands/AFCIntakeComm.h"
 #include "commands/AFCClimberComm.h"
 #include "commands/AFCShootingComm.h"
+#include "commands/AFCShortShootingComm.h"
 #include "commands/AFCStowComm.h"
 
 #include "frc/XboxController.h"
