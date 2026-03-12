@@ -27,6 +27,12 @@
           "data": {
             "pathName": "RightShootLineUp + RightRamp + Intake"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooting"
+          }
         }
       ]
     }

@@ -3,41 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.1851069900142646,
-        "y": 1.828958630527818
+        "x": 3.5732667617689007,
+        "y": 2.2041797432239663
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.094536376604849,
-        "y": 3.1745791726105574
+        "x": 3.482696148359485,
+        "y": 3.5498002853067057
       },
       "isLocked": false,
       "linkedName": "RightShoot Line Up"
     },
     {
       "anchor": {
-        "x": 8.386447931526389,
-        "y": 2.592339514978602
+        "x": 8.451141226818828,
+        "y": 2.450014265335236
       },
       "prevControl": {
-        "x": 8.788171938645013,
-        "y": 2.592339514978602
+        "x": 8.852865233937452,
+        "y": 2.450014265335236
       },
       "nextControl": {
-        "x": 8.136447931526389,
-        "y": 2.592339514978602
+        "x": 8.201141226818828,
+        "y": 2.450014265335236
       },
       "isLocked": false,
       "linkedName": "BallsEnd"
     },
     {
       "anchor": {
-        "x": 3.1851069900142646,
-        "y": 1.828958630527818
+        "x": 3.5732667617689007,
+        "y": 2.2041797432239663
       },
       "prevControl": {
-        "x": 2.1851069900142646,
-        "y": 1.8289586305278183
+        "x": 2.5732667617689007,
+        "y": 2.2041797432239663
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,13 +48,17 @@
     {
       "waypointRelativePos": 0.5613565372601541,
       "rotationDegrees": 180.0
+    },
+    {
+      "waypointRelativePos": 1.3432835820895428,
+      "rotationDegrees": 0.0
     }
   ],
   "constraintZones": [
     {
       "name": "Intake Constraint",
-      "minWaypointRelativePos": 1.75,
-      "maxWaypointRelativePos": 2.0,
+      "minWaypointRelativePos": 0.5833896016205308,
+      "maxWaypointRelativePos": 1.3612424037812196,
       "constraints": {
         "maxVelocity": 0.75,
         "maxAcceleration": 3.0,
@@ -78,12 +82,22 @@
     },
     {
       "fieldPosition": {
-        "x": 0.0,
-        "y": 0.0
+        "x": 8.0,
+        "y": 9.0
       },
       "rotationOffset": 0.0,
       "minWaypointRelativePos": 1.4572047670639168,
       "maxWaypointRelativePos": 1.6912242686890613,
+      "name": "Point Towards Zone"
+    },
+    {
+      "fieldPosition": {
+        "x": 0.0,
+        "y": 2.25
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.513166779203245,
+      "maxWaypointRelativePos": 1.4,
       "name": "Point Towards Zone"
     }
   ],

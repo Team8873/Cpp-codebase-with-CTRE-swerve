@@ -29,6 +29,7 @@ using namespace pathplanner;
 RobotContainer::RobotContainer() : m_afcIndexer(), m_afcClimber(), m_afcFlywheel(), m_afcIntake(), m_afcShooter()
 {
     //NamedCommands::registerCommand("Targeting", std::move(AFCShooter(&m_afcShooter).ToPtr()));
+    NamedCommands::registerCommand("ShortShooting", std::move(AFCShortShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter, &m_afcVision).ToPtr()));
     NamedCommands::registerCommand("Shooting", std::move(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter, &m_afcVision).ToPtr()));
     NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, -740.0).ToPtr())); 
     NamedCommands::registerCommand("PartialIntakeOut", std::move(AFCIntakeComm(&m_afcIntake, -300.0).ToPtr()));   
@@ -155,11 +156,11 @@ void RobotContainer::ConfigureBindings()
     
     //Turret Turn
     m_afcShooter.SetDefaultCommand(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(0);},{&m_afcShooter}));
-    m_operator.POVLeft().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(-0.1);},{&m_afcShooter}));
-    m_operator.POVRight().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(0.1);},{&m_afcShooter}));
+    m_operator.POVLeft().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(0.1);},{&m_afcShooter}));
+    m_operator.POVRight().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretSpeed(-0.1);},{&m_afcShooter}));
     m_operator.X().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(0);},{&m_afcShooter}));
-    m_operator.Y().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(200);},{&m_afcShooter}));
-    m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(-200);},{&m_afcShooter}));
+    m_operator.Y().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(-200);},{&m_afcShooter}));
+    m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(200);},{&m_afcShooter}));
 
     //Auto Lock
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.AutoLock(LimelightHelpers::getTX(""));},{&m_afcShooter}));

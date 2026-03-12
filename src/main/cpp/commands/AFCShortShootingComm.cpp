@@ -1,6 +1,6 @@
-#include "commands/AFCShootingComm.h"
+#include "commands/AFCShortShootingComm.h"
 
-AFCShootingComm::AFCShootingComm(AFCIndexer* indexerSubsytem, 
+AFCShortShootingComm::AFCShortShootingComm(AFCIndexer* indexerSubsytem, 
                                  AFCFlywheel* flywheelSubsystem, 
                                  AFCShooter* shooterSubsystem, 
                                  AFCVision* visionSubsystem)
@@ -15,22 +15,22 @@ AFCShootingComm::AFCShootingComm(AFCIndexer* indexerSubsytem,
     AddRequirements({m_pVisionsubsystem});
 }
 
-void AFCShootingComm::Initialize() {
+void AFCShortShootingComm::Initialize() {
     m_startTime = std::chrono::steady_clock::now();
 }
 
-void AFCShootingComm::Execute() {
+void AFCShortShootingComm::Execute() {
     m_pShootersubsystem->AutoLock(LimelightHelpers::getTX(""));
     m_pIndexerSubsystem->UptakeOn();
-    m_pFlywheelSubsytem->ManualSpeed(0);
+    m_pFlywheelSubsytem->ManualSpeed(-1);
     // m_pFlywheelSubsytem->AutoSpeed(m_pVisionsubsystem->FlySpeed);
 }
 
-void AFCShootingComm::End(bool interrupted) {
+void AFCShortShootingComm::End(bool interrupted) {
     m_pIndexerSubsystem->Stop(); 
     m_pShootersubsystem->Stop();
 }
 
-bool AFCShootingComm::IsFinished() {
+bool AFCShortShootingComm::IsFinished() {
    return (std::chrono::steady_clock::now() - m_startTime) >= std::chrono::seconds(4);
 }
