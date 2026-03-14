@@ -64,7 +64,7 @@ void AFCIndexer::UptakeReverse(){
 
 void AFCIndexer::UptakeOn() {
     //m_uptakeMotor.GetClosedLoopController().SetSetpoint(450, rev::spark::SparkLowLevel::ControlType::kVelocity);
-    m_uptaker.Set(-1);
+    m_uptaker.Set(1);
     m_conveyorMotor.Set(0.3);
     // if m_conveyorMotor.Spark
 }
