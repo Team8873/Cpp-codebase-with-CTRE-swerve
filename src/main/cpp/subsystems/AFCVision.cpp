@@ -10,7 +10,7 @@ void AFCVision::Periodic(){
     m_txTurret = LimelightHelpers::getTX("");
     m_tyTurret = LimelightHelpers::getTY("");
     turretHasTarget = LimelightHelpers::getTV("");
-    TgtDistance = TurretDistanceCalc(LLAngleToRad());
+    TgtDistance = TurretDistanceCalc(x_cord, y_cord);
     FlySpeed = SpeedRamp(TgtDistance);
     // robotHasTarget = LimelightHelpers::getTV("");
     x_cord = LimelightHelpers::getBotpose_wpiBlue("").at(0); //supposedly
@@ -27,16 +27,15 @@ void AFCVision::Periodic(){
     frc::SmartDashboard::PutNumber("Distance From Tgt", TgtDistance);
 }
 
-double AFCVision::LLAngleToRad (){
-        const double LLAngleOffset = 26;
-        const double RadConvert = 0.01745;
-      return (m_tyTurret + LLAngleOffset) * RadConvert;
-}
 
-double AFCVision::TurretDistanceCalc(double LLAngleToRad){
-        const double AdjustedTgtHight = 0.5207;
-        
-        return 0.5207/tan(LLAngleToRad);
+double AFCVision::TurretDistanceCalc(double x_cord, double y_cord){
+       if (auto ally = frc::DriverStation::GetAlliance()) {
+    if (ally.value() == Alliance::kRed) {
+        return (sqrt(((4.625594-x_cord)*(4.625594-x_cord)+(4.034536-y_cord)*(4.034536-y_cord))));
+    } else{
+        return (sqrt(((11.915394-x_cord)*(11.915394-x_cord)+(4.034536-y_cord)*(4.034536-y_cord))));
+    }
+}
 }
 
 double AFCVision::SpeedRamp(double TgtDistance){

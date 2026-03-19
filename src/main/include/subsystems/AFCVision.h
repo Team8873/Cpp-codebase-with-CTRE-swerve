@@ -29,8 +29,7 @@ class AFCVision : public frc2::SubsystemBase
 
         explicit AFCVision();
         void Periodic() override;
-        double TurretDistanceCalc(double LLAngleToRad);
-        double LLAngleToRad();
+        double TurretDistanceCalc(double x_cord, double y_cord);
         double SpeedRamp(double TurretDistanceCalc);
         double FlySpeed = 0.0;
 
