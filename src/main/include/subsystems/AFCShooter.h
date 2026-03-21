@@ -14,7 +14,7 @@
 
 #include <frc2/command/SubsystemBase.h>
 #include <frc2/command/CommandPtr.h>
-#include <frc/Servo.h>
+//#include <frc/Servo.h>
 #include <frc2/command/Commands.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 //#include <frc/controller/PIDController.h>
@@ -56,7 +56,7 @@ class AFCShooter : public frc2::SubsystemBase
         
         rev::spark::SparkMax m_turretMotor{ConstantsCanIds::TurretMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkRelativeEncoder m_turretEncoder = m_turretMotor.GetEncoder();
-        frc::Servo m_hoodServos{1};
+        //frc::Servo m_hoodServos{1};
 
         double m_tx = 0.0;
         double txNeed = 100.0;

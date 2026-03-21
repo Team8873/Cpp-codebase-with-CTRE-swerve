@@ -30,7 +30,7 @@ void AFCVision::Periodic(){
 
 double AFCVision::TurretDistanceCalc(double x_cord, double y_cord){
        if (auto ally = frc::DriverStation::GetAlliance()) {
-    if (ally.value() == Alliance::kRed) {
+    if (ally.value() == frc::DriverStation::Alliance::kRed) {
         return (sqrt(((4.625594-x_cord)*(4.625594-x_cord)+(4.034536-y_cord)*(4.034536-y_cord))));
     } else{
         return (sqrt(((11.915394-x_cord)*(11.915394-x_cord)+(4.034536-y_cord)*(4.034536-y_cord))));

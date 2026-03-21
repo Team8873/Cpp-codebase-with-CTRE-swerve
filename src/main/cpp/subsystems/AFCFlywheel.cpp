@@ -94,14 +94,17 @@ units::turns_per_second_t speed = units::turns_per_second_t{Sspeed};
 
 void AFCFlywheel::ManualSpeed(double Sspeed){
     if (Sspeed < -0.5){
-        m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{55_tps});
+        m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{55_tps});//55_tps
         m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-55_tps});
+        m_hoodServos.Set(0);
     }  else if (Sspeed >= -0.5 && Sspeed <= 0.5) {
-         m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{65_tps});
+         m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{65_tps});//65_tps
          m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-65_tps});
+         m_hoodServos.Set(.5);
     } else if (Sspeed > 0.5) {
-         m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{75_tps});
+         m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{75_tps});//75_tps
          m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-75_tps});
+         m_hoodServos.Set(1);
 } 
 
 }
