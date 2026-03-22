@@ -11,7 +11,8 @@ void AFCVision::Periodic(){
     m_tyTurret = LimelightHelpers::getTY("");
     turretHasTarget = LimelightHelpers::getTV("");
     TgtDistance = TurretDistanceCalc(x_cord, y_cord);
-    FlySpeed = SpeedRamp(TgtDistance);
+    STgtDistance = SavedTargetDistance(turretHasTarget, TgtDistance);
+    FlySpeed = SpeedRamp(STgtDistance);
     // robotHasTarget = LimelightHelpers::getTV("");
     x_cord = LimelightHelpers::getBotpose_wpiBlue("").at(0); //supposedly
     y_cord = LimelightHelpers::getBotpose_wpiBlue("").at(1); //supposedly
@@ -23,8 +24,10 @@ void AFCVision::Periodic(){
     frc::SmartDashboard::PutBoolean("Turret has Target", turretHasTarget);
     // frc::SmartDashboard::PutBoolean("Robot has Target", robotHasTarget);
     frc::SmartDashboard::PutNumber("xcord", x_cord);
-    frc::SmartDashboard::PutBoolean("ycord", y_cord);
+    frc::SmartDashboard::PutNumber("ycord", y_cord);
     frc::SmartDashboard::PutNumber("Distance From Tgt", TgtDistance);
+    frc::SmartDashboard::PutNumber("Fly Speed", FlySpeed);
+    frc::SmartDashboard::PutNumber("Saved Target Distance", STgtDistance);
 }
 
 
@@ -38,8 +41,16 @@ double AFCVision::TurretDistanceCalc(double x_cord, double y_cord){
 }
 }
 
-double AFCVision::SpeedRamp(double TgtDistance){
-        return (1.59*(TgtDistance*TgtDistance)) + (1.84 * TgtDistance) + 50.92;
+double AFCVision::SpeedRamp(double STgtDistance){
+        return (1.59*(STgtDistance * STgtDistance)) + (1.84 * STgtDistance) + 50.92;
+}
+
+double AFCVision::SavedTargetDistance(bool turretHasTarget, double TgtDistance){
+        if (turretHasTarget && TgtDistance < 110){
+            return STgtDistance = TgtDistance;
+        } else {
+            return STgtDistance;
+        }
 }
 
 

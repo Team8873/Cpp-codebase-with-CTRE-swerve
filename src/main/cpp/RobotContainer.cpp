@@ -164,12 +164,12 @@ void RobotContainer::ConfigureBindings()
 
     //Auto Lock
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.AutoLock(LimelightHelpers::getTX(""));},{&m_afcShooter}));
-   // m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.AutoSpeed(m_afcVision.FlySpeed);}, {&m_afcVision}));
+    m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.AutoSpeed(m_afcVision.FlySpeed);}, {&m_afcVision}));
 
     //Flywheel controls
-    m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
+    //m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
     // m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));
-    m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.ManualSpeed(m_operator.GetLeftY());}, {&m_afcFlywheel}));
+    // m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.ManualSpeed(m_operator.GetLeftY());}, {&m_afcFlywheel}));
     m_operator.LeftStick().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SuperShoot();}, {&m_afcFlywheel}));
 
     // *
