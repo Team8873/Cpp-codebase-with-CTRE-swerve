@@ -42,6 +42,7 @@ class AFCIndexer : public frc2::SubsystemBase{
     private:
         ctre::phoenix6::hardware::TalonFX m_uptaker{ConstantsCanIds::UptakerMotorID};
         rev::spark::SparkMax m_conveyorMotor{ConstantsCanIds::ConveyorMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
+        rev::spark::SparkMax m_uptakeMotor{ConstantsCanIds::UptakeMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
         pwf::TimeOfFlight m_distanceSensor{1};
         double distanceInmm = 0.0;
         double distanceInInches = 0.0;

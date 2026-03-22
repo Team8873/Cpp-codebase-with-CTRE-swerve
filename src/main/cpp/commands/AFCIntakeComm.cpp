@@ -13,7 +13,7 @@ void AFCIntakeComm::Initialize() {
 }
 
 void AFCIntakeComm::Execute(){
-    // m_pIntake->Deployer(m_pAngleOfDangle);
+    m_pIntake->Deployer(m_pAngleOfDangle);
     m_pIntake->IntakeSpeed(1);
 }
 

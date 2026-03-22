@@ -27,7 +27,7 @@ class AFCIntake : public frc2::SubsystemBase
         explicit AFCIntake();
         void Periodic() override;
         void Disable();
-        // void Deployer(double pos);
+        void Deployer(double pos);
         void IntakeSpeed(double speed);
         void DeploySpeed(double speed);
         void Stop();
@@ -36,9 +36,11 @@ class AFCIntake : public frc2::SubsystemBase
     private:
         
         ctre::phoenix6::hardware::TalonFX m_intaker{ConstantsCanIds::IntakerMotorID};
+        rev::spark::SparkMax m_intakeMotor{ConstantsCanIds::IntakeMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkMax m_intakeDeployer{ConstantsCanIds::IntakeDeployerId, rev::spark::SparkLowLevel::MotorType::kBrushless};
+        rev::spark::SparkRelativeEncoder m_intakeEncoder = m_intakeMotor.GetEncoder();
         rev::spark::SparkRelativeEncoder m_deployerEncoder = m_intakeDeployer.GetEncoder();
-        // ctre::phoenix6::hardware::CANcoder m_intakeStateEncoder{ConstantsCanIds::IntakeEncoderId};
+        ctre::phoenix6::hardware::CANcoder m_intakeStateEncoder{ConstantsCanIds::IntakeEncoderId};
 
 
 };
