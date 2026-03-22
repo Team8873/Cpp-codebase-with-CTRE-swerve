@@ -13,11 +13,13 @@ void AFCVision::Periodic(){
     TgtDistance = TurretDistanceCalc(x_cord, y_cord);
     STgtDistance = SavedTargetDistance(turretHasTarget, TgtDistance);
     FlySpeed = SpeedRamp(STgtDistance);
+    compensatedAngle = CalcCompAngle(ll4XVel, ll4YVel);
     // robotHasTarget = LimelightHelpers::getTV("");
     x_cord = LimelightHelpers::getBotpose_wpiBlue("").at(0); //supposedly
     y_cord = LimelightHelpers::getBotpose_wpiBlue("").at(1); //supposedly
     
-    
+    ll4XVel = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("imu", 5);
+    ll4YVel = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("imu", 6);
     //frc::SmartDashboard::PutNumber("Calc Compensated Angle", CalcCompAngle());
     frc::SmartDashboard::PutNumber("Turret X Position", m_txTurret);
     frc::SmartDashboard::PutNumber("Turret Y Position", m_tyTurret);
@@ -43,6 +45,18 @@ double AFCVision::TurretDistanceCalc(double x_cord, double y_cord){
 
 double AFCVision::SpeedRamp(double STgtDistance){
         return (1.59*(STgtDistance * STgtDistance)) + (1.84 * STgtDistance) + 50.92;
+}
+
+double AFCVision::CalcCompAngle(double robotXVel, double robotYVel){
+    //Vector2D targetPos = GetCurrentTarget();
+    //if (targetPos.x == 0 && targetPos.y == 0) return 0.0;
+    //double distance = std::sqrt(targetPos.x * targetPos.x + targetPos.y * targetPos.y);
+    double FuelAirTime = STgtDistance / ballFlightSpeed;
+
+    double virtualX = x_cord - (robotXVel * FuelAirTime);
+    double virtualY = y_cord - (robotYVel * FuelAirTime);
+
+    return std::atan2(virtualY, virtualX) * (180.0 / std::numbers::pi);    
 }
 
 double AFCVision::SavedTargetDistance(bool turretHasTarget, double TgtDistance){
