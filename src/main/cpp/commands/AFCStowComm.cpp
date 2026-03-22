@@ -13,7 +13,7 @@ void AFCStowComm::Initialize() {
 void AFCStowComm::Execute(){
     m_pIntake->Stop();
     frc2::WaitCommand(25_ms);
-    m_pIntake->Deployer(0.0);
+    // m_pIntake->Deployer(0.0);
 }
 
 void AFCStowComm::End(bool interrupted){
