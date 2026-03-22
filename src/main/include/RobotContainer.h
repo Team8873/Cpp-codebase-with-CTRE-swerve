@@ -13,7 +13,6 @@
 #include <frc/filter/SlewRateLimiter.h>
 
 #include "subsystems/AFCIntake.h"
-#include "subsystems/AFCClimber.h"
 #include "subsystems/AFCIndexer.h"
 #include "subsystems/AFCShooter.h"
 #include "subsystems/AFCVision.h"
@@ -24,7 +23,6 @@
 
 
 #include "commands/AFCIntakeComm.h"
-#include "commands/AFCClimberComm.h"
 #include "commands/AFCShootingComm.h"
 #include "commands/AFCShortShootingComm.h"
 #include "commands/AFCStowComm.h"
@@ -67,7 +65,6 @@ public:
 
     frc2::Command *GetAutonomousCommand();
     AFCIntake m_afcIntake{}; // Intake subsystem initialization
-    AFCClimber m_afcClimber{}; // Climber subsystem initialization ♦♦♦ NOT USED ♦♦♦
     AFCIndexer m_afcIndexer{}; // Indexer subsystem initialization
     AFCShooter m_afcShooter{}; // Shooter Subsystem initialization
     AFCFlywheel m_afcFlywheel{}; // Flywheel subsytem initialization

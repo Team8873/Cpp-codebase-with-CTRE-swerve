@@ -26,7 +26,7 @@
 //#include "commands/AFCIndexerComm.h"
 
 using namespace pathplanner;
-RobotContainer::RobotContainer() : m_afcIndexer(), m_afcClimber(), m_afcFlywheel(), m_afcIntake(), m_afcShooter()
+RobotContainer::RobotContainer() : m_afcIndexer(),m_afcFlywheel(), m_afcIntake(), m_afcShooter()
 {
     //NamedCommands::registerCommand("Targeting", std::move(AFCShooter(&m_afcShooter).ToPtr()));
     NamedCommands::registerCommand("ShortShooting", std::move(AFCShortShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter, &m_afcVision).ToPtr()));
@@ -137,9 +137,7 @@ void RobotContainer::ConfigureBindings()
 
     //♦♦♦♦♦♦Start of Operator controls reorganize later♦♦♦♦♦♦
 
-    //Climber controls
-    // m_operator.POVDown().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(1);},{&m_afcClimber}));
-    // m_operator.POVUp().WhileTrue(frc2::cmd::Run([this]{m_afcClimber.SetManualSpeed(-1);},{&m_afcClimber}));
+    
 
     //Indexer controls
     m_afcIndexer.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIndexer.Stop();},{&m_afcIndexer}));
