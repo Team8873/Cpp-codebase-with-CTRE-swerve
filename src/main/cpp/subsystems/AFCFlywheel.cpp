@@ -55,6 +55,18 @@ void AFCFlywheel::SpinUp(double Sspeed){
     //m_shooter2.SetControl(m_velReq.WithVelocity(-50_tr / 1_s));
 };
 
+bool AFCFlywheel::DoneFiring(){
+    while(m_shooter1.GetTorqueCurrent().GetValueAsDouble() != 0.0){
+        if(m_shooter1.GetTorqueCurrent().GetValueAsDouble() > idleCurrent){
+            ++ballCountAuto;
+            firingState = false;
+        }
+        else{
+            
+        }
+    }
+    return firingState;
+}
 bool AFCFlywheel::Flywheelrpm(){
     bool upToSpeed = false;
     if (m_shooter1.GetVelocity().GetValueAsDouble() >= 500){

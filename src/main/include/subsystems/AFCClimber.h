@@ -18,7 +18,6 @@ class AFCClimber : public frc2::SubsystemBase
     public:
 
         explicit AFCClimber();
-
         void Periodic() override;
         void Disable();
         void ClimberDown();
