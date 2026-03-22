@@ -32,8 +32,10 @@ class AFCVision : public frc2::SubsystemBase
         double TurretDistanceCalc(double x_cord, double y_cord);
         double SavedTargetDistance(bool turretHasTarget, double TgtDistance);
         double SpeedRamp(double STgtDistance);
+        double CalcCompAngle(double robotXVel, double robotYVel);
         double FlySpeed = 0.0;
         double STgtDistance = 0.0;
+        double compensatedAngle = 0.0;
 
 
         // Vector2D GetCurrentTarget();
@@ -54,5 +56,13 @@ class AFCVision : public frc2::SubsystemBase
         double x_cord = 0.0;
         double y_cord = 0.0;
         double TgtDistance = 0.0;
+
+        double targetHeight = 45.0;
+        double cameraHeight = 24.0;
+        double cameraAngle = 30.0;
+        double ballFlightSpeed = 240.0; // Muzzle velocity of Fuel in inches
+        
+        double ll4XVel = 0.0;
+        double ll4YVel = 0.0;
         
 };
