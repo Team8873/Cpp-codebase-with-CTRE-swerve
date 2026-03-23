@@ -18,8 +18,8 @@ void AFCVision::Periodic(){
     x_cord = LimelightHelpers::getBotpose_wpiBlue("").at(0); //supposedly
     y_cord = LimelightHelpers::getBotpose_wpiBlue("").at(1); //supposedly
     
-    ll4XVel = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("imu", 5);
-    ll4YVel = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("imu", 6);
+    ll4XAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("imu", 5);
+    ll4YAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("imu", 6);
     //frc::SmartDashboard::PutNumber("Calc Compensated Angle", CalcCompAngle());
     frc::SmartDashboard::PutNumber("Turret X Position", m_txTurret);
     frc::SmartDashboard::PutNumber("Turret Y Position", m_tyTurret);

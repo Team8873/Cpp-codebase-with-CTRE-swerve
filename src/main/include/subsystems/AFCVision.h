@@ -62,6 +62,8 @@ class AFCVision : public frc2::SubsystemBase
         double cameraAngle = 30.0;
         double ballFlightSpeed = 240.0; // Muzzle velocity of Fuel in inches
         
+        double ll4XAcell = 0.0;
+        double ll4YAcell = 0.0;
         double ll4XVel = 0.0;
         double ll4YVel = 0.0;
         
