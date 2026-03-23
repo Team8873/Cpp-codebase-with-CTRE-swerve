@@ -30,12 +30,15 @@ class AFCVision : public frc2::SubsystemBase
         explicit AFCVision();
         void Periodic() override;
         double TurretDistanceCalc(double x_cord, double y_cord);
+        double TurretYCalc(double ll4YVel);
         double SavedTargetDistance(bool turretHasTarget, double TgtDistance);
         double SpeedRamp(double STgtDistance);
         double CalcCompAngle(double robotXVel, double robotYVel);
         double FlySpeed = 0.0;
         double STgtDistance = 0.0;
         double compensatedAngle = 0.0;
+        double turretXVelocity = 0.0;
+        double turretYVelocity = 0.0;
 
 
         // Vector2D GetCurrentTarget();

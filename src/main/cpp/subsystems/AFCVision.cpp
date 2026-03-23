@@ -12,6 +12,7 @@ void AFCVision::Periodic(){
     turretHasTarget = LimelightHelpers::getTV("");
     TgtDistance = TurretDistanceCalc(x_cord, y_cord);
     STgtDistance = SavedTargetDistance(turretHasTarget, TgtDistance);
+    turretYVelocity = TurretYCalc(ll4YVel);
     FlySpeed = SpeedRamp(STgtDistance);
     compensatedAngle = CalcCompAngle(ll4XVel, ll4YVel);
     // robotHasTarget = LimelightHelpers::getTV("");
@@ -65,6 +66,10 @@ double AFCVision::SavedTargetDistance(bool turretHasTarget, double TgtDistance){
         } else {
             return STgtDistance;
         }
+}
+
+double AFCVision::TurretYCalc(double ll4YVel){
+    return turretYVelocity = cos(26)*ll4YVel;
 }
 
 
