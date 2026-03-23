@@ -16,7 +16,7 @@ void AFCVision::Periodic(){
     y_cord = LimelightHelpers::getBotpose_wpiBlue("").at(1); //supposedly
     //ll4XVel = LimelightHelpers::SetIMU
     //compensatedAngle;
-    //nt::
+    //nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("<variablename>",<value>);
     //auto vel = LimelightHelpers::getCameraPose_RobotSpace("");
     
     frc::SmartDashboard::PutNumber("Turret X Position", m_txTurret);
@@ -27,11 +27,11 @@ void AFCVision::Periodic(){
     frc::SmartDashboard::PutNumber("Distance From Tgt", TgtDistance);
 }
 
-double AFCVision::LLAngleToRad (){
-        const double LLAngleOffset = 26;
-        const double RadConvert = 0.01745;
-      return (m_tyTurret + LLAngleOffset) * RadConvert;
-}
+// double AFCVision::LLAngleToRad (){
+//         const double LLAngleOffset = 26;
+//         const double RadConvert = 0.01745;
+//       return (m_tyTurret + LLAngleOffset) * RadConvert;
+// }
 
 double AFCVision::TurretDistanceCalc(double x_cord, double y_cord){
         if (auto ally = frc::DriverStation::GetAlliance()){
