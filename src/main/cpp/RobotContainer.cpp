@@ -5,7 +5,16 @@
 #include "RobotContainer.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc2/command/Commands.h>
+#include <frc2/command/CommandScheduler.h>
 #include <frc2/command/button/RobotModeTriggers.h>
+#include <frc2/command/CommandScheduler.h>
+#include <frc2/command/InstantCommand.h>
+#include <frc2/command/ParallelCommandGroup.h>
+#include <frc2/command/RunCommand.h>
+#include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/WaitCommand.h>
+#include <frc2/command/WaitUntilCommand.h>
+#include <frc2/command/button/Trigger.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
 
 
@@ -76,6 +85,13 @@ void RobotContainer::ConfigureBindings()
     joystick.LeftBumper().OnTrue(drivetrain.RunOnce([this] { drivetrain.SeedFieldCentric(); }));
 
     drivetrain.RegisterTelemetry([this](auto const &state) { logger.Telemeterize(state); });
+
+    m_operator.A()
+            .WhileTrue(frc2::cmd::RunEnd([this]{m_Turret.SetManualSpeedTurret(m_operator.GetLeftX());},[this]{ m_Turret.SetManualSpeedTurret(0.0);},{&m_Turret}));
+
+    m_operator.X()
+            .ToggleOnTrue(ShooterComm(&m_Shooter).ToPtr());
+    m_Shooter.SetDefaultCommand(frc2::cmd::Run([this]{m_Shooter.Stop();},{&m_Shooter}));
 }
 
 frc2::Command *RobotContainer::GetAutonomousCommand()
