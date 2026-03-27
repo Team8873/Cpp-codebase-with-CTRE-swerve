@@ -7,6 +7,7 @@
 #include <frc2/command/Commands.h>
 #include <frc2/command/button/RobotModeTriggers.h>
 #include <pathplanner/lib/auto/AutoBuilder.h>
+#include <units/time.h>
 
 
 RobotContainer::RobotContainer()
@@ -76,6 +77,21 @@ void RobotContainer::ConfigureBindings()
     joystick.LeftBumper().OnTrue(drivetrain.RunOnce([this] { drivetrain.SeedFieldCentric(); }));
 
     drivetrain.RegisterTelemetry([this](auto const &state) { logger.Telemeterize(state); });
+
+
+   //Indexer
+   m_operator.A().ToggleOnTrue(IndexerComm(&m_Indexer, &m_Shooter).ToPtr());
+   m_Indexer.SetDefaultCommand(frc2::cmd::Run([this]{m_Indexer.Stop(); }, {&m_Indexer}));
+   
+   //Intake
+   m_operator.LeftBumper().ToggleOnTrue(IntakeComm(&m_Intake).ToPtr());
+   m_Intake.SetDefaultCommand(frc2::cmd::Run([this]{m_Intake.Stop(); }, {&m_Intake}));
+
+
+   
+
+    
+
 }
 
 frc2::Command *RobotContainer::GetAutonomousCommand()
