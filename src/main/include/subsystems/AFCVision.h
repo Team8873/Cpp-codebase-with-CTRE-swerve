@@ -30,14 +30,17 @@ class AFCVision : public frc2::SubsystemBase
         explicit AFCVision();
         void Periodic() override;
         double TurretDistanceCalc(double x_cord, double y_cord);
+        double RobotAngleCalc(double x_cord, double y_cord, double robot_faceangle);
         double TurretYCalc(double ll4YVel);
         double SavedTargetDistance(bool turretHasTarget, double TgtDistance);
+        double SavedTargetAngle(bool turretHasTarget, double TgtDistance);
         double SpeedRamp(double STgtDistance);
         double CalcAjustAngle(double robotXVel, double robotYVel);
         double LimelightXAcceleration(double ll4XAccel, double XVelOrigin);
         double LimelightYAcceleration(double ll4YAccel, double YVelOrigin);
         double FlySpeed = 0.0;
         double STgtDistance = 0.0;
+        double STgtAngle = 0.0;
         double compensatedAngle = 0.0;
         double turretXVelocity = 0.0;
         double turretYVelocity = 0.0;
@@ -58,9 +61,13 @@ class AFCVision : public frc2::SubsystemBase
         double m_tyTurret = 0.0;
         bool robotHasTarget = false;
 
-        double x_cord = 0.0;
-        double y_cord = 0.0;
+        double turretllx_cord = 0.0;
+        double turretlly_cord = 0.0;
         double TgtDistance = 0.0;
+        double botllx_cord = 0.0;
+        double botlly_cord = 0.0;
+        double botll_faceangle = 0.0;
+        double TgtAngle = 0.0;
 
         double targetHeight = 45.0;
         double cameraHeight = 24.0;

@@ -10,14 +10,21 @@ void AFCVision::Periodic(){
     m_txTurret = LimelightHelpers::getTX("limelight-limenew");
     m_tyTurret = LimelightHelpers::getTY("limelight-limenew");
     turretHasTarget = LimelightHelpers::getTV("limelight-limenew");
-    TgtDistance = TurretDistanceCalc(x_cord, y_cord);
+    robotHasTarget = LimelightHelpers::getTV("limelight-lemold");
+    TgtDistance = TurretDistanceCalc(turretllx_cord, turretlly_cord);
     STgtDistance = SavedTargetDistance(turretHasTarget, TgtDistance);
+    TgtAngle = RobotAngleCalc(botllx_cord, botlly_cord, botll_faceangle);
+    STgtAngle = SavedTargetAngle(robotHasTarget, TgtAngle);
     turretYVelocity = TurretYCalc(ll4YVel);
     FlySpeed = SpeedRamp(STgtDistance);
     compensatedAngle = CalcAjustAngle(ll4XVel, TurretYVel);
     // robotHasTarget = LimelightHelpers::getTV("");
-    x_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(0); //supposedly
-    y_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(1); //supposedly
+    turretllx_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(0);
+    turretlly_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(1);
+
+    botllx_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-lemold").at(0);
+    botlly_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-lemold").at(1);
+    botll_faceangle = LimelightHelpers::getBotpose_wpiBlue("limelight-lemold").at(5);
     
     ll4XAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(7);
     ll4YAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(9);
@@ -33,9 +40,10 @@ void AFCVision::Periodic(){
     frc::SmartDashboard::PutNumber("Turret X Position", m_txTurret);
     frc::SmartDashboard::PutNumber("Turret Y Position", m_tyTurret);
     frc::SmartDashboard::PutBoolean("Turret has Target", turretHasTarget);
-    // frc::SmartDashboard::PutBoolean("Robot has Target", robotHasTarget);
-    frc::SmartDashboard::PutNumber("xcord", x_cord);
-    frc::SmartDashboard::PutNumber("ycord", y_cord);
+    frc::SmartDashboard::PutBoolean("Robot has Target", robotHasTarget);
+    frc::SmartDashboard::PutNumber("turret xcord", turretllx_cord);
+    frc::SmartDashboard::PutNumber("turret ycord", turretlly_cord);
+    frc::SmartDashboard::PutNumber("bot faceangle", botll_faceangle);
     frc::SmartDashboard::PutNumber("Distance From Tgt", TgtDistance);
     frc::SmartDashboard::PutNumber("Fly Speed", FlySpeed);
     frc::SmartDashboard::PutNumber("Saved Target Distance", STgtDistance);
@@ -55,6 +63,16 @@ double AFCVision::TurretDistanceCalc(double x_cord, double y_cord){
 }
 }
 
+double AFCVision::RobotAngleCalc(double x_cord, double y_cord, double robot_faceangle){
+       if (auto ally = frc::DriverStation::GetAlliance()) {
+    if (ally.value() == frc::DriverStation::Alliance::kRed) {
+        return ((std::atan2(4.034536-y_cord, 4.625594-x_cord)*(180/std::numbers::pi))-robot_faceangle);
+    } else{
+        return ((std::atan2(4.034536-y_cord, 11.915394-x_cord)*(180/std::numbers::pi))-robot_faceangle);
+    }
+}
+}
+
 double AFCVision::SpeedRamp(double STgtDistance){
         return (1.59*(STgtDistance * STgtDistance)) + (1.84 * STgtDistance) + 50.92;
 }
@@ -65,8 +83,8 @@ double AFCVision::CalcAjustAngle(double robotXVel, double robotYVel){
     //double distance = std::sqrt(targetPos.x * targetPos.x + targetPos.y * targetPos.y);
     double FuelAirTime = STgtDistance / ballFlightSpeed;
 
-    double virtualX = x_cord - (robotXVel * FuelAirTime);
-    double virtualY = y_cord - (robotYVel * FuelAirTime);
+    double virtualX = turretllx_cord - (robotXVel * FuelAirTime);
+    double virtualY = turretlly_cord - (robotYVel * FuelAirTime);
 
     return std::atan2(virtualY, virtualX) * (180.0 / std::numbers::pi);    
 }
@@ -76,6 +94,14 @@ double AFCVision::SavedTargetDistance(bool turretHasTarget, double TgtDistance){
             return STgtDistance = TgtDistance;
         } else {
             return STgtDistance;
+        }
+}
+
+double AFCVision::SavedTargetAngle(bool robotHasTarget, double TgtAngle){
+        if (robotHasTarget){
+            return STgtAngle = TgtAngle;
+        } else {
+            return STgtAngle;
         }
 }
 
