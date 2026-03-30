@@ -161,7 +161,7 @@ void RobotContainer::ConfigureBindings()
     m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(200);},{&m_afcShooter}));
 
     //Auto Lock
-    m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.AutoLock(LimelightHelpers::getTX(""));},{&m_afcShooter}));
+    m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.AutoLock(LimelightHelpers::getTX("limelight-limenew"));},{&m_afcShooter}));
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.AutoSpeed(m_afcVision.FlySpeed);}, {&m_afcVision}));
 
     //Flywheel controls

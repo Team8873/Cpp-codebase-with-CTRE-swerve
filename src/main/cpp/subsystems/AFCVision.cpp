@@ -7,20 +7,28 @@ AFCVision::AFCVision(){
 }
 
 void AFCVision::Periodic(){
-    m_txTurret = LimelightHelpers::getTX("");
-    m_tyTurret = LimelightHelpers::getTY("");
-    turretHasTarget = LimelightHelpers::getTV("");
+    m_txTurret = LimelightHelpers::getTX("limelight-limenew");
+    m_tyTurret = LimelightHelpers::getTY("limelight-limenew");
+    turretHasTarget = LimelightHelpers::getTV("limelight-limenew");
     TgtDistance = TurretDistanceCalc(x_cord, y_cord);
     STgtDistance = SavedTargetDistance(turretHasTarget, TgtDistance);
     turretYVelocity = TurretYCalc(ll4YVel);
     FlySpeed = SpeedRamp(STgtDistance);
-    compensatedAngle = CalcCompAngle(ll4XVel, ll4YVel);
+    compensatedAngle = CalcAjustAngle(ll4XVel, TurretYVel);
     // robotHasTarget = LimelightHelpers::getTV("");
-    x_cord = LimelightHelpers::getBotpose_wpiBlue("").at(0); //supposedly
-    y_cord = LimelightHelpers::getBotpose_wpiBlue("").at(1); //supposedly
+    x_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(0); //supposedly
+    y_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(1); //supposedly
     
-    ll4XAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("imu", 5);
-    ll4YAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("imu", 6);
+    ll4XAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(7);
+    ll4YAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(9);
+    //double something = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumberArray("imu",std::vector<double>(10)).at(0);
+
+
+    ll4XVel = LimelightXAcceleration(ll4XAcell, ll4XVel);
+    ll4YVel = LimelightYAcceleration(ll4YAcell, ll4YVel);
+
+    TurretYVel = TurretYCalc(ll4YVel);
+
     //frc::SmartDashboard::PutNumber("Calc Compensated Angle", CalcCompAngle());
     frc::SmartDashboard::PutNumber("Turret X Position", m_txTurret);
     frc::SmartDashboard::PutNumber("Turret Y Position", m_tyTurret);
@@ -31,9 +39,12 @@ void AFCVision::Periodic(){
     frc::SmartDashboard::PutNumber("Distance From Tgt", TgtDistance);
     frc::SmartDashboard::PutNumber("Fly Speed", FlySpeed);
     frc::SmartDashboard::PutNumber("Saved Target Distance", STgtDistance);
+
+    frc::SmartDashboard::PutNumber("Turret X Velocity", ll4XVel);
+    frc::SmartDashboard::PutNumber("Turret Y Velocity", ll4YAcell);
 }
 
-
+ 
 double AFCVision::TurretDistanceCalc(double x_cord, double y_cord){
        if (auto ally = frc::DriverStation::GetAlliance()) {
     if (ally.value() == frc::DriverStation::Alliance::kRed) {
@@ -48,7 +59,7 @@ double AFCVision::SpeedRamp(double STgtDistance){
         return (1.59*(STgtDistance * STgtDistance)) + (1.84 * STgtDistance) + 50.92;
 }
 
-double AFCVision::CalcCompAngle(double robotXVel, double robotYVel){
+double AFCVision::CalcAjustAngle(double robotXVel, double robotYVel){
     //Vector2D targetPos = GetCurrentTarget();
     //if (targetPos.x == 0 && targetPos.y == 0) return 0.0;
     //double distance = std::sqrt(targetPos.x * targetPos.x + targetPos.y * targetPos.y);
@@ -72,11 +83,26 @@ double AFCVision::TurretYCalc(double ll4YVel){
     return turretYVelocity = cos(26)*ll4YVel;
 }
 
+double AFCVision::LimelightXAcceleration(double ll4XAccel, double XVelOrigin){
+
+    double XVelocity = ((std::trunc(ll4XAccel*10)/10)+0.4)*0.02+XVelOrigin;
+
+    return XVelOrigin = XVelocity;
+
+}
+
+double AFCVision::LimelightYAcceleration(double ll4YAccel, double YVelOrigin){
+
+    double YVelocity = ((std::trunc(ll4YAccel*10)/10)-0.9)*0.02+YVelOrigin;
+
+    return YVelOrigin = YVelocity;
+
+}
 
 // Vector2D GetCurrentTarget(){
-//     double txTarget = LimelightHelpers::getTX("");
-//     double tyTarget = LimelightHelpers::getTY("");
-//     bool turretHasTarget = LimelightHelpers::getTV("");
+//     double txTarget = LimelightHelpers::getTX("limelight-limenew");
+//     double tyTarget = LimelightHelpers::getTY("limelight-limenew");
+//     bool turretHasTarget = LimelightHelpers::getTV("limelight-limenew");
 
 //     if (!turretHasTarget) return {0, 0};
 //     // 45 target hight 4 camera 30 angle of camera

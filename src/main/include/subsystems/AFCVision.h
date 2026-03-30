@@ -33,7 +33,9 @@ class AFCVision : public frc2::SubsystemBase
         double TurretYCalc(double ll4YVel);
         double SavedTargetDistance(bool turretHasTarget, double TgtDistance);
         double SpeedRamp(double STgtDistance);
-        double CalcCompAngle(double robotXVel, double robotYVel);
+        double CalcAjustAngle(double robotXVel, double robotYVel);
+        double LimelightXAcceleration(double ll4XAccel, double XVelOrigin);
+        double LimelightYAcceleration(double ll4YAccel, double YVelOrigin);
         double FlySpeed = 0.0;
         double STgtDistance = 0.0;
         double compensatedAngle = 0.0;
@@ -69,5 +71,6 @@ class AFCVision : public frc2::SubsystemBase
         double ll4YAcell = 0.0;
         double ll4XVel = 0.0;
         double ll4YVel = 0.0;
+        double TurretYVel = 0.0;
         
 };

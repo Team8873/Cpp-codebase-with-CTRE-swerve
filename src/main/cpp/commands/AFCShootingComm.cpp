@@ -20,7 +20,7 @@ void AFCShootingComm::Initialize() {
 }
 
 void AFCShootingComm::Execute() {
-    m_pShootersubsystem->AutoLock(LimelightHelpers::getTX(""));
+    m_pShootersubsystem->AutoLock(LimelightHelpers::getTX("limelight-limenew"));
     m_pIndexerSubsystem->UptakeOn();
     m_pFlywheelSubsytem->ManualSpeed(0);
     // m_pFlywheelSubsytem->AutoSpeed(m_pVisionsubsystem->FlySpeed);
