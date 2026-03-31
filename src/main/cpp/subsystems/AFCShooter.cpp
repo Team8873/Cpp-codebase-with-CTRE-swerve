@@ -45,8 +45,8 @@ AFCShooter::AFCShooter()
 
 void AFCShooter::Periodic(){
     
-    m_tx = LimelightHelpers::getTX("limelight-limenew");
-    hasTarget = LimelightHelpers::getTV("limelight-limenew");
+    m_tx = LimelightHelpers::getTX("limelight-lemold");
+    hasTarget = LimelightHelpers::getTV("limelight-lemold");
     turPos = m_turretEncoder.GetPosition();
     frc::SmartDashboard::PutNumber("Lime Target X Position", m_tx);
     frc::SmartDashboard::PutBoolean("Limelight Has Target", hasTarget);

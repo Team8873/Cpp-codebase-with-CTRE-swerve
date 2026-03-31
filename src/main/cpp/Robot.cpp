@@ -25,8 +25,8 @@ void Robot::RobotPeriodic() {
         auto const heading = driveState.Pose.Rotation().Degrees();
         auto const omega = driveState.Speeds.omega;
 
-        LimelightHelpers::SetRobotOrientation("limelight-limenew", heading.value(), 0, 0, 0, 0, 0);
-        auto llMeasurement = LimelightHelpers::getBotPoseEstimate_wpiBlue_MegaTag2("limelight-limenew");
+        LimelightHelpers::SetRobotOrientation("limelight-lemold", heading.value(), 0, 0, 0, 0, 0);
+        auto llMeasurement = LimelightHelpers::getBotPoseEstimate_wpiBlue_MegaTag2("limelight-lemold");
         if (llMeasurement && llMeasurement->tagCount > 0 && units::math::abs(omega) < 2_tps) {
             m_container.drivetrain.AddVisionMeasurement(llMeasurement->pose, llMeasurement->timestampSeconds);
         }

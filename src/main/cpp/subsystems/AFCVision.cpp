@@ -7,10 +7,10 @@ AFCVision::AFCVision(){
 }
 
 void AFCVision::Periodic(){
-    m_txTurret = LimelightHelpers::getTX("limelight-limenew");
-    m_tyTurret = LimelightHelpers::getTY("limelight-limenew");
-    turretHasTarget = LimelightHelpers::getTV("limelight-limenew");
-    robotHasTarget = LimelightHelpers::getTV("limelight-lemold");
+    m_txTurret = LimelightHelpers::getTX("limelight-lemold");
+    m_tyTurret = LimelightHelpers::getTY("limelight-lemold");
+    turretHasTarget = LimelightHelpers::getTV("limelight-lemold");
+    robotHasTarget = LimelightHelpers::getTV("limelight-limenew");
     TgtDistance = TurretDistanceCalc(turretllx_cord, turretlly_cord);
     STgtDistance = SavedTargetDistance(turretHasTarget, TgtDistance);
     TgtAngle = RobotAngleCalc(botllx_cord, botlly_cord, botll_faceangle);
@@ -19,15 +19,15 @@ void AFCVision::Periodic(){
     FlySpeed = SpeedRamp(STgtDistance);
     compensatedAngle = CalcAjustAngle(ll4XVel, TurretYVel);
     // robotHasTarget = LimelightHelpers::getTV("");
-    turretllx_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(0);
-    turretlly_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(1);
+    turretllx_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-lemold").at(0);
+    turretlly_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-lemold").at(1);
 
-    botllx_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-lemold").at(0);
-    botlly_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-lemold").at(1);
-    botll_faceangle = LimelightHelpers::getBotpose_wpiBlue("limelight-lemold").at(5);
+    botllx_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(0);
+    botlly_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(1);
+    botll_faceangle = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(5);
     
-    ll4XAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(7);
-    ll4YAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(9);
+   // ll4XAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(7);
+  //  ll4YAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(9);
     //double something = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumberArray("imu",std::vector<double>(10)).at(0);
 
 
