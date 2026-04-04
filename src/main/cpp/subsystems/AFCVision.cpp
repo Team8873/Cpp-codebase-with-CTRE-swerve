@@ -7,11 +7,11 @@ AFCVision::AFCVision(){
 }
 
 void AFCVision::Periodic(){
-    m_txTurret = LimelightHelpers::getTX("limelight-lemold");
-    m_tyTurret = LimelightHelpers::getTY("limelight-lemold");
-    turretHasTarget = LimelightHelpers::getTV("limelight-lemold");
+    m_txTurret = LimelightHelpers::getTX("limelight-limenew");
+    m_tyTurret = LimelightHelpers::getTY("limelight-limenew");
+    turretHasTarget = LimelightHelpers::getTV("limelight-limenew");
     robotHasTarget = LimelightHelpers::getTV("limelight-limenew");
-    TgtDistance = TurretDistanceCalc(turretllx_cord, turretlly_cord);
+    TgtDistance = TurretDistanceCalc(turretllx_cord, turretlly_cord, botll_faceangle);
     STgtDistance = SavedTargetDistance(turretHasTarget, TgtDistance);
     TgtAngle = RobotAngleCalc(botllx_cord, botlly_cord, botll_faceangle);
     STgtAngle = SavedTargetAngle(robotHasTarget, TgtAngle);
@@ -19,16 +19,16 @@ void AFCVision::Periodic(){
     FlySpeed = SpeedRamp(STgtDistance);
     compensatedAngle = CalcAjustAngle(ll4XVel, TurretYVel);
     // robotHasTarget = LimelightHelpers::getTV("");
-    turretllx_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-lemold").at(0);
-    turretlly_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-lemold").at(1);
+    turretllx_cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(0);
+    turretlly_cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(1);
 
-    botllx_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(0);
-    botlly_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(1);
-    botll_faceangle = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(5);
+    botllx_cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(0);
+    botlly_cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(1);
+    botll_faceangle = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(5);
     
-   // ll4XAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(7);
-  //  ll4YAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(9);
-    //double something = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumberArray("imu",std::vector<double>(10)).at(0);
+   ll4XAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(7);
+   ll4YAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(9);
+   double something = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(0);
 
 
     ll4XVel = LimelightXAcceleration(ll4XAcell, ll4XVel);
@@ -47,28 +47,60 @@ void AFCVision::Periodic(){
     frc::SmartDashboard::PutNumber("Distance From Tgt", TgtDistance);
     frc::SmartDashboard::PutNumber("Fly Speed", FlySpeed);
     frc::SmartDashboard::PutNumber("Saved Target Distance", STgtDistance);
+    frc::SmartDashboard::PutNumber("Saved Target encoder value", STgtAngle);
+    frc::SmartDashboard::PutNumber("SomethingElse", (std::atan2(4.034536-botlly_cord, 4.625594-botllx_cord)*(180/std::numbers::pi)));
 
     frc::SmartDashboard::PutNumber("Turret X Velocity", ll4XVel);
     frc::SmartDashboard::PutNumber("Turret Y Velocity", ll4YAcell);
+
+    frc::SmartDashboard::PutNumber("Turret Y Value", (botlly_cord + std::sin((botll_faceangle * (std::numbers::pi / 180.0)))*0.146));
+    frc::SmartDashboard::PutNumber("Turret X Value", (botllx_cord + std::cos((botll_faceangle * (std::numbers::pi / 180.0)))*0.146));
 }
 
  
-double AFCVision::TurretDistanceCalc(double x_cord, double y_cord){
+double AFCVision::TurretDistanceCalc(double x_cord, double y_cord, double robot_faceangle){
+    double Y_TurretCenterOffset = std::sin(robot_faceangle * (std::numbers::pi / 180.0))*0.146;
+    double X_TurretCenterOffset = std::cos(robot_faceangle * (std::numbers::pi / 180.0))*0.146;
+
        if (auto ally = frc::DriverStation::GetAlliance()) {
     if (ally.value() == frc::DriverStation::Alliance::kRed) {
-        return (sqrt(((4.625594-x_cord)*(4.625594-x_cord)+(4.034536-y_cord)*(4.034536-y_cord))));
+        return (sqrt(((11.915394-(x_cord+X_TurretCenterOffset))*(11.915394-(x_cord+X_TurretCenterOffset))+(4.034536-(y_cord+Y_TurretCenterOffset))*(4.034536-(y_cord+Y_TurretCenterOffset)))));
     } else{
-        return (sqrt(((11.915394-x_cord)*(11.915394-x_cord)+(4.034536-y_cord)*(4.034536-y_cord))));
+        return (sqrt(((4.625594-(x_cord+X_TurretCenterOffset))*(4.625594-(x_cord+X_TurretCenterOffset))+(4.034536-(y_cord+Y_TurretCenterOffset))*(4.034536-(y_cord+Y_TurretCenterOffset)))));
     }
 }
 }
 
 double AFCVision::RobotAngleCalc(double x_cord, double y_cord, double robot_faceangle){
+    double Y_TurretCenterOffset = (std::sin((robot_faceangle * (std::numbers::pi / 180.0)))*0.146);
+    double X_TurretCenterOffset = (std::cos((robot_faceangle * (std::numbers::pi / 180.0)))*0.146);
+
+    double TurretXValue = x_cord+X_TurretCenterOffset;
+    double TurretYValue = y_cord+Y_TurretCenterOffset;
+
+    double TurretXDistanceRed = 11.915394-(TurretXValue);
+    double TurretYDistanceRed = 4.034536-(TurretYValue);
+
+    double TurretXDistanceBlue = 4.625594-(TurretXValue);
+    double TurretYDistanceBlue = 4.034536-(TurretYValue);
+    
+    // if(TurretXDistanceRed == 0){
+    //     TurretXDistanceRed = 0.001;
+    // } else {
+    //     TurretXDistanceRed = TurretXDistanceRed;
+    // }
+
+    // if(TurretXDistanceBlue == 0){
+    //     TurretXDistanceBlue = 0.001;
+    // } else {
+    //     TurretXDistanceBlue = TurretXDistanceRed;
+    // }
+
        if (auto ally = frc::DriverStation::GetAlliance()) {
     if (ally.value() == frc::DriverStation::Alliance::kRed) {
-        return ((std::atan2(4.034536-y_cord, 4.625594-x_cord)*(180/std::numbers::pi))-robot_faceangle);
+        return (robot_faceangle-(std::atan2(TurretYDistanceRed, TurretXDistanceRed)*(180/std::numbers::pi)));
     } else{
-        return ((std::atan2(4.034536-y_cord, 11.915394-x_cord)*(180/std::numbers::pi))-robot_faceangle);
+        return (robot_faceangle-(std::atan2(TurretYDistanceBlue, TurretXDistanceBlue)*(180/std::numbers::pi)));
     }
 }
 }
