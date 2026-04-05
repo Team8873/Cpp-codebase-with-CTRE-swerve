@@ -50,7 +50,7 @@ void AFCShooter::Periodic(){
     turPos = m_turretEncoder.GetPosition();
     frc::SmartDashboard::PutNumber("Lime Target X Position", m_tx);
     frc::SmartDashboard::PutBoolean("Limelight Has Target", hasTarget);
-    frc::SmartDashboard::PutNumber("Turret POS", turPos);
+    frc::SmartDashboard::PutNumber("Turret POS", AFCShooter::GetPosition());
     //frc::SmartDashboard::PutNumber("Turret Target Position", TurretTarget());
     //frc::SmartDashboard::PutNumber("Shooter Velocity", velocity);
 }

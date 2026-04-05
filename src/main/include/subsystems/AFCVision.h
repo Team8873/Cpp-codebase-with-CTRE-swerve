@@ -29,7 +29,7 @@ class AFCVision : public frc2::SubsystemBase
 
         explicit AFCVision();
         void Periodic() override;
-        double TurretDistanceCalc(double x_cord, double y_cord);
+        double TurretDistanceCalc(double x_cord, double y_cord, double robot_faceangle);
         double RobotAngleCalc(double x_cord, double y_cord, double robot_faceangle);
         double TurretYCalc(double ll4YVel);
         double SavedTargetDistance(bool turretHasTarget, double TgtDistance);

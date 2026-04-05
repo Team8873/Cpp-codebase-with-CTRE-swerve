@@ -62,8 +62,7 @@ class AFCShooter : public frc2::SubsystemBase
         double txNeed = 100.0;
         bool hasTarget = false;
         double turPos = 0.0;
-        double velocity = 0.0;
-        
+        double velocity = 0.0;      
 
 
 };
