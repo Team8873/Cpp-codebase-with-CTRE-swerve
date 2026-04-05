@@ -18,7 +18,7 @@ void AFCVision::Periodic(){
     turretYVelocity = TurretYCalc(ll4YVel);
     FlySpeed = SpeedRamp(STgtDistance);
     compensatedAngle = CalcAjustAngle(ll4XVel, TurretYVel);
-    // robotHasTarget = LimelightHelpers::getTV("");
+    //robotHasTarget = LimelightHelpers::getTV("");
     turretllx_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(0);
     turretlly_cord = LimelightHelpers::getBotpose_wpiBlue("limelight-limenew").at(1);
 
@@ -50,6 +50,9 @@ void AFCVision::Periodic(){
 
     frc::SmartDashboard::PutNumber("Turret X Velocity", ll4XVel);
     frc::SmartDashboard::PutNumber("Turret Y Velocity", ll4YAcell);
+
+    touchX = frc::SmartDashboard::GetNumber("TouchTargetX", 0.0);
+    touchY = frc::SmartDashboard::GetNumber("TouchTargetY", 0.0);
 }
 
  

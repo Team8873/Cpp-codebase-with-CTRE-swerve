@@ -79,5 +79,8 @@ class AFCVision : public frc2::SubsystemBase
         double ll4XVel = 0.0;
         double ll4YVel = 0.0;
         double TurretYVel = 0.0;
+
+        double touchX = 0.0;
+        double touchY = 0.0;
         
 };
