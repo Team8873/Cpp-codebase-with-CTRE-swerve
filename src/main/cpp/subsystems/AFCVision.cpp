@@ -7,191 +7,52 @@ AFCVision::AFCVision(){
 }
 
 void AFCVision::Periodic(){
-    m_txTurret = LimelightHelpers::getTX("limelight-limenew");
-    m_tyTurret = LimelightHelpers::getTY("limelight-limenew");
-    turretHasTarget = LimelightHelpers::getTV("limelight-limenew");
-    robotHasTarget = LimelightHelpers::getTV("limelight-limenew");
-    TgtDistance = TurretDistanceCalc(turretllx_cord, turretlly_cord, botll_faceangle);
-    STgtDistance = SavedTargetDistance(turretHasTarget, TgtDistance);
-    TgtAngle = RobotAngleCalc(botllx_cord, botlly_cord, botll_faceangle);
-    STgtAngle = SavedTargetAngle(robotHasTarget, TgtAngle);
-    turretYVelocity = TurretYCalc(ll4YVel);
-    FlySpeed = SpeedRamp(STgtDistance);
-    compensatedAngle = CalcAjustAngle(ll4XVel, TurretYVel);
-    // robotHasTarget = LimelightHelpers::getTV("");
-    turretllx_cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(0);
-    turretlly_cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(1);
 
-    botllx_cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(0);
-    botlly_cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(1);
-    botll_faceangle = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(5);
-    
-   ll4XAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(7);
-   ll4YAcell = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(9);
-   double something = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("imu",std::vector<double>(10)).at(0);
+    LL4HasTarget = LimelightHelpers::getTV("limelight-limenew");
+    LL4_X_Cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(0);
+    LL4_Y_Cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(1);
+    LL4_Face_Angle = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(5);
 
+    Turret_X_Cord = (std::abs(std::cos(LL4_Face_Angle * (std::numbers::pi / 180.0)))*0.146)+LL4_X_Cord;
+    Turret_Y_Cord = (std::sin(LL4_Face_Angle * (std::numbers::pi / 180.0))*0.146)+LL4_Y_Cord;
 
-    ll4XVel = LimelightXAcceleration(ll4XAcell, ll4XVel);
-    ll4YVel = LimelightYAcceleration(ll4YAcell, ll4YVel);
+    X_Range_To_Target = (Target_Cord().at(0)-Turret_X_Cord);
+    Y_Range_To_Target = (Target_Cord().at(1)-Turret_Y_Cord);
+    Distance_To_Target = (sqrt(std::pow(X_Range_To_Target, 2) + std::pow(Y_Range_To_Target, 2))); 
 
-    TurretYVel = TurretYCalc(ll4YVel);
+    Turret_Angle_To_Target = (LL4_Face_Angle-(std::atan2(Y_Range_To_Target, X_Range_To_Target)*(180/std::numbers::pi)));
+    SpeedRamp = ((1.59*(Distance_To_Target * Distance_To_Target)) + (1.84 * Distance_To_Target) + 50.92);
 
-    //frc::SmartDashboard::PutNumber("Calc Compensated Angle", CalcCompAngle());
-    frc::SmartDashboard::PutNumber("Turret X Position", m_txTurret);
-    frc::SmartDashboard::PutNumber("Turret Y Position", m_tyTurret);
-    frc::SmartDashboard::PutBoolean("Turret has Target", turretHasTarget);
-    frc::SmartDashboard::PutBoolean("Robot has Target", robotHasTarget);
-    frc::SmartDashboard::PutNumber("turret xcord", turretllx_cord);
-    frc::SmartDashboard::PutNumber("turret ycord", turretlly_cord);
-    frc::SmartDashboard::PutNumber("bot faceangle", botll_faceangle);
-    frc::SmartDashboard::PutNumber("Distance From Tgt", TgtDistance);
-    frc::SmartDashboard::PutNumber("Fly Speed", FlySpeed);
-    frc::SmartDashboard::PutNumber("Saved Target Distance", STgtDistance);
-    frc::SmartDashboard::PutNumber("Saved Target encoder value", STgtAngle);
-    frc::SmartDashboard::PutNumber("SomethingElse", (std::atan2(4.034536-botlly_cord, 4.625594-botllx_cord)*(180/std::numbers::pi)));
+    Saved_Turret_Angle = Saved_Turret_Angle_To_Target(LL4HasTarget, Turret_Angle_To_Target);
+    Saved_Flywheel_Speed = Saved_Fly_Speed(LL4HasTarget, SpeedRamp);
 
-    frc::SmartDashboard::PutNumber("Turret X Velocity", ll4XVel);
-    frc::SmartDashboard::PutNumber("Turret Y Velocity", ll4YAcell);
-
-    touchX = frc::SmartDashboard::GetNumber("TouchTargetX", 0.0);
-    touchY = frc::SmartDashboard::GetNumber("TouchTargetY", 0.0);
-    frc::SmartDashboard::PutNumber("Turret Y Value", (botlly_cord + std::sin((botll_faceangle * (std::numbers::pi / 180.0)))*0.146));
-    frc::SmartDashboard::PutNumber("Turret X Value", (botllx_cord + std::cos((botll_faceangle * (std::numbers::pi / 180.0)))*0.146));
 }
 
- 
-double AFCVision::TurretDistanceCalc(double x_cord, double y_cord, double robot_faceangle){
-    double Y_TurretCenterOffset = std::sin(robot_faceangle * (std::numbers::pi / 180.0))*0.146;
-    double X_TurretCenterOffset = std::cos(robot_faceangle * (std::numbers::pi / 180.0))*0.146;
-
-       if (auto ally = frc::DriverStation::GetAlliance()) {
-    if (ally.value() == frc::DriverStation::Alliance::kRed) {
-        return (sqrt(((11.915394-(x_cord+X_TurretCenterOffset))*(11.915394-(x_cord+X_TurretCenterOffset))+(4.034536-(y_cord+Y_TurretCenterOffset))*(4.034536-(y_cord+Y_TurretCenterOffset)))));
-    } else{
-        return (sqrt(((4.625594-(x_cord+X_TurretCenterOffset))*(4.625594-(x_cord+X_TurretCenterOffset))+(4.034536-(y_cord+Y_TurretCenterOffset))*(4.034536-(y_cord+Y_TurretCenterOffset)))));
+std::array<double,2> Target_Cord()
+{
+    if (auto ally = frc::DriverStation::GetAlliance()) {
+        if (ally.value() == frc::DriverStation::Alliance::kRed) {
+            std::array<double,2> RedAllianceHub = {11.915394, 4.034536};
+            return RedAllianceHub;
+        } else{
+        std::array<double,2> BlueAllianceHub = {4.625594 , 4.034536};
+            return BlueAllianceHub;
+        }
     }
 }
-}
 
-double AFCVision::RobotAngleCalc(double x_cord, double y_cord, double robot_faceangle){
-    double Y_TurretCenterOffset = (std::sin((robot_faceangle * (std::numbers::pi / 180.0)))*0.146);
-    double X_TurretCenterOffset = (std::cos((robot_faceangle * (std::numbers::pi / 180.0)))*0.146);
-
-    double TurretXValue = x_cord+X_TurretCenterOffset;
-    double TurretYValue = y_cord+Y_TurretCenterOffset;
-
-    double TurretXDistanceRed = 11.915394-(TurretXValue);
-    double TurretYDistanceRed = 4.034536-(TurretYValue);
-
-    double TurretXDistanceBlue = 4.625594-(TurretXValue);
-    double TurretYDistanceBlue = 4.034536-(TurretYValue);
-    
-    // if(TurretXDistanceRed == 0){
-    //     TurretXDistanceRed = 0.001;
-    // } else {
-    //     TurretXDistanceRed = TurretXDistanceRed;
-    // }
-
-    // if(TurretXDistanceBlue == 0){
-    //     TurretXDistanceBlue = 0.001;
-    // } else {
-    //     TurretXDistanceBlue = TurretXDistanceRed;
-    // }
-
-       if (auto ally = frc::DriverStation::GetAlliance()) {
-    if (ally.value() == frc::DriverStation::Alliance::kRed) {
-        return (robot_faceangle-(std::atan2(TurretYDistanceRed, TurretXDistanceRed)*(180/std::numbers::pi)));
-    } else{
-        return (robot_faceangle-(std::atan2(TurretYDistanceBlue, TurretXDistanceBlue)*(180/std::numbers::pi)));
-    }
-}
-}
-
-double AFCVision::SpeedRamp(double STgtDistance){
-        return (1.59*(STgtDistance * STgtDistance)) + (1.84 * STgtDistance) + 50.92;
-}
-
-double AFCVision::CalcAjustAngle(double robotXVel, double robotYVel){
-    //Vector2D targetPos = GetCurrentTarget();
-    //if (targetPos.x == 0 && targetPos.y == 0) return 0.0;
-    //double distance = std::sqrt(targetPos.x * targetPos.x + targetPos.y * targetPos.y);
-    double FuelAirTime = STgtDistance / ballFlightSpeed;
-
-    double virtualX = turretllx_cord - (robotXVel * FuelAirTime);
-    double virtualY = turretlly_cord - (robotYVel * FuelAirTime);
-
-    return std::atan2(virtualY, virtualX) * (180.0 / std::numbers::pi);    
-}
-
-double AFCVision::SavedTargetDistance(bool turretHasTarget, double TgtDistance){
-        if (turretHasTarget && TgtDistance < 110){
-            return STgtDistance = TgtDistance;
+double AFCVision::Saved_Turret_Angle_To_Target(bool Robot_Has_Target, double Angle_To_Target){
+        if (Robot_Has_Target && Angle_To_Target < 110){
+            return Saved_Turret_Angle = Angle_To_Target;
         } else {
-            return STgtDistance;
+            return Saved_Turret_Angle;
         }
 }
 
-double AFCVision::SavedTargetAngle(bool robotHasTarget, double TgtAngle){
-        if (robotHasTarget){
-            return STgtAngle = TgtAngle;
+double AFCVision::Saved_Fly_Speed(bool Robot_Has_Target, double Target_Distance){
+        if (Robot_Has_Target && Target_Distance < 110){
+            return Saved_Flywheel_Speed = Target_Distance;
         } else {
-            return STgtAngle;
+            return Saved_Flywheel_Speed;
         }
 }
-
-double AFCVision::TurretYCalc(double ll4YVel){
-    return turretYVelocity = cos(26)*ll4YVel;
-}
-
-double AFCVision::LimelightXAcceleration(double ll4XAccel, double XVelOrigin){
-
-    double XVelocity = ((std::trunc(ll4XAccel*10)/10)+0.4)*0.02+XVelOrigin;
-
-    return XVelOrigin = XVelocity;
-
-}
-
-double AFCVision::LimelightYAcceleration(double ll4YAccel, double YVelOrigin){
-
-    double YVelocity = ((std::trunc(ll4YAccel*10)/10)-0.9)*0.02+YVelOrigin;
-
-    return YVelOrigin = YVelocity;
-
-}
-
-// Vector2D GetCurrentTarget(){
-//     double txTarget = LimelightHelpers::getTX("limelight-limenew");
-//     double tyTarget = LimelightHelpers::getTY("limelight-limenew");
-//     bool turretHasTarget = LimelightHelpers::getTV("limelight-limenew");
-
-//     if (!turretHasTarget) return {0, 0};
-//     // 45 target hight 4 camera 30 angle of camera
-//     double distance = (45.0 - 24.0) / std::tan((30.0 + tyTarget) * (std::numbers::pi / 180.0));
-
-//     double x = distance * std::cos(txTarget * (std::numbers::pi / 180));
-//     double y = distance * std::sin(tyTarget * (std::numbers::pi / 180));
-//     return {x, y};
-// }
-
-// double CalcCompAngle(double robotXVel, double robotYVel){
-//     Vector2D targetPos = GetCurrentTarget();
-//     if (targetPos.x == 0 && targetPos.y == 0) return 0.0;
-
-//     double distance = std::sqrt(targetPos.x * targetPos.x + targetPos.y * targetPos.y);
-//     double FuelAirTime = distance / 350.0;
-
-//     double virtualX = targetPos.x - (robotXVel * FuelAirTime);
-//     double virtualY = targetPos.y - (robotYVel * FuelAirTime);
-
-//     double compensatedAngle = std::atan2(virtualY, virtualX) * (180.0 / std::numbers::pi);
-
-//     return compensatedAngle;    
-// }
-
-// void AFCVision::TurretFace(){
-    
-// }
-
-// void AFCVision::Disable(){}
-
-   
