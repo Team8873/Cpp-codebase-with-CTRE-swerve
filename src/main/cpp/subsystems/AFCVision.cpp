@@ -16,8 +16,8 @@ void AFCVision::Periodic(){
     Turret_X_Cord = (std::abs(std::cos(LL4_Face_Angle * (std::numbers::pi / 180.0)))*0.146)+LL4_X_Cord;
     Turret_Y_Cord = (std::sin(LL4_Face_Angle * (std::numbers::pi / 180.0))*0.146)+LL4_Y_Cord;
 
-    X_Range_To_Target = (Target_Cord().at(0)-Turret_X_Cord);
-    Y_Range_To_Target = (Target_Cord().at(1)-Turret_Y_Cord);
+    X_Range_To_Target = (Target_Cord().x-Turret_X_Cord);
+    Y_Range_To_Target = (Target_Cord().y-Turret_Y_Cord);
     Distance_To_Target = (sqrt(std::pow(X_Range_To_Target, 2) + std::pow(Y_Range_To_Target, 2))); 
 
     Turret_Angle_To_Target = (LL4_Face_Angle-(std::atan2(Y_Range_To_Target, X_Range_To_Target)*(180/std::numbers::pi)));
@@ -26,17 +26,22 @@ void AFCVision::Periodic(){
     Saved_Turret_Angle = Saved_Turret_Angle_To_Target(LL4HasTarget, Turret_Angle_To_Target);
     Saved_Flywheel_Speed = Saved_Fly_Speed(LL4HasTarget, SpeedRamp);
 
+    frc::SmartDashboard::PutNumber("Turret X Cord", Turret_X_Cord);
+    frc::SmartDashboard::PutNumber("Turret Y Cord", Turret_Y_Cord);
+    frc::SmartDashboard::PutNumber("Y_Range_To_Target", Y_Range_To_Target);
+    frc::SmartDashboard::PutNumber("X_Range_To_Target", X_Range_To_Target);
+    frc::SmartDashboard::PutNumber("LL4_Face_Angle", LL4_Face_Angle);
+    frc::SmartDashboard::PutNumber("Saved_Turret_Angle", Saved_Turret_Angle);
+
+
 }
 
-std::array<double,2> Target_Cord()
-{
+Vector2D AFCVision::Target_Cord(){
     if (auto ally = frc::DriverStation::GetAlliance()) {
         if (ally.value() == frc::DriverStation::Alliance::kRed) {
-            std::array<double,2> RedAllianceHub = {11.915394, 4.034536};
-            return RedAllianceHub;
+            return {11.915394, 4.034536};
         } else{
-        std::array<double,2> BlueAllianceHub = {4.625594 , 4.034536};
-            return BlueAllianceHub;
+            return {4.625594, 4.034536};
         }
     }
 }

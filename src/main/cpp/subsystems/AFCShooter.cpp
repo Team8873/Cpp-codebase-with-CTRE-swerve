@@ -61,7 +61,8 @@ void AFCShooter::Disable(){
 }
 
 void AFCShooter::TurretPOS(double pos){
-    m_turretMotor.GetClosedLoopController().SetSetpoint(pos, rev::spark::SparkLowLevel::ControlType::kPosition);
+    double ajusted_pos = -(pos*2.33333);
+    m_turretMotor.GetClosedLoopController().SetSetpoint(ajusted_pos, rev::spark::SparkLowLevel::ControlType::kPosition);
 }
 
 void AFCShooter::TurretSpeed(double speed){
