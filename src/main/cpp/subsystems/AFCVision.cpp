@@ -26,14 +26,7 @@ void AFCVision::Periodic(){
     Saved_Turret_Angle = Saved_Turret_Angle_To_Target(LL4HasTarget, Turret_Angle_To_Target);
     Saved_Flywheel_Speed = Saved_Fly_Speed(LL4HasTarget, SpeedRamp);
 
-    frc::SmartDashboard::PutNumber("Turret X Cord", Turret_X_Cord);
-    frc::SmartDashboard::PutNumber("Turret Y Cord", Turret_Y_Cord);
-    frc::SmartDashboard::PutNumber("Y_Range_To_Target", Y_Range_To_Target);
-    frc::SmartDashboard::PutNumber("X_Range_To_Target", X_Range_To_Target);
-    frc::SmartDashboard::PutNumber("LL4_Face_Angle", LL4_Face_Angle);
-    frc::SmartDashboard::PutNumber("Saved_Turret_Angle", Saved_Turret_Angle);
-
-
+    frc::SmartDashboard::PutNumber("Nothing", 0);
 }
 
 Vector2D AFCVision::Target_Cord(){

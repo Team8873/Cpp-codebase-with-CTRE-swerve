@@ -21,13 +21,10 @@
 #include "subsystems/AFCVision.h"
 #include "LimelightHelpers.h"
 
-
 #include "commands/AFCIntakeComm.h"
 #include "commands/AFCShootingComm.h"
 #include "commands/AFCShortShootingComm.h"
 #include "commands/AFCStowComm.h"
-
-#include "frc/XboxController.h"
 
 #include "Telemetry.h"
 
@@ -55,7 +52,7 @@ private:
 
 public:
     subsystems::CommandSwerveDrivetrain drivetrain{TunerConstants::CreateDrivetrain()};
-
+   
 private:
     /* Path follower */
     frc::SendableChooser<frc2::Command *> autoChooser;
