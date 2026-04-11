@@ -33,6 +33,6 @@
   "bumperOffsetX": 0.0,
   "bumperOffsetY": 0.0,
   "robotFeatures": [
-    "{\"name\":\"Intake\",\"type\":\"rounded_rect\",\"data\":{\"center\":{\"x\":-0.381,\"y\":0.0},\"size\":{\"width\":0.635,\"length\":0.1778},\"borderRadius\":0.0,\"strokeWidth\":0.01,\"filled\":true}}"
+    "{\"name\":\"Intake\",\"type\":\"rounded_rect\",\"data\":{\"center\":{\"x\":-0.381,\"y\":0.0},\"size\":{\"width\":0.635,\"length\":0.2921},\"borderRadius\":0.0,\"strokeWidth\":0.01,\"filled\":true}}"
   ]
 }
