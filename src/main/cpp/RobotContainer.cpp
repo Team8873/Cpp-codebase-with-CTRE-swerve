@@ -4,6 +4,7 @@
 
 #include "RobotContainer.h"
 #include <frc/smartdashboard/SmartDashboard.h>
+
 #include <frc2/command/Commands.h>
 #include <frc2/command/CommandScheduler.h>
 #include <frc2/command/button/RobotModeTriggers.h>
@@ -37,9 +38,13 @@ RobotContainer::RobotContainer() : m_afcIndexer(),m_afcFlywheel(), m_afcIntake()
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
     frc::SmartDashboard::PutData("Auto Mode", &autoChooser);
     
-   
+    auto state = drivetrain.GetState();
+    frc::Pose2d pose = state.Pose;
+    frc::ChassisSpeeds speed = state.Speeds;
+    frc::SmartDashboard::PutNumber("Bot X Speed", speed.vx.value());
+    frc::SmartDashboard::PutNumber("Bot Y Speed", speed.vy.value());
     ConfigureBindings();
-
+     
 
 }
 
@@ -163,11 +168,12 @@ void RobotContainer::ConfigureBindings()
     //Auto Lock
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(m_afcVision.Saved_Turret_Angle);},{&m_afcShooter}));
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.AutoSpeed(m_afcVision.Saved_Flywheel_Speed);}, {&m_afcVision}));
+    //m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.}));
 
     //Flywheel controls
     //m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
-    // m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));
-    // m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.ManualSpeed(m_operator.GetLeftY());}, {&m_afcFlywheel}));
+    //m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));
+    //m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.ManualSpeed(m_operator.GetLeftY());}, {&m_afcFlywheel}));
     m_operator.LeftStick().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SuperShoot();}, {&m_afcFlywheel}));
 
     // *

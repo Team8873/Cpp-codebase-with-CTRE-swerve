@@ -7,7 +7,9 @@ AFCVision::AFCVision(){
 }
 
 void AFCVision::Periodic(){
-
+    
+    
+    
     LL4HasTarget = LimelightHelpers::getTV("limelight-limenew");
     LL4_X_Cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(0);
     LL4_Y_Cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(1);
@@ -26,7 +28,20 @@ void AFCVision::Periodic(){
     Saved_Turret_Angle = Saved_Turret_Angle_To_Target(LL4HasTarget, Turret_Angle_To_Target);
     Saved_Flywheel_Speed = Saved_Fly_Speed(LL4HasTarget, SpeedRamp);
 
-    frc::SmartDashboard::PutNumber("Nothing", 0);
+    
+    
+    units::meter_t X_Speed = units::meter_t{frc::SmartDashboard::GetNumber("Bot X Speed", 0.0)};
+    units::meter_t Y_Speed = units::meter_t{frc::SmartDashboard::GetNumber("Bot Y Speed", 0.0)};
+    units::meter_t X_Range = units::meter_t{X_Range_To_Target};
+    units::meter_t Y_Range = units::meter_t{Y_Range_To_Target};
+    frc::Translation2d targetPosistion{X_Range, Y_Range};
+    frc::Translation2d targetVector = ((targetPosistion / Distance_To_Target) * SpeedRamp);
+    frc::Translation2d robotVelocity{X_Speed, Y_Speed};
+    frc::Translation2d shotVector = (targetVector - robotVelocity);
+    double Something = shotVector.Angle().Degrees().value();
+    frc::SmartDashboard::PutNumber("Nothing", Something);
+
+    frc::Translation2d YOU_ARE_TRYING_TO_ACCESS_A_SINGLE_COEFFICIENT_IN_A_SPECIAL_EXPRESSION_WHERE_THAT_IS_NOT_ALLOWED_BECAUSE_THAT_WOULD_BE_INEFFICIENT;
 }
 
 Vector2D AFCVision::Target_Cord(){
@@ -38,7 +53,14 @@ Vector2D AFCVision::Target_Cord(){
         }
     }
 }
+double AFCVision::Shoot_Scoot(double Robot_X_Vel, double Robot_Y_Vel){
+    Vector2D Tar_Pos = Target_Cord();
+    Fuel_Air_Time = Distance_To_Target / ballFlightSpeed;
+    double virtualX = Tar_Pos.x - (Robot_X_Vel * Fuel_Air_Time);
+    double virtualY = Tar_Pos.y - (Robot_Y_Vel * Fuel_Air_Time);
+    return 0;
 
+}
 double AFCVision::Saved_Turret_Angle_To_Target(bool Robot_Has_Target, double Angle_To_Target){
         if (Robot_Has_Target && Angle_To_Target < 110){
             return Saved_Turret_Angle = Angle_To_Target;

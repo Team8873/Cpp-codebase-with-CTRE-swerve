@@ -66,6 +66,7 @@ public:
     AFCShooter m_afcShooter{}; // Shooter Subsystem initialization
     AFCFlywheel m_afcFlywheel{}; // Flywheel subsytem initialization
     AFCVision m_afcVision{}; // Vision subsytem initialization
+    
 
    
 private:

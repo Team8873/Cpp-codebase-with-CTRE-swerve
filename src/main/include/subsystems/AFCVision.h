@@ -7,6 +7,8 @@
 #include <array>
 #include <algorithm>
 #include <iostream>
+#include <units/angular_velocity.h>
+#include <units/length.h>
 
 #include <frc2/command/SubsystemBase.h>
 #include <frc2/command/CommandPtr.h>
@@ -14,7 +16,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/kinematics/ChassisSpeeds.h>
 #include <frc/DriverStation.h>
-#include <units/angular_velocity.h>
+#include <frc/geometry/Translation2d.h>
 
 #include "LimelightHelpers.h"
 
@@ -29,6 +31,7 @@ class AFCVision : public frc2::SubsystemBase
     explicit AFCVision();
     void Periodic() override;
     Vector2D Target_Cord();
+    double Shoot_Scoot(double Robot_X_Vel, double Robot_Y_Vel);
     double Saved_Turret_Angle_To_Target(bool Robot_Has_Target, double Angle_To_Target);
     double Saved_Fly_Speed(bool Robot_Has_Target, double Target_Distance);
 
@@ -38,6 +41,7 @@ class AFCVision : public frc2::SubsystemBase
 
 
     private:
+       
 
        bool LL4HasTarget = false;    //
        double LL4_X_Cord = 0.0;      // Data From LL4
@@ -56,7 +60,9 @@ class AFCVision : public frc2::SubsystemBase
 
 //---------------------------------- Shoot & Scoot ---------------------------------
        double ballFlightSpeed = 240.0; // Muzzle velocity of Fuel in inches
-
+       double Fuel_Air_Time = 0.0;
+       double Robot_X_Vel = 0.0;
+       double Robot_Y_Vel = 0.0;
        double LL4_X_Acell = 0.0;
        double LL4_Y_Acell = 0.0;
        double LL4_X_Vel = 0.0;
