@@ -39,9 +39,11 @@ void AFCVision::Periodic(){
     frc::Translation2d robotVelocity{X_Speed, Y_Speed};
     frc::Translation2d shotVector = (targetVector - robotVelocity);
     double Something = shotVector.Angle().Degrees().value();
-    frc::SmartDashboard::PutNumber("Nothing", Something);
 
-    frc::Translation2d YOU_ARE_TRYING_TO_ACCESS_A_SINGLE_COEFFICIENT_IN_A_SPECIAL_EXPRESSION_WHERE_THAT_IS_NOT_ALLOWED_BECAUSE_THAT_WOULD_BE_INEFFICIENT;
+    
+    frc::SmartDashboard::PutNumber("Nothing", Something);
+     frc::SmartDashboard::PutNumber("Angle to Target", Turret_Angle_To_Target);
+
 }
 
 Vector2D AFCVision::Target_Cord(){
