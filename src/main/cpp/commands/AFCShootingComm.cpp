@@ -20,10 +20,10 @@ void AFCShootingComm::Initialize() {
 }
 
 void AFCShootingComm::Execute() {
-    m_pShootersubsystem->AutoLock(LimelightHelpers::getTX("limelight-limenew"));
+    m_pShootersubsystem->TurretPOS(m_pVisionsubsystem->Saved_Turret_Angle);
+    m_pFlywheelSubsytem->AutoSpeed(m_pVisionsubsystem->Saved_Flywheel_Speed);
     m_pIndexerSubsystem->UptakeOn();
-    m_pFlywheelSubsytem->ManualSpeed(0);
-    // m_pFlywheelSubsytem->AutoSpeed(m_pVisionsubsystem->FlySpeed);
+
 }
 
 void AFCShootingComm::End(bool interrupted) {
