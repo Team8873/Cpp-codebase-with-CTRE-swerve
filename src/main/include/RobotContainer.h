@@ -32,7 +32,7 @@
 class RobotContainer {
 private:
     units::meters_per_second_t MaxSpeed = 1 * TunerConstants::kSpeedAt12Volts; // kSpeedAt12Volts desired top speed
-    units::radians_per_second_t MaxAngularRate = 0.75_tps; // 3/4 of a rotation per second max angular velocity
+    units::radians_per_second_t MaxAngularRate = 1_tps; // 3/4 of a rotation per second max angular velocity
 
     /* Setting up bindings for necessary control of the swerve drive platform */
     swerve::requests::FieldCentric drive = swerve::requests::FieldCentric{}
@@ -66,6 +66,7 @@ public:
     AFCShooter m_afcShooter{}; // Shooter Subsystem initialization
     AFCFlywheel m_afcFlywheel{}; // Flywheel subsytem initialization
     AFCVision m_afcVision{}; // Vision subsytem initialization
+    
 
    
 private:
