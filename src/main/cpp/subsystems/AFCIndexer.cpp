@@ -82,10 +82,13 @@ void AFCIndexer::UptakeReverse(){
 void AFCIndexer::UptakeOn() {
     //m_uptakeMotor.GetClosedLoopController().SetSetpoint(450, rev::spark::SparkLowLevel::ControlType::kVelocity);
     m_uptaker.Set(-1.0);
-    m_conveyorMotor.Set(0.3);
-    m_kickerBarMotor.Set(0.3);
+    m_conveyorMotor.Set(0.75);
+    //m_kickerBarMotor.Set(-0.05);
 }
 
+void AFCIndexer::KickerBarOn(){
+    m_kickerBarMotor.Set(0.1);
+}
 // bool AFCIndexer::HopperEmpty(){
 //     if (m_distanceSensor.GetRange() <= 5){
 
@@ -98,5 +101,6 @@ void AFCIndexer::Stop() {
     m_conveyorMotor.StopMotor();
     m_uptaker.StopMotor();
     m_kickerBarMotor.StopMotor();
+
 }
 
