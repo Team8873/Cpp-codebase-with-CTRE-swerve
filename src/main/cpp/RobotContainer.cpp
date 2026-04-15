@@ -38,11 +38,7 @@ RobotContainer::RobotContainer() : m_afcIndexer(),m_afcFlywheel(), m_afcIntake()
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
     frc::SmartDashboard::PutData("Auto Mode", &autoChooser);
     
-    auto state = drivetrain.GetState();
-    frc::Pose2d pose = state.Pose;
-    frc::ChassisSpeeds speed = state.Speeds;
-    frc::SmartDashboard::PutNumber("Bot X Speed", speed.vx.value());
-    frc::SmartDashboard::PutNumber("Bot Y Speed", speed.vy.value());
+    
     ConfigureBindings();
      
 
@@ -168,7 +164,6 @@ void RobotContainer::ConfigureBindings()
     //Auto Lock
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(m_afcVision.Saved_Turret_Angle);},{&m_afcShooter}));
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.AutoSpeed(m_afcVision.Saved_Flywheel_Speed);}, {&m_afcVision}));
-    //m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.}));
 
     //Flywheel controls
     //m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
@@ -189,6 +184,13 @@ void RobotContainer::ConfigureBindings()
     // *
     // * 
     // * 
+
+    auto state = drivetrain.GetState();
+    frc::Pose2d pose = state.Pose;
+    frc::ChassisSpeeds speed = state.Speeds;
+    double vx = speed.vx.value();
+    frc::SmartDashboard::PutNumber("Bot X Speed", vx);
+    frc::SmartDashboard::PutNumber("Bot Y Speed", speed.vy.value());
      
 }
 

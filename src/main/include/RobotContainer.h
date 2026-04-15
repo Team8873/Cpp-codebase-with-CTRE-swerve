@@ -71,6 +71,7 @@ public:
    
 private:
     void ConfigureBindings();
+    
 
      frc2::CommandXboxController m_operator{1}; //Operator Controller initialization
 

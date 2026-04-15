@@ -17,6 +17,7 @@
 #include <frc/kinematics/ChassisSpeeds.h>
 #include <frc/DriverStation.h>
 #include <frc/geometry/Translation2d.h>
+#include <networktables/DoubleTopic.h>
 
 #include "LimelightHelpers.h"
 
@@ -42,7 +43,6 @@ class AFCVision : public frc2::SubsystemBase
 
     private:
        
-
        bool LL4HasTarget = false;    //
        double LL4_X_Cord = 0.0;      // Data From LL4
        double LL4_Y_Cord = 0.0;      //
