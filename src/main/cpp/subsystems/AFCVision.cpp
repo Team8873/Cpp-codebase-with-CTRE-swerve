@@ -4,6 +4,8 @@
 
 
 AFCVision::AFCVision(){
+    auto inst = nt::NetworkTableInstance::GetDefault();
+    auto table = inst.GetTable("DriveState");
 }
 
 void AFCVision::Periodic(){
@@ -23,15 +25,17 @@ void AFCVision::Periodic(){
     Distance_To_Target = (sqrt(std::pow(X_Range_To_Target, 2) + std::pow(Y_Range_To_Target, 2))); 
 
     Turret_Angle_To_Target = (LL4_Face_Angle-(std::atan2(Y_Range_To_Target, X_Range_To_Target)*(180/std::numbers::pi)));
-    SpeedRamp = ((1.59*(Distance_To_Target * Distance_To_Target)) + (1.84 * Distance_To_Target) + 50.92);
+    SpeedRamp = ((0.673559*(Distance_To_Target * Distance_To_Target)) + (7.52202 * Distance_To_Target) + 37.9335);
 
     Saved_Turret_Angle = Saved_Turret_Angle_To_Target(LL4HasTarget, Turret_Angle_To_Target);
     Saved_Flywheel_Speed = Saved_Fly_Speed(LL4HasTarget, SpeedRamp);
 
     
-    
-    units::meter_t X_Speed = units::meter_t{frc::SmartDashboard::GetNumber("Bot X Speed", 0.0)};
-    units::meter_t Y_Speed = units::meter_t{frc::SmartDashboard::GetNumber("Bot Y Speed", 0.0)};
+    //nt::GetDouble("vx", 0.0);
+    double netvx = frc::SmartDashboard::GetNumber("vx", 0.0);
+    double netvy = frc::SmartDashboard::GetNumber("vy", 0.0);
+    units::meter_t X_Speed = units::meter_t{netvx};
+    units::meter_t Y_Speed = units::meter_t{netvy};
     units::meter_t X_Range = units::meter_t{X_Range_To_Target};
     units::meter_t Y_Range = units::meter_t{Y_Range_To_Target};
     frc::Translation2d targetPosistion{X_Range, Y_Range};
@@ -42,8 +46,9 @@ void AFCVision::Periodic(){
 
     
     frc::SmartDashboard::PutNumber("Nothing", Something);
-     frc::SmartDashboard::PutNumber("Angle to Target", Turret_Angle_To_Target);
-
+    frc::SmartDashboard::PutNumber("Angle to Target", Turret_Angle_To_Target);
+    frc::SmartDashboard::PutNumber("Something X", netvx);
+    frc::SmartDashboard::PutNumber("Somthing Y", netvy);
 }
 
 Vector2D AFCVision::Target_Cord(){
