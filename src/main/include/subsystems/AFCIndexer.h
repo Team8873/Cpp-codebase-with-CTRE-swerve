@@ -2,6 +2,7 @@
 
 
 #include <functional>
+#include <chrono>
 
 #include <rev/SparkMax.h>
 #include <TimeOfFlight.h>
@@ -50,5 +51,6 @@ class AFCIndexer : public frc2::SubsystemBase{
         double distanceInmm = 0.0;
         double distanceInInches = 0.0;
         const double mmToInches = 25.4;
+        std::chrono::time_point<std::chrono::steady_clock> m_startTime;
         
 };

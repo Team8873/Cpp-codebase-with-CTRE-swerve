@@ -25,6 +25,7 @@ namespace ConstantsCanIds
    constexpr CANid_t UptakeMotorId = 14;    // UpTake Motor CAN ID    ♦ SparkMax ♦♦♦ NOT USED ♦♦♦
    constexpr CANid_t TurretMotorId = 15;    // Turret Motor CAN ID    ♦ SparkMax
    constexpr CANid_t ClimberMotorId = 16;   // Climber Motor CAN ID   ♦ SparkMax ♦♦♦ NOT USED ♦♦♦
+   constexpr CANid_t KickerBarMotorId = 17;
 
    constexpr CANid_t IntakeEncoderId = 14; //CTRE CAN devices can share ids with
    constexpr CANid_t CANdleId = 15;        //others as long as it is a different device

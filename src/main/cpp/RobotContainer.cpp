@@ -155,6 +155,9 @@ void RobotContainer::ConfigureBindings()
 
     m_operator.RightBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeReverse();},{&m_afcIndexer}));
 
+    m_afcKicker.SetDefaultCommand(frc2::cmd::Run([this]{m_afcKicker.Stop();},{&m_afcKicker}));
+    m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcKicker.KickerOn();},{&m_afcKicker}));
+
     //Intake controls
     m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-m_operator.GetRightY());},{&m_afcIntake}));
     m_operator.LeftBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(1);},{&m_afcIntake})); //Be aware this is a built in negative on variable in the subsytem file
@@ -172,6 +175,7 @@ void RobotContainer::ConfigureBindings()
     m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(200);},{&m_afcShooter}));
 
     //Auto Lock
+    m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();},{&m_afcFlywheel}));
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(m_afcVision.Saved_Turret_Angle);},{&m_afcShooter}));
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.AutoSpeed(m_afcVision.Saved_Flywheel_Speed);}, {&m_afcVision}));
     //m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.}));
@@ -195,6 +199,13 @@ void RobotContainer::ConfigureBindings()
     // *
     // * 
     // * 
+
+    auto state = drivetrain.GetState();
+    frc::Pose2d pose = state.Pose;
+    frc::ChassisSpeeds speed = state.Speeds;
+    double vx = speed.vx.value();
+    frc::SmartDashboard::PutNumber("Bot X Speed", vx);
+    frc::SmartDashboard::PutNumber("Bot Y Speed", speed.vy.value());
      
 }
 
