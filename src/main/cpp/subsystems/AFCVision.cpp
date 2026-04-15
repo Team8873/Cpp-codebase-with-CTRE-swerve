@@ -31,7 +31,8 @@ void AFCVision::Periodic(){
     Saved_Flywheel_Speed = Saved_Fly_Speed(LL4HasTarget, SpeedRamp);
 
     
-    //nt::GetDouble("vx", 0.0);
+ double vx = vxSub.Get();
+ 
     double netvx = frc::SmartDashboard::GetNumber("vx", 0.0);
     double netvy = frc::SmartDashboard::GetNumber("vy", 0.0);
     units::meter_t X_Speed = units::meter_t{netvx};
@@ -47,7 +48,7 @@ void AFCVision::Periodic(){
     
     frc::SmartDashboard::PutNumber("Nothing", Something);
     frc::SmartDashboard::PutNumber("Angle to Target", Turret_Angle_To_Target);
-    frc::SmartDashboard::PutNumber("Something X", netvx);
+    frc::SmartDashboard::PutNumber("Something X", vx);
     frc::SmartDashboard::PutNumber("Somthing Y", netvy);
 }
 

@@ -21,6 +21,10 @@
 #include "subsystems/AFCVision.h"
 #include "LimelightHelpers.h"
 
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
+#include <networktables/DoubleTopic.h>
+
 #include "commands/AFCIntakeComm.h"
 #include "commands/AFCShootingComm.h"
 #include "commands/AFCShortShootingComm.h"
@@ -30,6 +34,11 @@
 
 
 class RobotContainer {
+
+    nt::DoublePublisher vxPub;
+    nt::DoublePublisher vyPub;
+    nt::DoublePublisher omegaPub;
+
 private:
     units::meters_per_second_t MaxSpeed = 1 * TunerConstants::kSpeedAt12Volts; // kSpeedAt12Volts desired top speed
     units::radians_per_second_t MaxAngularRate = 1_tps; // 3/4 of a rotation per second max angular velocity
@@ -67,6 +76,9 @@ public:
     AFCFlywheel m_afcFlywheel{}; // Flywheel subsytem initialization
     AFCVision m_afcVision{}; // Vision subsytem initialization
     
+    explicit RobotContainer(nt::DoubleTopic vxTopic){
+        vxPub = vxTopic.Publish();
+    }
 
    
 private:

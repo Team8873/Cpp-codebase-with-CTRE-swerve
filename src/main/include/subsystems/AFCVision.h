@@ -17,6 +17,9 @@
 #include <frc/kinematics/ChassisSpeeds.h>
 #include <frc/DriverStation.h>
 #include <frc/geometry/Translation2d.h>
+
+#include <networktables/NetworkTableInstance.h>
+#include <networktables/NetworkTable.h>
 #include <networktables/DoubleTopic.h>
 
 #include "LimelightHelpers.h"
@@ -27,6 +30,9 @@ struct Vector2D {
 
 class AFCVision : public frc2::SubsystemBase
 {
+
+nt::DoubleSubscriber vxSub;
+
     public:
 
     explicit AFCVision();
@@ -38,6 +44,10 @@ class AFCVision : public frc2::SubsystemBase
 
     double Saved_Turret_Angle = 0.0;
     double Saved_Flywheel_Speed = 0.0;
+
+    explicit AFCVision(nt::DoubleTopic vxTopic){
+        vxSub = vxTopic.Subscribe(0.0);
+    }
     
 
 

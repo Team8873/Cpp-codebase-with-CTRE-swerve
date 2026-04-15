@@ -189,8 +189,10 @@ void RobotContainer::ConfigureBindings()
     frc::Pose2d pose = state.Pose;
     frc::ChassisSpeeds speed = state.Speeds;
     double vx = speed.vx.value();
-    frc::SmartDashboard::PutNumber("Bot X Speed", vx);
-    frc::SmartDashboard::PutNumber("Bot Y Speed", speed.vy.value());
+    double vy = speed.vy.value();
+
+    vxPub.SetDefault(0.0);
+    vxPub.Set(vx);
      
 }
 
