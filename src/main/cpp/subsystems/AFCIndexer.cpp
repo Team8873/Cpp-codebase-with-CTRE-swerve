@@ -52,6 +52,7 @@ AFCIndexer::AFCIndexer()
                     0.0, // Acceleration constant
                     true,
                     true);
+    m_startTime = std::chrono::steady_clock::now();
 }
 
 
@@ -71,7 +72,10 @@ void AFCIndexer::ConveyorOn() {
 void AFCIndexer::UptakeReverse(){
     m_uptaker.Set(1.0);
     m_conveyorMotor.Set(-0.3);
-    m_kickerBarMotor.Set(-0.3);
+    while((std::chrono::steady_clock::now() - m_startTime) > std::chrono::seconds(1)){
+        m_kickerBarMotor.Set(-0.3);
+        m_startTime = std::chrono::steady_clock::now();
+    }
 
 }
 
