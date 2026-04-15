@@ -29,13 +29,6 @@ void AFCVision::Periodic(){
 
     Saved_Turret_Angle = Saved_Turret_Angle_To_Target(LL4HasTarget, Turret_Angle_To_Target);
     Saved_Flywheel_Speed = Saved_Fly_Speed(LL4HasTarget, SpeedRamp);
-<<<<<<< HEAD
-    
-    //Robot_X_Vel = nt::NetworkTableInstance::GetDefault().GetDoubleTopic("DriveState/Speeds/vx").Subscribe(0.0).Get();
-    Robot_Y_Vel = nt::NetworkTableInstance::GetDefault().GetDoubleTopic("DriveState/Speeds/vy");
-    units::meter_t X_Speed = units::meter_t{frc::SmartDashboard::GetNumber("Bot X Speed", 0.0)};
-    units::meter_t Y_Speed = units::meter_t{frc::SmartDashboard::GetNumber("Bot Y Speed", 0.0)};
-=======
 
     
     //nt::GetDouble("vx", 0.0);
@@ -43,7 +36,6 @@ void AFCVision::Periodic(){
     double netvy = frc::SmartDashboard::GetNumber("vy", 0.0);
     units::meter_t X_Speed = units::meter_t{netvx};
     units::meter_t Y_Speed = units::meter_t{netvy};
->>>>>>> e454ed1df721b32c582dd9550fc0575fd0835593
     units::meter_t X_Range = units::meter_t{X_Range_To_Target};
     units::meter_t Y_Range = units::meter_t{Y_Range_To_Target};
     frc::Translation2d targetPosistion{X_Range, Y_Range};
@@ -53,17 +45,10 @@ void AFCVision::Periodic(){
     double Something = shotVector.Angle().Degrees().value();
 
     
-<<<<<<< HEAD
-    frc::SmartDashboard::PutNumber("Nothing X", Robot_X_Vel);
-    frc::SmartDashboard::PutNumber("Nothing Y", Robot_Y_Vel);
-    frc::SmartDashboard::PutNumber("Angle to Target", Turret_Angle_To_Target);
-
-=======
     frc::SmartDashboard::PutNumber("Nothing", Something);
     frc::SmartDashboard::PutNumber("Angle to Target", Turret_Angle_To_Target);
     frc::SmartDashboard::PutNumber("Something X", netvx);
     frc::SmartDashboard::PutNumber("Somthing Y", netvy);
->>>>>>> e454ed1df721b32c582dd9550fc0575fd0835593
 }
 
 Vector2D AFCVision::Target_Cord(){
