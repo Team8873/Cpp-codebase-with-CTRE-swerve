@@ -27,9 +27,9 @@ void AFCVision::Periodic(){
 
     Saved_Turret_Angle = Saved_Turret_Angle_To_Target(LL4HasTarget, Turret_Angle_To_Target);
     Saved_Flywheel_Speed = Saved_Fly_Speed(LL4HasTarget, SpeedRamp);
-
     
-    
+    //Robot_X_Vel = nt::NetworkTableInstance::GetDefault().GetDoubleTopic("DriveState/Speeds/vx").Subscribe(0.0).Get();
+    Robot_Y_Vel = nt::NetworkTableInstance::GetDefault().GetDoubleTopic("DriveState/Speeds/vy");
     units::meter_t X_Speed = units::meter_t{frc::SmartDashboard::GetNumber("Bot X Speed", 0.0)};
     units::meter_t Y_Speed = units::meter_t{frc::SmartDashboard::GetNumber("Bot Y Speed", 0.0)};
     units::meter_t X_Range = units::meter_t{X_Range_To_Target};
@@ -41,8 +41,9 @@ void AFCVision::Periodic(){
     double Something = shotVector.Angle().Degrees().value();
 
     
-    frc::SmartDashboard::PutNumber("Nothing", Something);
-     frc::SmartDashboard::PutNumber("Angle to Target", Turret_Angle_To_Target);
+    frc::SmartDashboard::PutNumber("Nothing X", Robot_X_Vel);
+    frc::SmartDashboard::PutNumber("Nothing Y", Robot_Y_Vel);
+    frc::SmartDashboard::PutNumber("Angle to Target", Turret_Angle_To_Target);
 
 }
 

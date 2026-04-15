@@ -147,6 +147,12 @@ void RobotContainer::ConfigureBindings()
     //Indexer controls
     m_afcIndexer.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIndexer.Stop();},{&m_afcIndexer}));
     m_operator.RightTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeOn();},{&m_afcIndexer}));
+    
+
+    // m_operator.RightTrigger().WhileTrue(frc2::cmd::Sequence(frc2::cmd::Run([this] {m_afcIndexer.UptakeReverse();}, {&m_afcIndexer}),
+    //                                                         frc2::cmd::Run([this] {m_afcIndexer.UptakeOn();}, {&m_afcIndexer})));
+
+
     m_operator.RightBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeReverse();},{&m_afcIndexer}));
 
     //Intake controls
@@ -171,7 +177,7 @@ void RobotContainer::ConfigureBindings()
     //m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.}));
 
     //Flywheel controls
-    //m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
+    m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
     //m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));
     //m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.ManualSpeed(m_operator.GetLeftY());}, {&m_afcFlywheel}));
     m_operator.LeftStick().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SuperShoot();}, {&m_afcFlywheel}));
