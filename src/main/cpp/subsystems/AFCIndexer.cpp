@@ -82,7 +82,7 @@ void AFCIndexer::UptakeOn() {
 }
 
 void AFCIndexer::KickerBarOn(){
-    m_kickerBarMotor.Set(0.1);
+    m_kickerBarMotor.Set(-0.1);
 }
 // bool AFCIndexer::HopperEmpty(){
 //     if (m_distanceSensor.GetRange() <= 5){
