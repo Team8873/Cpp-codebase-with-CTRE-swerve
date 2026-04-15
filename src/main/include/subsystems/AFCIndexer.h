@@ -30,6 +30,7 @@ class AFCIndexer : public frc2::SubsystemBase{
         void ConveyorOn();
         void UptakeReverse();
         void UptakeOn();
+        void KickerBarOn();
         bool HopperEmpty();
         double GetDis();
         double Convert();
@@ -48,5 +49,4 @@ class AFCIndexer : public frc2::SubsystemBase{
         double distanceInmm = 0.0;
         double distanceInInches = 0.0;
         const double mmToInches = 25.4;
-        
 };
