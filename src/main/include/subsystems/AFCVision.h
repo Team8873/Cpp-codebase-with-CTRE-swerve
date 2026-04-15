@@ -29,12 +29,13 @@ class AFCVision : public frc2::SubsystemBase
 {
     public:
 
-    explicit AFCVision();
+    explicit AFCVision(std::function<frc::ChassisSpeeds()> velocitySource);
     void Periodic() override;
     Vector2D Target_Cord();
     double Shoot_Scoot(double Robot_X_Vel, double Robot_Y_Vel);
     double Saved_Turret_Angle_To_Target(bool Robot_Has_Target, double Angle_To_Target);
     double Saved_Fly_Speed(bool Robot_Has_Target, double Target_Distance);
+    
 
     double Saved_Turret_Angle = 0.0;
     double Saved_Flywheel_Speed = 0.0;
@@ -68,6 +69,7 @@ class AFCVision : public frc2::SubsystemBase
        double LL4_X_Vel = 0.0;
        double LL4_Y_Vel = 0.0;
        double TurretYVel = 0.0;
+       std::function<frc::ChassisSpeeds()> m_velocitySource;
 
 
 };
