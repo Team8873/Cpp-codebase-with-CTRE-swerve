@@ -82,6 +82,7 @@ double AFCShooter::GetPosition(){
     return m_turretEncoder.GetPosition();   
 }
 
+
 void AFCShooter::Stop(){
     m_turretMotor.StopMotor();
 }

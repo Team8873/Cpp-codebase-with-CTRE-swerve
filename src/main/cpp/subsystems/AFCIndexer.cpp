@@ -41,17 +41,7 @@ AFCIndexer::AFCIndexer()
                     true,
                     true);
 
-    MaxMotorConfig(&m_kickerBarMotor,
-                    40.0_A,  // Max Amp
-                    true,// Brake mode
-                    0.1, // Proportional gain
-                    0.0, // Integral gain
-                    0.0, // Derivative gain ♦♦DON'T TOUCH♦♦ (0.0)
-                    0.0, // Static friction
-                    0.0, // Velocity constant
-                    0.0, // Acceleration constant
-                    true,
-                    true);
+    
     m_startTime = std::chrono::steady_clock::now();
 }
 
@@ -71,11 +61,7 @@ void AFCIndexer::ConveyorOn() {
 }
 void AFCIndexer::UptakeReverse(){
     m_uptaker.Set(1.0);
-    m_conveyorMotor.Set(-0.3);
-    while((std::chrono::steady_clock::now() - m_startTime) > std::chrono::seconds(1)){
-        m_kickerBarMotor.Set(-0.3);
-        m_startTime = std::chrono::steady_clock::now();
-    }
+    m_conveyorMotor.Set(-0.3);    
 
 }
 
@@ -86,9 +72,7 @@ void AFCIndexer::UptakeOn() {
     //m_kickerBarMotor.Set(-0.05);
 }
 
-void AFCIndexer::KickerBarOn(){
-    m_kickerBarMotor.Set(-0.1);
-}
+
 // bool AFCIndexer::HopperEmpty(){
 //     if (m_distanceSensor.GetRange() <= 5){
 
@@ -100,7 +84,5 @@ void AFCIndexer::KickerBarOn(){
 void AFCIndexer::Stop() {
     m_conveyorMotor.StopMotor();
     m_uptaker.StopMotor();
-    m_kickerBarMotor.StopMotor();
-
 }
 

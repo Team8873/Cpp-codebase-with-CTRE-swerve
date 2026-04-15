@@ -144,7 +144,9 @@ void RobotContainer::ConfigureBindings()
     m_afcIndexer.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIndexer.Stop();},{&m_afcIndexer}));
     m_operator.RightTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeOn();},{&m_afcIndexer}));
     m_operator.RightBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeReverse();},{&m_afcIndexer}));
-    m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.KickerBarOn();},{&m_afcIndexer}));
+
+    m_afcKicker.SetDefaultCommand(frc2::cmd::Run([this]{m_afcKicker.Stop();},{&m_afcKicker}));
+    m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcKicker.KickerOn();},{&m_afcKicker}));
 
     //Intake controls
     m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-m_operator.GetRightY());},{&m_afcIntake}));

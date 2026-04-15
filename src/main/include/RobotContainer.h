@@ -19,6 +19,7 @@
 #include "subsystems/CommandSwerveDrivetrain.h"
 #include "subsystems/AFCFlywheel.h"
 #include "subsystems/AFCVision.h"
+#include "subsystems/AFCKicker.h"
 #include "LimelightHelpers.h"
 
 #include "commands/AFCIntakeComm.h"
@@ -66,7 +67,7 @@ public:
     AFCShooter m_afcShooter{}; // Shooter Subsystem initialization
     AFCFlywheel m_afcFlywheel{}; // Flywheel subsytem initialization
     AFCVision m_afcVision{}; // Vision subsytem initialization
-    
+    AFCKicker m_afcKicker{};
 
    
 private:
