@@ -40,6 +40,18 @@ AFCIndexer::AFCIndexer()
                     0.0, // Acceleration constant
                     true,
                     true);
+
+    MaxMotorConfig(&m_kickerBarMotor,
+                    40.0_A,  // Max Amp
+                    true,// Brake mode
+                    0.1, // Proportional gain
+                    0.0, // Integral gain
+                    0.0, // Derivative gain ♦♦DON'T TOUCH♦♦ (0.0)
+                    0.0, // Static friction
+                    0.0, // Velocity constant
+                    0.0, // Acceleration constant
+                    true,
+                    true);
 }
 
 
@@ -59,6 +71,7 @@ void AFCIndexer::ConveyorOn() {
 void AFCIndexer::UptakeReverse(){
     m_uptaker.Set(1.0);
     m_conveyorMotor.Set(-0.3);
+    m_kickerBarMotor.Set(-0.3);
 
 }
 
@@ -66,7 +79,7 @@ void AFCIndexer::UptakeOn() {
     //m_uptakeMotor.GetClosedLoopController().SetSetpoint(450, rev::spark::SparkLowLevel::ControlType::kVelocity);
     m_uptaker.Set(-1.0);
     m_conveyorMotor.Set(0.3);
-    // if m_conveyorMotor.Spark
+    m_kickerBarMotor.Set(0.3);
 }
 
 // bool AFCIndexer::HopperEmpty(){
@@ -80,5 +93,6 @@ void AFCIndexer::UptakeOn() {
 void AFCIndexer::Stop() {
     m_conveyorMotor.StopMotor();
     m_uptaker.StopMotor();
+    m_kickerBarMotor.StopMotor();
 }
 
