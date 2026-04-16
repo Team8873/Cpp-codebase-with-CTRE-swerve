@@ -18,8 +18,9 @@ class AFCKicker : public frc2::SubsystemBase{
     public:
             explicit AFCKicker();
             void KickerOn();
+            void KickerBack();
             void Stop();
     private:
         rev::spark::SparkMax m_kickerBarMotor{ConstantsCanIds::KickerBarMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
-
+        rev::spark::SparkRelativeEncoder m_kickerBarEncoder = m_kickerBarMotor.GetEncoder();
 };
