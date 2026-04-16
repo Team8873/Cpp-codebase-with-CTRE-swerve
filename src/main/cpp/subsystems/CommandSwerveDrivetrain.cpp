@@ -40,7 +40,7 @@ void CommandSwerveDrivetrain::ConfigureAutoBuilder()
 }
 frc::ChassisSpeeds CommandSwerveDrivetrain::GetFieldVelocity(){
     auto state = GetState();
-    return frc::ChassisSpeeds::FromRobotRelativeSpeeds(
+    return frc::ChassisSpeeds::FromFieldRelativeSpeeds(
         state.Speeds, state.Pose.Rotation()
     );
 }
