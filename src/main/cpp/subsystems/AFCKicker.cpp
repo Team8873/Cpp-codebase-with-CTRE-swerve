@@ -24,8 +24,8 @@ void AFCKicker::KickerBack(){
 }
 
 void AFCKicker::KickerJitter(){
-    (frc2::cmd::RunOnce([this]{KickerOn();},{}).AndThen(frc2::cmd::Wait(0.3_s)) 
-                            .AndThen(frc2::cmd::RunOnce([this]{Stop();},{})).AndThen(frc2::cmd::Wait(0.5_s)).Repeatedly());
+    frc2::cmd::RunOnce([this]{KickerOn();},{}).AndThen(frc2::cmd::Wait(0.3_s)) 
+                            .AndThen(frc2::cmd::RunOnce([this]{Stop();},{})).AndThen(frc2::cmd::Wait(0.5_s)).Repeatedly();
 }
 
 void AFCKicker::Stop(){
