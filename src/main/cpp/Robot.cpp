@@ -12,6 +12,7 @@ void Robot::RobotPeriodic() {
     m_timeAndJoystickReplay.Update();
     frc2::CommandScheduler::GetInstance().Run();
 
+   
     // /*This example of adding Limelight is very simple and may not be sufficient for on-field use.
     //  * Users typically need to provide a standa
     //  * rd deviation that scales with the distance to target
@@ -35,12 +36,17 @@ void Robot::RobotPeriodic() {
 
 void Robot::DisabledInit() {}
 
-void Robot::DisabledPeriodic() {}
-
+void Robot::DisabledPeriodic() {
+   //  RobotAngle = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(5);
+    
+   // LimelightHelpers::SetRobotOrientation("limelight-limenew", RobotAngle, 0, 0, 0, 0, 0);
+LimelightHelpers::SetIMUAssistAlpha("limelight-limenew", 0.1),
+    LimelightHelpers::SetIMUMode("limelight-limenew", 3);
+}
 void Robot::DisabledExit() {}
 
 void Robot::AutonomousInit() {
-    LimelightHelpers::SetIMUMode("limelight-limenew", 3);
+
    // m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
     m_autonomousCommand = m_container.GetAutonomousCommand();
 
@@ -50,12 +56,14 @@ void Robot::AutonomousInit() {
 }
 
 void Robot::AutonomousPeriodic() {
+    LimelightHelpers::SetIMUAssistAlpha("limelight-limenew", 0.1),
     LimelightHelpers::SetIMUMode("limelight-limenew", 3);
 }
 
 void Robot::AutonomousExit() {}
 
 void Robot::TeleopInit() {
+    LimelightHelpers::SetIMUAssistAlpha("limelight-limenew", 0.1),
     LimelightHelpers::SetIMUMode("limelight-limenew", 3);
     if (m_autonomousCommand) {
         frc2::CommandScheduler::GetInstance().Cancel(m_autonomousCommand);
@@ -63,6 +71,7 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
+LimelightHelpers::SetIMUAssistAlpha("limelight-limenew", 0.1),
 LimelightHelpers::SetIMUMode("limelight-limenew", 3);
 }
 

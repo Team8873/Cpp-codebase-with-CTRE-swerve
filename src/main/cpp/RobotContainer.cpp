@@ -156,7 +156,7 @@ void RobotContainer::ConfigureBindings()
 
     //Kicker
     m_afcKicker.SetDefaultCommand(frc2::cmd::Run([this]{m_afcKicker.Stop();},{&m_afcKicker}));
-    m_operator.B().WhileTrue(frc2::cmd::RunOnce([this]{m_afcKicker.KickerOn();},{&m_afcKicker}).AndThen(frc2::cmd::Wait(0.3_s)) 
+    m_operator.RightTrigger().WhileTrue(frc2::cmd::RunOnce([this]{m_afcKicker.KickerOn();},{&m_afcKicker}).AndThen(frc2::cmd::Wait(0.3_s)) 
                             .AndThen(frc2::cmd::RunOnce([this]{m_afcKicker.Stop();},{&m_afcKicker})).AndThen(frc2::cmd::Wait(0.5_s)).Repeatedly());
     m_operator.RightBumper().WhileTrue(frc2::cmd::Run([this]{m_afcKicker.KickerBack();},{&m_afcKicker}));
 
