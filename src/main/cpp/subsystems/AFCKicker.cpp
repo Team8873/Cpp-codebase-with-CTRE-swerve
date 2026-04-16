@@ -13,6 +13,7 @@ MaxMotorConfig(&m_kickerBarMotor,
                     0.0, // Acceleration constant
                     true,
                     true);
+                    m_startTime = std::chrono::steady_clock::now();
 
 }
 
@@ -24,13 +25,21 @@ void AFCKicker::KickerBack(){
     m_kickerBarMotor.Set(0.5);
 }
  void AFCKicker::KickerJitter(){
-    while(true){
-    m_kickerBarMotor.Set(-0.5);
-    frc2::cmd::Wait(0.3_s);
-    m_kickerBarMotor.StopMotor();
-    frc2::cmd::Wait(0.5_s);
-    break;
+    if((std::chrono::steady_clock::now() - m_startTime) < std::chrono::milliseconds(250)){
+        m_kickerBarMotor.Set(-0.5);
+    } else if((std::chrono::steady_clock::now() - m_startTime) >= std::chrono::milliseconds(250) and (std::chrono::steady_clock::now() - m_startTime) <= std::chrono::milliseconds(500)){
+        m_kickerBarMotor.StopMotor();
+    } else{
+        m_startTime = std::chrono::steady_clock::now();
     }
+    // while(true){
+    // m_kickerBarMotor.Set(-0.5);
+    // frc2::cmd::Wait(0.3_s);
+    // m_kickerBarMotor.StopMotor();
+    // frc2::cmd::Wait(0.5_s);
+    // break;
+    // }
+    
     
  }
 

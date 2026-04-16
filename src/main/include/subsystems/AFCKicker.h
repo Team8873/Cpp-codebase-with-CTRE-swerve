@@ -37,4 +37,5 @@ class AFCKicker : public frc2::SubsystemBase{
     private:
         rev::spark::SparkMax m_kickerBarMotor{ConstantsCanIds::KickerBarMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};
         rev::spark::SparkRelativeEncoder m_kickerBarEncoder = m_kickerBarMotor.GetEncoder();
+        std::chrono::time_point<std::chrono::steady_clock> m_startTime;
 };
