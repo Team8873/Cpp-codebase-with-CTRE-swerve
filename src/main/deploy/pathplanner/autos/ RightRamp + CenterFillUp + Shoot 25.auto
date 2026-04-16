@@ -11,9 +11,35 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "Shooting"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooting"
+                }
+              },
+              {
+                "type": "parallel",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 3.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "JigglePhysics"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         }
       ]

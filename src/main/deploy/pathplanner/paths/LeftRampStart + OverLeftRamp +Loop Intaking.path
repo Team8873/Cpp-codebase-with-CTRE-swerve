@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.6840449438202247,
-        "y": 5.441359550561796
+        "x": 3.52151212553495,
+        "y": 5.477660485021398
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.019067415730336,
-        "y": 4.4018764044943826
+        "x": 5.52700427960057,
+        "y": 4.9083594864479325
       },
       "isLocked": false,
       "linkedName": null
@@ -62,7 +62,7 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.3226452905811619,
+      "waypointRelativePos": 1.0106609808102411,
       "rotationDegrees": 73.05366067722458
     }
   ],
@@ -81,7 +81,18 @@
       }
     }
   ],
-  "pointTowardsZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 9.0,
+        "y": 0.0
+      },
+      "rotationOffset": 0.0,
+      "minWaypointRelativePos": 0.0,
+      "maxWaypointRelativePos": 0.3322079675894683,
+      "name": "Point Towards Zone"
+    }
+  ],
   "eventMarkers": [
     {
       "name": "Intaking",
@@ -118,7 +129,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 88.66778014613048
+    "rotation": -46.556443056962806
   },
   "useDefaultConstraints": true
 }
