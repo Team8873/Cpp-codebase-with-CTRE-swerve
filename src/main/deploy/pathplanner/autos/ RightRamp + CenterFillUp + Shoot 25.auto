@@ -5,9 +5,15 @@
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "Copy of RightShootLineUp + RightRamp + Intake"
+          }
+        },
+        {
           "type": "named",
           "data": {
-            "name": "Intaking"
+            "name": "Shooting"
           }
         }
       ]

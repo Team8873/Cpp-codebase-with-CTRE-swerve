@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.4548644793152645,
-        "y": 4.274365192582025
+        "x": 2.542651685393258,
+        "y": 5.1458202247191
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.523281027104137,
-        "y": 5.231825962910129
+        "x": 1.61106823318213,
+        "y": 6.103280995047204
       },
       "isLocked": false,
-      "linkedName": "OverLeftRampFinishedState"
+      "linkedName": "Looping Left Ramp End"
     },
     {
       "anchor": {
@@ -80,7 +80,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 179.20427644726072
+    "rotation": -31.94997144633307
   },
   "useDefaultConstraints": true
 }

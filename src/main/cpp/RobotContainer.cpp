@@ -30,7 +30,6 @@ using namespace pathplanner;
 RobotContainer::RobotContainer() : m_afcIndexer(),m_afcFlywheel(), m_afcIntake(), m_afcShooter()
 {
     //NamedCommands::registerCommand("Targeting", std::move(AFCShooter(&m_afcShooter).ToPtr()));
-    NamedCommands::registerCommand("ShortShooting", std::move(AFCShortShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter, &m_afcVision).ToPtr()));
     NamedCommands::registerCommand("Shooting", std::move(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter, &m_afcVision).ToPtr()));
     NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, -740.0).ToPtr())); 
     NamedCommands::registerCommand("PartialIntakeOut", std::move(AFCIntakeComm(&m_afcIntake, -300.0).ToPtr()));   

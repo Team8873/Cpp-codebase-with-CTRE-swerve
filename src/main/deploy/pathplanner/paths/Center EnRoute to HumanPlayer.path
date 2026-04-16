@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.5859775280898873,
-        "y": 5.981483146067416
+        "x": 1.8700449438202247,
+        "y": 4.05538202247191
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.3503033707865166,
-        "y": 5.502505617977529
+        "x": 2.4305505617977525,
+        "y": 2.3432921348314606
       },
       "isLocked": false,
-      "linkedName": "Depot Intake"
+      "linkedName": "Depot EnRoute to HumanPlayer"
     },
     {
       "anchor": {
-        "x": 2.0534831460674154,
-        "y": 4.992955056179776
+        "x": 0.596,
+        "y": 0.641
       },
       "prevControl": {
-        "x": 1.3197303370786515,
-        "y": 5.533078651685393
+        "x": 1.0444044943820225,
+        "y": 1.1403595505617974
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Depot Shooting Position"
+      "linkedName": "HugTheWallEnd"
     }
   ],
   "rotationTargets": [],
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -19.17900802581077
+    "rotation": 1.2929406172265523
   },
   "reversed": false,
   "folder": null,

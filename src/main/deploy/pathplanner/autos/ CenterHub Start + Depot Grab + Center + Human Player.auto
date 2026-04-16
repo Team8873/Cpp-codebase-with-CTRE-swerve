@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Looping LeftRampStart + OverLeftRamp + Intaking"
+                  "pathName": "Center + Depot"
                 }
               },
               {
@@ -26,7 +26,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Shoot LineUp"
+            "pathName": "Depot enRoute to Human Player"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Center EnRoute to HumanPlayer"
           }
         },
         {

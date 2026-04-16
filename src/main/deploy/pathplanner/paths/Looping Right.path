@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.5859775280898873,
-        "y": 5.981483146067416
+        "x": 3.6432808988764043,
+        "y": 3.077044943820224
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.3503033707865166,
-        "y": 5.502505617977529
+        "x": 5.3044157303370785,
+        "y": 2.13947191011236
       },
       "isLocked": false,
-      "linkedName": "Depot Intake"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.0534831460674154,
-        "y": 4.992955056179776
+        "x": 7.943887640449438,
+        "y": 0.6923483146067417
       },
       "prevControl": {
-        "x": 1.3197303370786515,
-        "y": 5.533078651685393
+        "x": 7.036887640449438,
+        "y": 1.415910112359552
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Depot Shooting Position"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -19.17900802581077
+    "rotation": -90.0
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 90.65854317756362
   },
   "useDefaultConstraints": true
 }
