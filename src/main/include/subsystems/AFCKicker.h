@@ -12,6 +12,7 @@
 #include "Constants.h"
 #include "misc/MaxMotorConfig.h"
 #include "misc/TalonMotorConfig.h"
+#include "frc2/command/Commands.h"
 
 
 class AFCKicker : public frc2::SubsystemBase{
@@ -19,6 +20,7 @@ class AFCKicker : public frc2::SubsystemBase{
             explicit AFCKicker();
             void KickerOn();
             void KickerBack();
+            void KickerJitter();
             void Stop();
     private:
         rev::spark::SparkMax m_kickerBarMotor{ConstantsCanIds::KickerBarMotorId, rev::spark::SparkLowLevel::MotorType::kBrushless};

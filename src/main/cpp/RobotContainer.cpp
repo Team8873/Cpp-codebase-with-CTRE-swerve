@@ -27,12 +27,12 @@
 //#include "commands/AFCIndexerComm.h"
 
 using namespace pathplanner;
-RobotContainer::RobotContainer() : m_afcIndexer(),m_afcFlywheel(), m_afcIntake(), m_afcShooter()
+RobotContainer::RobotContainer() : m_afcIndexer(),m_afcFlywheel(), m_afcIntake(), m_afcShooter(), m_afcKicker()
 {
     //NamedCommands::registerCommand("Targeting", std::move(AFCShooter(&m_afcShooter).ToPtr()));
-    NamedCommands::registerCommand("Shooting", std::move(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter, &m_afcVision).ToPtr()));
+    NamedCommands::registerCommand("Shooting", std::move(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter, &m_afcVision, &m_afcKicker).ToPtr()));
     NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, -740.0).ToPtr())); 
-    NamedCommands::registerCommand("PartialIntakeOut", std::move(AFCIntakeComm(&m_afcIntake, -300.0).ToPtr()));   
+    NamedCommands::registerCommand("PartialIntakeOut", std::move(AFCIntakeComm(&m_afcIntake, -300.0).ToPtr()));  
    
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
     frc::SmartDashboard::PutData("Auto Mode", &autoChooser);
@@ -156,8 +156,7 @@ void RobotContainer::ConfigureBindings()
 
     //Kicker
     m_afcKicker.SetDefaultCommand(frc2::cmd::Run([this]{m_afcKicker.Stop();},{&m_afcKicker}));
-    m_operator.B().WhileTrue(frc2::cmd::RunOnce([this]{m_afcKicker.KickerOn();},{&m_afcKicker}).AndThen(frc2::cmd::Wait(0.3_s)) 
-                            .AndThen(frc2::cmd::RunOnce([this]{m_afcKicker.Stop();},{&m_afcKicker})).AndThen(frc2::cmd::Wait(0.5_s)).Repeatedly());
+    m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcKicker.KickerJitter();},{&m_afcKicker}));
     m_operator.RightBumper().WhileTrue(frc2::cmd::Run([this]{m_afcKicker.KickerBack();},{&m_afcKicker}));
 
     //Intake controls

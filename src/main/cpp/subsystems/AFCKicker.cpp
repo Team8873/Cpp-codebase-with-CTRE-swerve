@@ -13,7 +13,6 @@ MaxMotorConfig(&m_kickerBarMotor,
                     0.0, // Acceleration constant
                     true,
                     true);
-
 }
 
 void AFCKicker::KickerOn(){
@@ -22,6 +21,11 @@ void AFCKicker::KickerOn(){
 
 void AFCKicker::KickerBack(){
     m_kickerBarMotor.Set(0.5);
+}
+
+void AFCKicker::KickerJitter(){
+    (frc2::cmd::RunOnce([this]{KickerOn();},{}).AndThen(frc2::cmd::Wait(0.3_s)) 
+                            .AndThen(frc2::cmd::RunOnce([this]{Stop();},{})).AndThen(frc2::cmd::Wait(0.5_s)).Repeatedly());
 }
 
 void AFCKicker::Stop(){
