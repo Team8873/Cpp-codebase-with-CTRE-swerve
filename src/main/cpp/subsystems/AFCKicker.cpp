@@ -23,6 +23,16 @@ void AFCKicker::KickerOn(){
 void AFCKicker::KickerBack(){
     m_kickerBarMotor.Set(0.5);
 }
+ void AFCKicker::KickerJitter(){
+    while(true){
+    m_kickerBarMotor.Set(-0.5);
+    frc2::cmd::Wait(0.3_s);
+    m_kickerBarMotor.StopMotor();
+    frc2::cmd::Wait(0.5_s);
+    break;
+    }
+    
+ }
 
 void AFCKicker::Stop(){
     m_kickerBarMotor.StopMotor();
