@@ -38,7 +38,11 @@ RobotContainer::RobotContainer() : m_afcIndexer(),m_afcFlywheel(), m_afcIntake()
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
     frc::SmartDashboard::PutData("Auto Mode", &autoChooser);
     
-    
+    auto state = drivetrain.GetState();
+    frc::Pose2d pose = state.Pose;
+    frc::ChassisSpeeds speed = state.Speeds;
+    frc::SmartDashboard::PutNumber("Bot X Speed", speed.vx.value());
+    frc::SmartDashboard::PutNumber("Bot Y Speed", speed.vy.value());
     ConfigureBindings();
      
 
@@ -143,6 +147,12 @@ void RobotContainer::ConfigureBindings()
     //Indexer controls
     m_afcIndexer.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIndexer.Stop();},{&m_afcIndexer}));
     m_operator.RightTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeOn();},{&m_afcIndexer}));
+    
+
+    // m_operator.RightTrigger().WhileTrue(frc2::cmd::Sequence(frc2::cmd::Run([this] {m_afcIndexer.UptakeReverse();}, {&m_afcIndexer}),
+    //                                                         frc2::cmd::Run([this] {m_afcIndexer.UptakeOn();}, {&m_afcIndexer})));
+
+
     m_operator.RightBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeReverse();},{&m_afcIndexer}));
 
     //Kicker
@@ -172,9 +182,10 @@ void RobotContainer::ConfigureBindings()
     m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();},{&m_afcFlywheel}));
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(m_afcVision.Saved_Turret_Angle);},{&m_afcShooter}));
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.AutoSpeed(m_afcVision.Saved_Flywheel_Speed);}, {&m_afcVision}));
+    //m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.}));
 
     //Flywheel controls
-    //m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
+    m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();}, {&m_afcFlywheel}));
     //m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.SpinUp(0.8);}, {&m_afcFlywheel}));
     //m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.ManualSpeed(m_operator.GetLeftY());}, {&m_afcFlywheel}));
 

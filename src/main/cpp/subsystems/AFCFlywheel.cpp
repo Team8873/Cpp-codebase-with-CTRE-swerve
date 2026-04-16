@@ -38,8 +38,8 @@ void AFCFlywheel::Periodic(){
 }
 
 void AFCFlywheel::Idle(){
-    m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{22_tps});
-    m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-22_tps});
+    m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{42_tps});
+    m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-42_tps});
     //m_shooter1.Set(0.5);
     //m_shooter2.Set(-0.5);\[]
     

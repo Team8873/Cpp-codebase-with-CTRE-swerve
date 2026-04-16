@@ -13,6 +13,9 @@
 #include "misc/MaxMotorConfig.h"
 #include "misc/TalonMotorConfig.h"
 
+#include <chrono>
+
+
 
 
 namespace IndexerConstant{
@@ -31,7 +34,6 @@ class AFCIndexer : public frc2::SubsystemBase{
         void ConveyorOn();
         void UptakeReverse();
         void UptakeOn();
-        void KickerBarOn();
         bool HopperEmpty();
         double GetDis();
         double Convert();

@@ -72,7 +72,6 @@ void AFCIndexer::UptakeOn() {
     //m_kickerBarMotor.Set(-0.05);
 }
 
-
 // bool AFCIndexer::HopperEmpty(){
 //     if (m_distanceSensor.GetRange() <= 5){
 
