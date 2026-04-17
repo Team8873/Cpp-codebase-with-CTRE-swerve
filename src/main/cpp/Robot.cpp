@@ -43,7 +43,7 @@ void Robot::DisabledPeriodic() {
    //  RobotAngle = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(5);
     
    // LimelightHelpers::SetRobotOrientation("limelight-limenew", RobotAngle, 0, 0, 0, 0, 0);
-LimelightHelpers::SetIMUAssistAlpha("limelight-limenew", 0.1),
+LimelightHelpers::SetIMUAssistAlpha("limelight-limenew", 1),
     LimelightHelpers::SetIMUMode("limelight-limenew", 3);
 }
 void Robot::DisabledExit() {}
@@ -59,14 +59,14 @@ void Robot::AutonomousInit() {
 }
 
 void Robot::AutonomousPeriodic() {
-    LimelightHelpers::SetIMUAssistAlpha("limelight-limenew", 0.1),
+    LimelightHelpers::SetIMUAssistAlpha("limelight-limenew", 1),
     LimelightHelpers::SetIMUMode("limelight-limenew", 3);
 }
 
 void Robot::AutonomousExit() {}
 
 void Robot::TeleopInit() {
-    LimelightHelpers::SetIMUAssistAlpha("limelight-limenew", 0.1),
+    LimelightHelpers::SetIMUAssistAlpha("limelight-limenew", 1),
     LimelightHelpers::SetIMUMode("limelight-limenew", 3);
     if (m_autonomousCommand) {
         frc2::CommandScheduler::GetInstance().Cancel(m_autonomousCommand);
@@ -74,7 +74,7 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() {
-LimelightHelpers::SetIMUAssistAlpha("limelight-limenew", 0.1),
+LimelightHelpers::SetIMUAssistAlpha("limelight-limenew", 1),
 LimelightHelpers::SetIMUMode("limelight-limenew", 3);
 }
 

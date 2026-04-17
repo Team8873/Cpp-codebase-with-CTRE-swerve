@@ -26,6 +26,7 @@
 #include "commands/AFCShootingComm.h"
 #include "commands/AFCShortShootingComm.h"
 #include "commands/AFCStowComm.h"
+#include "commands/AFCJiggleComm.h"
 
 #include "Telemetry.h"
 

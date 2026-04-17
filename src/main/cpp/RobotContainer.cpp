@@ -167,6 +167,7 @@ void RobotContainer::ConfigureBindings()
     m_operator.LeftBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(1);},{&m_afcIntake})); //Be aware this is a built in negative on variable in the subsytem file
     m_operator.LeftBumper().MultiPress(2, 250_ms).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
     m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.JigglePhysics();},{&m_afcIntake}));
+    m_operator.LeftStick().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.Deployer(-830.0);},{&m_afcIntake}));
 
    //Outake Controls
     m_operator.Button(7).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(-0.5);},{&m_afcIntake})); //Be aware this is a built in negative on variable in the subsytem file
