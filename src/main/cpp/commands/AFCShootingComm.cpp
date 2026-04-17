@@ -39,5 +39,5 @@ void AFCShootingComm::End(bool interrupted) {
 }
 
 bool AFCShootingComm::IsFinished() {
-   return (std::chrono::steady_clock::now() - m_startTime) >= std::chrono::seconds(4);
+   return (std::chrono::steady_clock::now() - m_startTime) >= std::chrono::seconds(20);
 }

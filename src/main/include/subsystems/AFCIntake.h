@@ -17,6 +17,19 @@
 #include "Constants.h"
 #include "misc/MaxMotorConfig.h"
 
+#include <frc2/command/Commands.h>
+#include <frc2/command/CommandScheduler.h>
+#include <frc2/command/button/RobotModeTriggers.h>
+#include <frc2/command/CommandScheduler.h>
+#include <frc2/command/InstantCommand.h>
+#include <frc2/command/ParallelCommandGroup.h>
+#include <frc2/command/RunCommand.h>
+#include <frc2/command/SequentialCommandGroup.h>
+#include <frc2/command/WaitCommand.h>
+#include <frc2/command/WaitUntilCommand.h>
+#include <frc2/command/button/Trigger.h>
+
+
 
 
 
@@ -28,6 +41,7 @@ class AFCIntake : public frc2::SubsystemBase
         void Periodic() override;
         void Disable();
         void Deployer(double pos);
+        void JigglePhysics();
         void IntakeSpeed(double speed);
         void DeploySpeed(double speed);
         void Stop();
@@ -41,6 +55,9 @@ class AFCIntake : public frc2::SubsystemBase
         rev::spark::SparkRelativeEncoder m_intakeEncoder = m_intakeMotor.GetEncoder();
         rev::spark::SparkRelativeEncoder m_deployerEncoder = m_intakeDeployer.GetEncoder();
         ctre::phoenix6::hardware::CANcoder m_intakeStateEncoder{ConstantsCanIds::IntakeEncoderId};
+
+        std::chrono::time_point<std::chrono::steady_clock> m_startTime;
+
 
 
 };

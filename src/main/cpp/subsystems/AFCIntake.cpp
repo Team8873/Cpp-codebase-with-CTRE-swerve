@@ -70,6 +70,21 @@ void AFCIntake::IntakeSpeed(double speed){
 void AFCIntake::DeploySpeed(double speed){
     m_intakeDeployer.Set(speed);
 }
+
+void AFCIntake::JigglePhysics(){
+    // // if((std::chrono::steady_clock::now() - m_startTime) < std::chrono::seconds(3)){
+    // //     std::cout << "Hello World";
+    // }else{
+        if((std::chrono::steady_clock::now() - m_startTime) < std::chrono::milliseconds(500)){
+        m_intakeDeployer.GetClosedLoopController().SetSetpoint(-830.0, rev::spark::SparkLowLevel::ControlType::kPosition);
+    } else if((std::chrono::steady_clock::now() - m_startTime) >= std::chrono::milliseconds(500) and (std::chrono::steady_clock::now() - m_startTime) <= std::chrono::seconds(1)){
+        m_intakeDeployer.GetClosedLoopController().SetSetpoint(-525.0, rev::spark::SparkLowLevel::ControlType::kPosition);
+    } else{
+        m_startTime = std::chrono::steady_clock::now();
+    }
+}
+// }
+
 void AFCIntake::Stop(){
     m_intakeMotor.StopMotor();
 

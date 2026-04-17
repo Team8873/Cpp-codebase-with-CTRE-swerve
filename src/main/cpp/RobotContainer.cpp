@@ -31,8 +31,8 @@ RobotContainer::RobotContainer() : m_afcIndexer(),m_afcFlywheel(), m_afcIntake()
 {
     //NamedCommands::registerCommand("Targeting", std::move(AFCShooter(&m_afcShooter).ToPtr()));
     NamedCommands::registerCommand("Shooting", std::move(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter, &m_afcVision, &m_afcKicker).ToPtr()));
-    NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, -830.0).ToPtr())); 
-    NamedCommands::registerCommand("JigglePhysics", std::move(AFCIntakeComm(&m_afcIntake, -580.0).ToPtr())); 
+    NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, -830.0).ToPtr()));
+    NamedCommands::registerCommand("JiggleComm", std::move(AFCJiggleComm(&m_afcIntake).ToPtr())); 
     NamedCommands::registerCommand("PartialIntakeOut", std::move(AFCIntakeComm(&m_afcIntake, -300.0).ToPtr()));   
    
     autoChooser = pathplanner::AutoBuilder::buildAutoChooser("Tests");
@@ -166,6 +166,7 @@ void RobotContainer::ConfigureBindings()
     m_afcIntake.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIntake.DeploySpeed(-m_operator.GetLeftY());},{&m_afcIntake}));
     m_operator.LeftBumper().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(1);},{&m_afcIntake})); //Be aware this is a built in negative on variable in the subsytem file
     m_operator.LeftBumper().MultiPress(2, 250_ms).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(0);},{&m_afcIntake}));
+    m_operator.B().WhileTrue(frc2::cmd::Run([this]{m_afcIntake.JigglePhysics();},{&m_afcIntake}));
 
    //Outake Controls
     m_operator.Button(7).WhileTrue(frc2::cmd::Run([this]{m_afcIntake.IntakeSpeed(-0.5);},{&m_afcIntake})); //Be aware this is a built in negative on variable in the subsytem file
