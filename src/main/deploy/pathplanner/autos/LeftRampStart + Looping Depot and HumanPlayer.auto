@@ -17,7 +17,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "HugTheWallPath"
+                  "pathName": "HugThe Depot"
                 }
               },
               {
@@ -30,9 +30,41 @@
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "Shooting"
+            "pathName": "Depot Grab to ShootingLineUp"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooting"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 3.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "JiggleComm"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         }
       ]

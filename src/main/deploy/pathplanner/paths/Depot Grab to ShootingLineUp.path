@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.8700449438202247,
-        "y": 4.05538202247191
-      },
-      "prevControl": null,
-      "nextControl": {
-        "x": 2.4305505617977525,
-        "y": 2.3432921348314606
-      },
-      "isLocked": false,
-      "linkedName": "Depot EnRoute to HumanPlayer"
-    },
-    {
-      "anchor": {
         "x": 0.351584269662921,
         "y": 5.023528089887641
       },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.351584269662921,
+        "y": 5.023528089887641
+      },
+      "isLocked": false,
+      "linkedName": "HugTheDepotEnd"
+    },
+    {
+      "anchor": {
+        "x": 2.0127191011235954,
+        "y": 5.023528089887641
+      },
       "prevControl": {
-        "x": 0.7999887640449435,
-        "y": 5.522887640449438
+        "x": 1.0127191011235954,
+        "y": 5.023528089887641
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "HugTheWallEnd"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 90.0
+    "rotation": -31.21840276434647
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 90.0
   },
   "useDefaultConstraints": true
 }

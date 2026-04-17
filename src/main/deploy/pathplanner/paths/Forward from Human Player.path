@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.596,
-        "y": 0.641
+        "x": 0.351584269662921,
+        "y": 5.023528089887641
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.596,
-        "y": 0.641
+        "x": 1.351584269662921,
+        "y": 5.023528089887641
       },
       "isLocked": false,
       "linkedName": "HugTheWallEnd"
@@ -48,7 +48,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 1.2929406172265525
+    "rotation": 90.0
   },
   "useDefaultConstraints": true
 }
