@@ -5,6 +5,7 @@
 #include "Robot.h"
 #include "LimelightHelpers.h"
 #include <frc2/command/CommandScheduler.h>
+#include <cameraserver/CameraServer.h>
 
 Robot::Robot() {}
 
@@ -34,7 +35,9 @@ void Robot::RobotPeriodic() {
     // }
 }
 
-void Robot::DisabledInit() {}
+void Robot::DisabledInit() {
+    frc::CameraServer::StartAutomaticCapture();
+}
 
 void Robot::DisabledPeriodic() {
    //  RobotAngle = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(5);
