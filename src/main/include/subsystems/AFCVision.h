@@ -29,12 +29,14 @@ class AFCVision : public frc2::SubsystemBase
 {
     public:
 
-    explicit AFCVision();
+    explicit AFCVision(std::function<frc::ChassisSpeeds()> velocitySource);
     void Periodic() override;
     Vector2D Target_Cord();
+    Vector2D Touch_Cord(); //♦♦♦♦ Changes for P.A.S.S. ♦♦♦♦
     double Shoot_Scoot(double Robot_X_Vel, double Robot_Y_Vel);
     double Saved_Turret_Angle_To_Target(bool Robot_Has_Target, double Angle_To_Target);
     double Saved_Fly_Speed(bool Robot_Has_Target, double Target_Distance);
+    
 
     double Saved_Turret_Angle = 0.0;
     double Saved_Flywheel_Speed = 0.0;
@@ -58,6 +60,13 @@ class AFCVision : public frc2::SubsystemBase
 
        double SpeedRamp = 0.0;
 
+       double TouchX = 0.0;             // ♦
+       double TouchY = 0.0;             // ♦♦♦♦ Changes for P.A.S.S. ♦♦♦♦
+       double X_Range_To_Touch = 0.0;   // ♦
+       double Y_Range_To_Touch = 0.0;   // ♦
+       nt::NetworkTableInstance ntInst = nt::NetworkTableInstance::GetDefault();    // ♦
+       std::shared_ptr<nt::NetworkTable> table = ntInst.GetTable("SmartDashboard"); // ♦
+
 //---------------------------------- Shoot & Scoot ---------------------------------
        double ballFlightSpeed = 240.0; // Muzzle velocity of Fuel in inches
        double Fuel_Air_Time = 0.0;
@@ -68,6 +77,7 @@ class AFCVision : public frc2::SubsystemBase
        double LL4_X_Vel = 0.0;
        double LL4_Y_Vel = 0.0;
        double TurretYVel = 0.0;
+       std::function<frc::ChassisSpeeds()> m_velocitySource;
 
 
 };
