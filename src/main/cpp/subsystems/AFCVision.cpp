@@ -32,23 +32,23 @@ void AFCVision::Periodic(){
 
     
     //nt::GetDouble("vx", 0.0);
-    double netvx = frc::SmartDashboard::GetNumber("vx", 0.0);
-    double netvy = frc::SmartDashboard::GetNumber("vy", 0.0);
-    units::meter_t X_Speed = units::meter_t{netvx};
-    units::meter_t Y_Speed = units::meter_t{netvy};
-    units::meter_t X_Range = units::meter_t{X_Range_To_Target};
-    units::meter_t Y_Range = units::meter_t{Y_Range_To_Target};
-    frc::Translation2d targetPosistion{X_Range, Y_Range};
-    frc::Translation2d targetVector = ((targetPosistion / Distance_To_Target) * SpeedRamp);
-    frc::Translation2d robotVelocity{X_Speed, Y_Speed};
-    frc::Translation2d shotVector = (targetVector - robotVelocity);
-    double Something = shotVector.Angle().Degrees().value();
+    // double netvx = frc::SmartDashboard::GetNumber("vx", 0.0);
+    // double netvy = frc::SmartDashboard::GetNumber("vy", 0.0);
+    // units::meter_t X_Speed = units::meter_t{netvx};
+    // units::meter_t Y_Speed = units::meter_t{netvy};
+    // units::meter_t X_Range = units::meter_t{X_Range_To_Target};
+    // units::meter_t Y_Range = units::meter_t{Y_Range_To_Target};
+    // frc::Translation2d targetPosistion{X_Range, Y_Range};
+    // frc::Translation2d targetVector = ((targetPosistion / Distance_To_Target) * SpeedRamp);
+    // frc::Translation2d robotVelocity{X_Speed, Y_Speed};
+    // frc::Translation2d shotVector = (targetVector - robotVelocity);
+    // double Something = shotVector.Angle().Degrees().value();
 
     
-    frc::SmartDashboard::PutNumber("Nothing", Something);
-    frc::SmartDashboard::PutNumber("Angle to Target", Turret_Angle_To_Target);
-    frc::SmartDashboard::PutNumber("Something X", netvx);
-    frc::SmartDashboard::PutNumber("Somthing Y", netvy);
+    // frc::SmartDashboard::PutNumber("Nothing", Something);
+    // frc::SmartDashboard::PutNumber("Angle to Target", Turret_Angle_To_Target);
+    // frc::SmartDashboard::PutNumber("Something X", netvx);
+    // frc::SmartDashboard::PutNumber("Somthing Y", netvy);
 }
 
 Vector2D AFCVision::Target_Cord(){
