@@ -299,7 +299,6 @@ public:
     {
         return _drivetrain.SamplePoseAt(utils::FPGAToCurrentTime(timestamp));
     }
-    frc::ChassisSpeeds GetFieldVelocity();
 
 private:
     void ConfigureAutoBuilder();

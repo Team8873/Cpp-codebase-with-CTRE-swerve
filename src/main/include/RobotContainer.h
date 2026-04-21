@@ -67,13 +67,8 @@ public:
     AFCIndexer m_afcIndexer{}; // Indexer subsystem initialization
     AFCShooter m_afcShooter{}; // Shooter Subsystem initialization
     AFCFlywheel m_afcFlywheel{}; // Flywheel subsytem initialization
-<<<<<<< HEAD
     AFCVision m_afcVision{}; // Vision subsytem initialization
     AFCKicker m_afcKicker{};
-=======
-    AFCVision m_afcVision{[this] { return drivetrain.GetFieldVelocity(); }}; // Vision subsytem initialization
-    
->>>>>>> Secon_Rule_Of_FightClub
 
    
 private:

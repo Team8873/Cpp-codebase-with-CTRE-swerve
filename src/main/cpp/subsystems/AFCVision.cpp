@@ -3,8 +3,7 @@
 
 
 
-AFCVision::AFCVision(std::function<frc::ChassisSpeeds()> velocitySource)
-    : m_velocitySource(velocitySource){
+AFCVision::AFCVision(){
     auto inst = nt::NetworkTableInstance::GetDefault();
     auto table = inst.GetTable("DriveState");
 }
@@ -12,10 +11,7 @@ AFCVision::AFCVision(std::function<frc::ChassisSpeeds()> velocitySource)
 void AFCVision::Periodic(){
     
     
-    frc::ChassisSpeeds speeds = m_velocitySource();
-
-    Robot_X_Vel = speeds.vx.value();
-    Robot_Y_Vel = speeds.vy.value();
+    
     LL4HasTarget = LimelightHelpers::getTV("limelight-limenew");
     LL4_X_Cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(0);
     LL4_Y_Cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(1);
@@ -34,10 +30,12 @@ void AFCVision::Periodic(){
     Saved_Turret_Angle = Saved_Turret_Angle_To_Target(LL4HasTarget, Turret_Angle_To_Target);
     Saved_Flywheel_Speed = Saved_Fly_Speed(LL4HasTarget, SpeedRamp);
 
-    X_Range_To_Touch = (Target_Cord().x - Turret_X_Cord); //♦♦♦♦ Changes for P.A.S.S. ♦♦♦♦
-    Y_Range_To_Target = (Target_Cord().y - Turret_X_Cord); //♦♦♦♦ Changes for P.A.S.S. ♦♦♦♦
-    units::meter_t X_Speed = units::meter_t{Robot_X_Vel};
-    units::meter_t Y_Speed = units::meter_t{Robot_Y_Vel};
+    
+    //nt::GetDouble("vx", 0.0);
+    double netvx = frc::SmartDashboard::GetNumber("vx", 0.0);
+    double netvy = frc::SmartDashboard::GetNumber("vy", 0.0);
+    units::meter_t X_Speed = units::meter_t{netvx};
+    units::meter_t Y_Speed = units::meter_t{netvy};
     units::meter_t X_Range = units::meter_t{X_Range_To_Target};
     units::meter_t Y_Range = units::meter_t{Y_Range_To_Target};
     frc::Translation2d targetPosistion{X_Range, Y_Range};
@@ -49,9 +47,8 @@ void AFCVision::Periodic(){
     
     frc::SmartDashboard::PutNumber("Nothing", Something);
     frc::SmartDashboard::PutNumber("Angle to Target", Turret_Angle_To_Target);
-    frc::SmartDashboard::PutNumber("Something X", Robot_X_Vel);
-    frc::SmartDashboard::PutNumber("Somthing Y", Robot_Y_Vel);
-    
+    frc::SmartDashboard::PutNumber("Something X", netvx);
+    frc::SmartDashboard::PutNumber("Somthing Y", netvy);
 }
 
 Vector2D AFCVision::Target_Cord(){
@@ -62,11 +59,6 @@ Vector2D AFCVision::Target_Cord(){
             return {4.625594, 4.034536};
         }
     }
-}
-Vector2D AFCVision::Touch_Cord(){ //♦♦♦♦ Changes for P.A.S.S. ♦♦♦♦
-    TouchX = table->GetNumber("TouchTargetX", 0.0); //♦♦♦♦ Changes for P.A.S.S. ♦♦♦♦
-    TouchY = table->GetNumber("TouchTargetY", 0.0); //♦♦♦♦ Changes for P.A.S.S. ♦♦♦♦
-    return {TouchX, TouchY}; //♦♦♦♦ Changes for P.A.S.S. ♦♦♦♦
 }
 double AFCVision::Shoot_Scoot(double Robot_X_Vel, double Robot_Y_Vel){
     Vector2D Tar_Pos = Target_Cord();
