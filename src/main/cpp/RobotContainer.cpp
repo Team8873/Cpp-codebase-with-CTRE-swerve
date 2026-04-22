@@ -158,7 +158,7 @@ void RobotContainer::ConfigureBindings()
     //Kicker
     m_afcKicker.SetDefaultCommand(frc2::cmd::Run([this]{m_afcKicker.Stop();},{&m_afcKicker}));
      m_operator.RightTrigger().WhileTrue(frc2::cmd::RunOnce([this]{m_afcKicker.KickerOn();},{&m_afcKicker}).AndThen(frc2::cmd::Wait(0.3_s)) 
-                            .AndThen(frc2::cmd::RunOnce([this]{m_afcKicker.Stop();},{&m_afcKicker})).AndThen(frc2::cmd::Wait(0.5_s)).Repeatedly());
+                            .AndThen(frc2::cmd::RunOnce([this]{m_afcKicker.Stop();},{&m_afcKicker})).AndThen(frc2::cmd::Wait(0.2_s)).Repeatedly());
     // m_operator.RightTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcKicker.KickerJitter();},{&m_afcKicker}));
     m_operator.RightBumper().WhileTrue(frc2::cmd::Run([this]{m_afcKicker.KickerBack();},{&m_afcKicker}));
 
@@ -182,7 +182,7 @@ void RobotContainer::ConfigureBindings()
     m_operator.A().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(200);},{&m_afcShooter}));
 
     //Auto Lock
-    // m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();},{&m_afcFlywheel}));
+    m_afcFlywheel.SetDefaultCommand(frc2::cmd::Run([this]{m_afcFlywheel.Idle();},{&m_afcFlywheel}));
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.TurretPOS(m_afcVision.Saved_Turret_Angle);},{&m_afcShooter}));
     m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcFlywheel.AutoSpeed(m_afcVision.Saved_Flywheel_Speed);}, {&m_afcVision}));
     //m_operator.LeftTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcShooter.}));
