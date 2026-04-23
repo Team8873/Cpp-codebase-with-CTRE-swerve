@@ -146,7 +146,9 @@ void RobotContainer::ConfigureBindings()
 
     //Indexer controls
     m_afcIndexer.SetDefaultCommand(frc2::cmd::Run([this]{m_afcIndexer.Stop();},{&m_afcIndexer}));
-    m_operator.RightTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcIndexer.UptakeOn();},{&m_afcIndexer}));
+    m_operator.RightTrigger().WhileTrue(frc2::cmd::RunOnce([this]{m_afcIndexer.UptakeReverse();},{&m_afcIndexer})
+                                                                .AndThen(frc2::cmd::Wait(0.3_s))
+                                                                .AndThen(frc2::cmd::Run([this] {m_afcIndexer.UptakeOn();}, {&m_afcIndexer})));
     
 
     // m_operator.RightTrigger().WhileTrue(frc2::cmd::Sequence(frc2::cmd::Run([this] {m_afcIndexer.UptakeReverse();}, {&m_afcIndexer}),
@@ -157,8 +159,10 @@ void RobotContainer::ConfigureBindings()
 
     //Kicker
     m_afcKicker.SetDefaultCommand(frc2::cmd::Run([this]{m_afcKicker.Stop();},{&m_afcKicker}));
-     m_operator.RightTrigger().WhileTrue(frc2::cmd::RunOnce([this]{m_afcKicker.KickerOn();},{&m_afcKicker}).AndThen(frc2::cmd::Wait(0.3_s)) 
-                            .AndThen(frc2::cmd::RunOnce([this]{m_afcKicker.Stop();},{&m_afcKicker})).AndThen(frc2::cmd::Wait(0.2_s)).Repeatedly());
+    // m_operator.RightTrigger().WhileTrue(frc2::cmd::RunOnce([this]{m_afcKicker.KickerOn();},{&m_afcKicker}).AndThen(frc2::cmd::Wait(0.3_s)) 
+    //                         .AndThen(frc2::cmd::RunOnce([this]{m_afcKicker.Stop();},{&m_afcKicker})).AndThen(frc2::cmd::Wait(0.2_s)).Repeatedly());
+    m_operator.RightTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcKicker.KickerJitter();},{&m_afcKicker}));
+
     // m_operator.RightTrigger().WhileTrue(frc2::cmd::Run([this]{m_afcKicker.KickerJitter();},{&m_afcKicker}));
     m_operator.RightBumper().WhileTrue(frc2::cmd::Run([this]{m_afcKicker.KickerBack();},{&m_afcKicker}));
 
