@@ -25,7 +25,7 @@ class TunerConstants {
     // When using closed-loop control, the drive motor uses the control
     // output type specified by SwerveModuleConstants::DriveMotorClosedLoopOutput
     static constexpr configs::Slot0Configs driveGains = configs::Slot0Configs{}
-        .WithKP(39).WithKI(0).WithKD(0.01)
+        .WithKP(0.1).WithKI(0).WithKD(0)
         .WithKS(0).WithKV(0.124);
 
     // The closed-loop output type to use for the steer motors;
@@ -37,7 +37,7 @@ class TunerConstants {
 
     // The type of motor used for the drive motor
     static constexpr swerve::DriveMotorArrangement kDriveMotorType = swerve::DriveMotorArrangement::TalonFX_Integrated;
-    // The type of motor used for the drive motor
+    // The type of motor used for the steer motor
     static constexpr swerve::SteerMotorArrangement kSteerMotorType = swerve::SteerMotorArrangement::TalonFX_Integrated;
 
     // The remote sensor feedback type to use for the steer motors;
@@ -53,8 +53,10 @@ class TunerConstants {
     static constexpr configs::TalonFXConfiguration driveInitialConfigs = configs::TalonFXConfiguration{}
         .WithCurrentLimits(
             configs::CurrentLimitsConfigs{}
-                .WithStatorCurrentLimit(50_A)
-                .WithStatorCurrentLimitEnable(true)
+                // Default supply current limit is 70 A, but it can be lowered to avoid brownouts.
+                // Supply current limits can be larger than the breaker current rating.
+                .WithSupplyCurrentLimit(50_A)
+                .WithSupplyCurrentLimitEnable(true)
         );
     static constexpr configs::TalonFXConfiguration steerInitialConfigs = configs::TalonFXConfiguration{}
         .WithCurrentLimits(
@@ -75,9 +77,10 @@ public:
     // All swerve devices must share the same CAN bus
     static inline const CANBus kCANBus{kCANBusName, "./logs/example.hoot"};
 
-    // Theoretical free speed (m/s) at 12 V applied output;
+    // Measured robot speed (m/s) at 12 V applied output;
+    // This is NOT the desired max robot speed - see MaxSpeed in RobotContainer instead;
     // This needs to be tuned to your individual robot
-    static constexpr units::meters_per_second_t kSpeedAt12Volts = 4.72_mps;
+    static constexpr units::meters_per_second_t kSpeedAt12Volts = 4.58_mps;
 
 private:
     // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
@@ -86,7 +89,7 @@ private:
 
     static constexpr units::scalar_t kDriveGearRatio = 6.746031746031747;
     static constexpr units::scalar_t kSteerGearRatio = 21.428571428571427;
-    static constexpr units::inch_t kWheelRadius = 1.75_in;
+    static constexpr units::inch_t kWheelRadius = 2_in;
 
     static constexpr bool kInvertLeftSide = false;
     static constexpr bool kInvertRightSide = true;
@@ -95,7 +98,7 @@ private:
 
     // These are only used for simulation
     static constexpr units::kilogram_square_meter_t kSteerInertia = 0.01_kg_sq_m;
-    static constexpr units::kilogram_square_meter_t kDriveInertia = 0.01_kg_sq_m;
+    static constexpr units::kilogram_square_meter_t kDriveInertia = 0.035_kg_sq_m;
     // Simulated voltage necessary to overcome friction
     static constexpr units::volt_t kSteerFrictionVoltage = 0.2_V;
     static constexpr units::volt_t kDriveFrictionVoltage = 0.2_V;
@@ -135,7 +138,7 @@ private:
     static constexpr int kFrontLeftDriveMotorId = 7;
     static constexpr int kFrontLeftSteerMotorId = 8;
     static constexpr int kFrontLeftEncoderId = 32;
-    static constexpr units::turn_t kFrontLeftEncoderOffset = 0.0166015625_tr;
+    static constexpr units::turn_t kFrontLeftEncoderOffset = 0.01318359375_tr;
     static constexpr bool kFrontLeftSteerMotorInverted = true;
     static constexpr bool kFrontLeftEncoderInverted = false;
 
@@ -146,7 +149,7 @@ private:
     static constexpr int kFrontRightDriveMotorId = 5;
     static constexpr int kFrontRightSteerMotorId = 6;
     static constexpr int kFrontRightEncoderId = 31;
-    static constexpr units::turn_t kFrontRightEncoderOffset = -0.072265625_tr;
+    static constexpr units::turn_t kFrontRightEncoderOffset = -0.066650390625_tr;
     static constexpr bool kFrontRightSteerMotorInverted = true;
     static constexpr bool kFrontRightEncoderInverted = false;
 
@@ -157,7 +160,7 @@ private:
     static constexpr int kBackLeftDriveMotorId = 1;
     static constexpr int kBackLeftSteerMotorId = 2;
     static constexpr int kBackLeftEncoderId = 29;
-    static constexpr units::turn_t kBackLeftEncoderOffset = 0.0244140625_tr;
+    static constexpr units::turn_t kBackLeftEncoderOffset = 0.027587890625_tr;
     static constexpr bool kBackLeftSteerMotorInverted = true;
     static constexpr bool kBackLeftEncoderInverted = false;
 
@@ -168,7 +171,7 @@ private:
     static constexpr int kBackRightDriveMotorId = 3;
     static constexpr int kBackRightSteerMotorId = 4;
     static constexpr int kBackRightEncoderId = 30;
-    static constexpr units::turn_t kBackRightEncoderOffset = 0.368408203125_tr;
+    static constexpr units::turn_t kBackRightEncoderOffset = 0.361328125_tr;
     static constexpr bool kBackRightSteerMotorInverted = true;
     static constexpr bool kBackRightEncoderInverted = false;
 
@@ -254,10 +257,10 @@ public:
      *                                   unspecified or set to 0 Hz, this is 250 Hz on
      *                                   CAN FD, and 100 Hz on CAN 2.0.
      * \param odometryStandardDeviation  The standard deviation for odometry calculation
-     *                                   in the form [x, y, theta]áµ€, with units in meters
+     *                                   in the form [x, y, theta]ᵀ, with units in meters
      *                                   and radians
      * \param visionStandardDeviation    The standard deviation for vision calculation
-     *                                   in the form [x, y, theta]áµ€, with units in meters
+     *                                   in the form [x, y, theta]ᵀ, with units in meters
      *                                   and radians
      * \param modules                    Constants for each specific module
      */
