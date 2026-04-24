@@ -3,14 +3,17 @@
 
 
 
-AFCVision::AFCVision(){
+AFCVision::AFCVision(std::function<frc::ChassisSpeeds()> velocitySouce)
+    : m_velocitySource(velocitySouce){
     auto inst = nt::NetworkTableInstance::GetDefault();
     auto table = inst.GetTable("DriveState");
 }
 
 void AFCVision::Periodic(){
     
+    frc::ChassisSpeeds speeds = m_velocitySource();
     
+    Robot_X_Vel = speeds.vx.value();
     
     LL4HasTarget = LimelightHelpers::getTV("limelight-limenew");
     LL4_X_Cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(0);
@@ -45,7 +48,7 @@ void AFCVision::Periodic(){
     // double Something = shotVector.Angle().Degrees().value();
 
     
-    // frc::SmartDashboard::PutNumber("Nothing", Something);
+     frc::SmartDashboard::PutNumber("Nothing", Robot_X_Vel);
     // frc::SmartDashboard::PutNumber("Angle to Target", Turret_Angle_To_Target);
     // frc::SmartDashboard::PutNumber("Something X", netvx);
     // frc::SmartDashboard::PutNumber("Somthing Y", netvy);
