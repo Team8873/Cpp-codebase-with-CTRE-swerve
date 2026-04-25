@@ -76,9 +76,9 @@ void AFCIntake::JigglePhysics(){
     // //     std::cout << "Hello World";
     // }else{
         if((std::chrono::steady_clock::now() - m_startTime) < std::chrono::milliseconds(500)){
-        m_intakeDeployer.GetClosedLoopController().SetSetpoint(-830.0, rev::spark::SparkLowLevel::ControlType::kPosition);
+        m_intakeDeployer.GetClosedLoopController().SetSetpoint(-848.0, rev::spark::SparkLowLevel::ControlType::kPosition);
     } else if((std::chrono::steady_clock::now() - m_startTime) >= std::chrono::milliseconds(500) and (std::chrono::steady_clock::now() - m_startTime) <= std::chrono::seconds(1)){
-        m_intakeDeployer.GetClosedLoopController().SetSetpoint(-525.0, rev::spark::SparkLowLevel::ControlType::kPosition);
+        m_intakeDeployer.GetClosedLoopController().SetSetpoint(-500.0, rev::spark::SparkLowLevel::ControlType::kPosition);
     } else{
         m_startTime = std::chrono::steady_clock::now();
     }

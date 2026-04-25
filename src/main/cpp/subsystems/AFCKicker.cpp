@@ -25,9 +25,9 @@ void AFCKicker::KickerBack(){
     m_kickerBarMotor.Set(0.5);
 }
  void AFCKicker::KickerJitter(){
-    if((std::chrono::steady_clock::now() - m_startTime) < std::chrono::milliseconds(500)){
+    if((std::chrono::steady_clock::now() - m_startTime) < std::chrono::milliseconds(400)){
         m_kickerBarMotor.Set(-0.5);
-    } else if((std::chrono::steady_clock::now() - m_startTime) >= std::chrono::milliseconds(500) and (std::chrono::steady_clock::now() - m_startTime) <= std::chrono::milliseconds(600)){
+    } else if((std::chrono::steady_clock::now() - m_startTime) >= std::chrono::milliseconds(400) and (std::chrono::steady_clock::now() - m_startTime) <= std::chrono::milliseconds(500)){
         m_kickerBarMotor.Set(0.5);
     } else{
         m_startTime = std::chrono::steady_clock::now();
