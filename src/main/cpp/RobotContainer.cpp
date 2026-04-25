@@ -131,6 +131,12 @@ void RobotContainer::ConfigureBindings()
                 .WithRotationalRate(-joystick.GetRightX() * 0.45_tps); // Drive counterclockwise with negative X (left)
         }));
 
+        joystick.LeftTrigger().WhileTrue(drivetrain.ApplyRequest([this]() -> auto&& {
+            return drive.WithVelocityX(-joystick.GetLeftY() * 0.66_mps) // Drive forward with negative Y (forward)
+                .WithVelocityY(-joystick.GetLeftX() * 0.66_mps) // Drive left with negative X (left)
+                .WithRotationalRate(-joystick.GetRightX() * 0.45_tps); // Drive counterclockwise with negative X (left)
+        }));
+
         joystick.RightTrigger().WhileTrue(drivetrain.ApplyRequest([this]() -> auto&& {
             return drive.WithVelocityX(-joystick.GetLeftY() * 4.68_mps) // Drive forward with negative Y (forward)
                 .WithVelocityY(-joystick.GetLeftX() * 4.68_mps) // Drive left with negative X (left)
