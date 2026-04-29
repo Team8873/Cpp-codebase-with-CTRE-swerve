@@ -14,6 +14,7 @@ void AFCVision::Periodic(){
     frc::ChassisSpeeds speeds = m_velocitySource();
     
     Robot_X_Vel = speeds.vx.value();
+    Robot_Y_Vel = speeds.vy.value();
     
     LL4HasTarget = LimelightHelpers::getTV("limelight-limenew");
     LL4_X_Cord = nt::NetworkTableInstance::GetDefault().GetTable("limelight-limenew")->GetNumberArray("botpose_orb_wpiblue",std::vector<double>(12)).at(0);
@@ -23,8 +24,8 @@ void AFCVision::Periodic(){
     Turret_X_Cord = (std::abs(std::cos(LL4_Face_Angle * (std::numbers::pi / 180.0)))*0.146)+LL4_X_Cord;
     Turret_Y_Cord = (std::sin(LL4_Face_Angle * (std::numbers::pi / 180.0))*0.146)+LL4_Y_Cord;
 
-    X_Range_To_Target = (Target_Cord().x-Turret_X_Cord);
-    Y_Range_To_Target = (Target_Cord().y-Turret_Y_Cord);
+    X_Range_To_Target = ((Target_Cord().x - target_X_offset) - Turret_X_Cord);
+    Y_Range_To_Target = ((Target_Cord().y - target_Y_offset) - Turret_Y_Cord);
     Distance_To_Target = (sqrt(std::pow(X_Range_To_Target, 2) + std::pow(Y_Range_To_Target, 2))); 
 
     Turret_Angle_To_Target = (LL4_Face_Angle-(std::atan2(Y_Range_To_Target, X_Range_To_Target)*(180/std::numbers::pi)));
@@ -33,25 +34,14 @@ void AFCVision::Periodic(){
     Saved_Turret_Angle = Saved_Turret_Angle_To_Target(LL4HasTarget, Turret_Angle_To_Target);
     Saved_Flywheel_Speed = Saved_Fly_Speed(LL4HasTarget, SpeedRamp);
 
-    
-    //nt::GetDouble("vx", 0.0);
-    // double netvx = frc::SmartDashboard::GetNumber("vx", 0.0);
-    // double netvy = frc::SmartDashboard::GetNumber("vy", 0.0);
-    // units::meter_t X_Speed = units::meter_t{netvx};
-    // units::meter_t Y_Speed = units::meter_t{netvy};
-    // units::meter_t X_Range = units::meter_t{X_Range_To_Target};
-    // units::meter_t Y_Range = units::meter_t{Y_Range_To_Target};
-    // frc::Translation2d targetPosistion{X_Range, Y_Range};
-    // frc::Translation2d targetVector = ((targetPosistion / Distance_To_Target) * SpeedRamp);
-    // frc::Translation2d robotVelocity{X_Speed, Y_Speed};
-    // frc::Translation2d shotVector = (targetVector - robotVelocity);
-    // double Something = shotVector.Angle().Degrees().value();
+    target_X_offset = Robot_X_Vel * Fuel_Air_Time;
+    target_Y_offset = Robot_Y_Vel * Fuel_Air_Time;
 
+    ballFlightSpeed = Saved_Flywheel_Speed * (2 * 0.0508 * std::numbers::pi);
+
+    Fuel_Air_Time = ((2*ballFlightSpeed*ball_exit_angle) / 9.81);
     
-     frc::SmartDashboard::PutNumber("Nothing", Robot_X_Vel);
-    // frc::SmartDashboard::PutNumber("Angle to Target", Turret_Angle_To_Target);
-    // frc::SmartDashboard::PutNumber("Something X", netvx);
-    // frc::SmartDashboard::PutNumber("Somthing Y", netvy);
+
 }
 
 Vector2D AFCVision::Target_Cord(){
@@ -63,14 +53,7 @@ Vector2D AFCVision::Target_Cord(){
         }
     }
 }
-double AFCVision::Shoot_Scoot(double Robot_X_Vel, double Robot_Y_Vel){
-    Vector2D Tar_Pos = Target_Cord();
-    Fuel_Air_Time = Distance_To_Target / ballFlightSpeed;
-    double virtualX = Tar_Pos.x - (Robot_X_Vel * Fuel_Air_Time);
-    double virtualY = Tar_Pos.y - (Robot_Y_Vel * Fuel_Air_Time);
-    return 0;
 
-}
 double AFCVision::Saved_Turret_Angle_To_Target(bool Robot_Has_Target, double Angle_To_Target){
         if (Robot_Has_Target && Angle_To_Target < 110){
             return Saved_Turret_Angle = Angle_To_Target;
