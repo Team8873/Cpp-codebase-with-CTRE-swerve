@@ -38,7 +38,12 @@ void CommandSwerveDrivetrain::ConfigureAutoBuilder()
         this // Subsystem for requirements
     );
 }
-
+frc::ChassisSpeeds CommandSwerveDrivetrain::GetFieldVelocity(){
+    auto state = GetState();
+    return frc::ChassisSpeeds::FromFieldRelativeSpeeds(
+        state.Speeds, state.Pose.Rotation()
+    );
+}
 void CommandSwerveDrivetrain::Periodic()
 {
     /*

@@ -67,7 +67,7 @@ public:
     AFCIndexer m_afcIndexer{}; // Indexer subsystem initialization
     AFCShooter m_afcShooter{}; // Shooter Subsystem initialization
     AFCFlywheel m_afcFlywheel{}; // Flywheel subsytem initialization
-    AFCVision m_afcVision{}; // Vision subsytem initialization
+    AFCVision m_afcVision{[this] {return drivetrain.GetFieldVelocity(); }}; // Vision subsytem initialization
     AFCKicker m_afcKicker{};
 
    

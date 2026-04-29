@@ -29,10 +29,9 @@ class AFCVision : public frc2::SubsystemBase
 {
     public:
 
-    explicit AFCVision();
+    explicit AFCVision(std::function<frc::ChassisSpeeds()> velocitySouce);
     void Periodic() override;
     Vector2D Target_Cord();
-    double Shoot_Scoot(double Robot_X_Vel, double Robot_Y_Vel);
     double Saved_Turret_Angle_To_Target(bool Robot_Has_Target, double Angle_To_Target);
     double Saved_Fly_Speed(bool Robot_Has_Target, double Target_Distance);
 
@@ -59,15 +58,18 @@ class AFCVision : public frc2::SubsystemBase
        double SpeedRamp = 0.0;
 
 //---------------------------------- Shoot & Scoot ---------------------------------
-       double ballFlightSpeed = 240.0; // Muzzle velocity of Fuel in inches
+       double ball_exit_angle = 72.0; 
+       double ballFlightSpeed = 0.0; // Muzzle velocity of Fuel in inches
        double Fuel_Air_Time = 0.0;
+
        double Robot_X_Vel = 0.0;
        double Robot_Y_Vel = 0.0;
-       double LL4_X_Acell = 0.0;
-       double LL4_Y_Acell = 0.0;
-       double LL4_X_Vel = 0.0;
-       double LL4_Y_Vel = 0.0;
-       double TurretYVel = 0.0;
+
+       double target_X_offset = 0.0;
+       double target_Y_offset = 0.0;
+
+
+       std::function<frc::ChassisSpeeds()> m_velocitySource;
 
 
 };
