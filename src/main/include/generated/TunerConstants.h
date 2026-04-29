@@ -46,7 +46,7 @@ class TunerConstants {
 
     // The stator current at which the wheels start to slip;
     // This needs to be tuned to your individual robot
-    static constexpr units::ampere_t kSlipCurrent = 70_A;
+    static constexpr units::ampere_t kSlipCurrent = 120_A;
 
     // Initial configs for the drive and steer motors and the azimuth encoder; these cannot be null.
     // Some configs will be overwritten; check the `With*InitialConfigs()` API documentation.
@@ -55,7 +55,11 @@ class TunerConstants {
             configs::CurrentLimitsConfigs{}
                 // Default supply current limit is 70 A, but it can be lowered to avoid brownouts.
                 // Supply current limits can be larger than the breaker current rating.
+<<<<<<< Updated upstream
                 .WithSupplyCurrentLimit(50_A)
+=======
+                .WithSupplyCurrentLimit(70_A)
+>>>>>>> Stashed changes
                 .WithSupplyCurrentLimitEnable(true)
         );
     static constexpr configs::TalonFXConfiguration steerInitialConfigs = configs::TalonFXConfiguration{}
@@ -63,7 +67,7 @@ class TunerConstants {
             configs::CurrentLimitsConfigs{}
                 // Swerve azimuth does not require much torque output, so we can set a relatively low
                 // stator current limit to help avoid brownouts without impacting performance.
-                .WithStatorCurrentLimit(30_A)
+                .WithStatorCurrentLimit(60_A)
                 .WithStatorCurrentLimitEnable(true)
         );
     static constexpr configs::CANcoderConfiguration encoderInitialConfigs{};

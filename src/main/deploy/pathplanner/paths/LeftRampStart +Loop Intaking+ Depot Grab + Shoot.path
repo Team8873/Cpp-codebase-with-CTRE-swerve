@@ -48,16 +48,16 @@
     },
     {
       "anchor": {
-        "x": 2.6315641711229953,
-        "y": 5.477660485021398
+        "x": 0.6793315508021398,
+        "y": 5.829598930481284
       },
       "prevControl": {
-        "x": 5.165828877005341,
-        "y": 6.0839439074812915
+        "x": 4.232152406417113,
+        "y": 6.435882352941177
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Looping Left Ramp End"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
@@ -73,6 +73,19 @@
       "maxWaypointRelativePos": 2.2167832167832153,
       "constraints": {
         "maxVelocity": 1.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    },
+    {
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 2.9300699300699287,
+      "maxWaypointRelativePos": 3.0,
+      "constraints": {
+        "maxVelocity": 2.0,
         "maxAcceleration": 3.0,
         "maxAngularVelocity": 540.0,
         "maxAngularAcceleration": 720.0,
@@ -111,7 +124,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -38.8844964337146
+    "rotation": 0.0
   },
   "reversed": false,
   "folder": null,

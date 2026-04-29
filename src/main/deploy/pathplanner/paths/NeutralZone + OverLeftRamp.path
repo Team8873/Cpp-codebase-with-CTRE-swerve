@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.542651685393258,
-        "y": 5.1458202247191
+        "x": 2.6315641711229953,
+        "y": 5.477660485021398
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.61106823318213,
-        "y": 6.103280995047204
+        "x": 1.6999807189118674,
+        "y": 6.435121255349502
       },
       "isLocked": false,
       "linkedName": "Looping Left Ramp End"
@@ -80,7 +80,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -31.94997144633307
+    "rotation": -38.8844964337146
   },
   "useDefaultConstraints": true
 }
