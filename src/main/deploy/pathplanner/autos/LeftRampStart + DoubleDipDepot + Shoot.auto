@@ -7,7 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LeftRampStart + OverLeftRamp +Loop Intaking"
+            "pathName": "TrenchStart"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ReverseDoubleDip"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ReverseDepot + ShootLineUp"
           }
         },
         {
