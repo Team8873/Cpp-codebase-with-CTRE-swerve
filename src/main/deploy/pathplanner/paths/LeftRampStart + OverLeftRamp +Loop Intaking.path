@@ -32,16 +32,16 @@
     },
     {
       "anchor": {
-        "x": 7.352808988764044,
-        "y": 4.626078651685393
+        "x": 7.312539229671896,
+        "y": 5.16713266761769
       },
       "prevControl": {
-        "x": 7.883408456820868,
-        "y": 4.595319262232823
+        "x": 7.84313869772872,
+        "y": 5.136373278165119
       },
       "nextControl": {
-        "x": 6.649629213483145,
-        "y": 4.666842696629215
+        "x": 6.609359454390996,
+        "y": 5.207896712561511
       },
       "isLocked": false,
       "linkedName": null
@@ -70,7 +70,7 @@
     {
       "name": "Constraints Zone",
       "minWaypointRelativePos": 0.9399054692775048,
-      "maxWaypointRelativePos": 2.2167832167832153,
+      "maxWaypointRelativePos": 2.0418636056718444,
       "constraints": {
         "maxVelocity": 1.0,
         "maxAcceleration": 3.0,
@@ -84,11 +84,11 @@
   "pointTowardsZones": [
     {
       "fieldPosition": {
-        "x": 9.0,
-        "y": 0.0
+        "x": 6.5,
+        "y": 4.5
       },
       "rotationOffset": 0.0,
-      "minWaypointRelativePos": 0.0,
+      "minWaypointRelativePos": 0.3322079675894683,
       "maxWaypointRelativePos": 0.3322079675894683,
       "name": "Point Towards Zone"
     }
@@ -96,8 +96,8 @@
   "eventMarkers": [
     {
       "name": "Intaking",
-      "waypointRelativePos": 0,
-      "endWaypointRelativePos": null,
+      "waypointRelativePos": 0.6076975016880503,
+      "endWaypointRelativePos": 3.0,
       "command": null
     }
   ],
