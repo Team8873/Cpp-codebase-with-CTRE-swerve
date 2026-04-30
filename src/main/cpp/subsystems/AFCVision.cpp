@@ -24,8 +24,8 @@ void AFCVision::Periodic(){
     Turret_X_Cord = (std::abs(std::cos(LL4_Face_Angle * (std::numbers::pi / 180.0)))*0.146)+LL4_X_Cord;
     Turret_Y_Cord = (std::sin(LL4_Face_Angle * (std::numbers::pi / 180.0))*0.146)+LL4_Y_Cord;
 
-    X_Range_To_Target = ((Target_Cord().x - target_X_offset) - Turret_X_Cord);
-    Y_Range_To_Target = ((Target_Cord().y - target_Y_offset) - Turret_Y_Cord);
+    X_Range_To_Target = ((Target_Cord().x/* - target_X_offset*/) - Turret_X_Cord);
+    Y_Range_To_Target = ((Target_Cord().y/* - target_Y_offset*/) - Turret_Y_Cord);
     Distance_To_Target = (sqrt(std::pow(X_Range_To_Target, 2) + std::pow(Y_Range_To_Target, 2))); 
 
     Turret_Angle_To_Target = (LL4_Face_Angle-(std::atan2(Y_Range_To_Target, X_Range_To_Target)*(180/std::numbers::pi)));
