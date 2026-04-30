@@ -111,7 +111,7 @@ void AFCFlywheel::ManualSpeed(double Sspeed){
 
 void AFCFlywheel::SuperShoot(){
 
-         m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{100_tps});
-         m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-100_tps});
+         m_shooter1.SetControl(ctre::phoenix6::controls::VelocityVoltage{200_tps});
+         m_shooter2.SetControl(ctre::phoenix6::controls::VelocityVoltage{-200_tps});
 
 }

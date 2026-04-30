@@ -31,7 +31,7 @@ RobotContainer::RobotContainer() : m_afcIndexer(),m_afcFlywheel(), m_afcIntake()
 {
     //NamedCommands::registerCommand("Targeting", std::move(AFCShooter(&m_afcShooter).ToPtr()));
     NamedCommands::registerCommand("Shooting", std::move(AFCShootingComm(&m_afcIndexer, &m_afcFlywheel, &m_afcShooter, &m_afcVision, &m_afcKicker).ToPtr()));
-    NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, -830.0).ToPtr()));
+    NamedCommands::registerCommand("Intaking", std::move(AFCIntakeComm(&m_afcIntake, -848.0).ToPtr()));
     NamedCommands::registerCommand("JiggleComm", std::move(AFCJiggleComm(&m_afcIntake).ToPtr())); 
     NamedCommands::registerCommand("PartialIntakeOut", std::move(AFCIntakeComm(&m_afcIntake, -300.0).ToPtr()));   
    
